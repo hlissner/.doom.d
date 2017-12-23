@@ -1,5 +1,8 @@
 ;;; private/hlissner/init.el -*- lexical-binding: t; -*-
 
+;; Prevents the unstyled mode-line flash at startup
+(setq-default mode-line-format nil)
+
 ;; I've swapped these keys on my keyboard
 (setq x-super-keysym 'alt
       x-alt-keysym   'meta
