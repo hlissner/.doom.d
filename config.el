@@ -1,6 +1,10 @@
 ;;; private/hlissner/config.el -*- lexical-binding: t; -*-
 
-(setq +doom-modeline-buffer-file-name-style 'relative-from-project)
+(setq +doom-modeline-buffer-file-name-style 'relative-from-project
+      show-trailing-whitespace t)
+
+(add-hook! '(minibuffer-setup-hook doom-popup-mode-hook)
+  (setq-local show-trailing-whitespace nil))
 
 
 ;;
