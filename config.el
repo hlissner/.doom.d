@@ -1,14 +1,8 @@
 ;;; private/hlissner/config.el -*- lexical-binding: t; -*-
 
-(setq epa-file-encrypt-to user-mail-address
-      auth-sources (list (expand-file-name ".authinfo.gpg" doom-local-dir))
-      +doom-modeline-buffer-file-name-style 'relative-from-project)
+(add-to-list 'load-path "~/work/conf/emacs-snippets")
 
-(defun +hlissner*no-authinfo-for-tramp (orig-fn &rest args)
-  "Don't look into .authinfo for local sudo TRAMP buffers."
-  (let ((auth-sources (if (equal tramp-current-method "sudo") nil auth-sources)))
-    (apply orig-fn args)))
-(advice-add #'tramp-read-passwd :around #'+hlissner*no-authinfo-for-tramp)
+(setq +doom-modeline-buffer-file-name-style 'relative-from-project)
 
 
 ;;
