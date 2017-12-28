@@ -1,7 +1,5 @@
 ;;; private/hlissner/config.el -*- lexical-binding: t; -*-
 
-(add-to-list 'load-path "~/work/conf/emacs-snippets")
-
 (setq +doom-modeline-buffer-file-name-style 'relative-from-project)
 
 
