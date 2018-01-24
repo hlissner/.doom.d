@@ -10,16 +10,12 @@
       user-mail-address "henrik@lissner.net"
       user-full-name    "Henrik Lissner"
 
-      doom-font (font-spec :family "Fira Mono" :size 12)
+      doom-font (font-spec :family "Input Mono Narrow" :size 12 :weight 'semi-light)
       doom-variable-pitch-font (font-spec :family "Fira Sans")
-      doom-unicode-font (font-spec :family "DejaVu Sans Mono")
+      doom-unicode-font (font-spec :family "Input Mono Narrow" :size 12)
       doom-big-font (font-spec :family "Fira Mono" :size 19)
 
       org-ellipsis " ▼ ")
-
-;; Fira Mono doesn't have italics, so we highlight it instead.
-(add-hook! doom-post-init
-  (set-face-attribute 'italic nil :weight 'ultra-light :foreground "#ffffff"))
 
 (add-hook! doom-big-font-mode
   (setq +doom-modeline-height (if doom-big-font-mode 37 29)))
