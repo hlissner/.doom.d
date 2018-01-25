@@ -11,8 +11,7 @@
       mu4e-maildir        (expand-file-name "mail" xdg-data)
       mu4e-attachment-dir (expand-file-name "attachments" mu4e-maildir))
 
-(add-hook! '(minibuffer-setup-hook doom-popup-mode-hook)
-  (setq-local show-trailing-whitespace nil))
+(add-hook! minibuffer-setup (setq-local show-trailing-whitespace nil))
 
 
 ;;
