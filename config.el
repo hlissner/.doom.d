@@ -19,18 +19,19 @@
 ;;
 
 (after! smartparens
-  ;; Auto-close more conservatively and expand braces on RET
+  ;; Auto-close pairs more conservatively
   (let ((unless-list '(sp-point-before-word-p
                        sp-point-after-word-p
                        sp-point-before-same-p)))
     (sp-pair "'"  nil :unless unless-list)
     (sp-pair "\"" nil :unless unless-list))
-  (sp-pair "{" nil :post-handlers '(("||\n[i]" "RET") ("| " " "))
+
+  ;; ...and expand braces on RET
+  (sp-pair "{" nil :post-handlers '(("||\n[i]" "RET"))
            :unless '(sp-point-before-word-p sp-point-before-same-p))
-  (sp-pair "(" nil :post-handlers '(("||\n[i]" "RET") ("| " " "))
+  (sp-pair "(" nil :post-handlers '(("||\n[i]" "RET"))
            :unless '(sp-point-before-word-p sp-point-before-same-p))
-  (sp-pair "[" nil :post-handlers '(("| " " "))
-           :unless '(sp-point-before-word-p sp-point-before-same-p)))
+  (sp-pair "[" nil :unless '(sp-point-before-word-p sp-point-before-same-p)))
 
 ;; feature/evil
 (after! evil-mc
