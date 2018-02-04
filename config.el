@@ -15,6 +15,17 @@
 
 
 ;;
+;; Keybindings
+;;
+
+(map!
+ (:leader
+   (:prefix "f"
+     :desc "Find file in dotfiles" :n "d" #'+hlissner/find-in-dotfiles
+     :desc "Browse dotfiles"       :n "D" #'+hlissner/browse-dotfiles)))
+
+
+;;
 ;; Modules
 ;;
 
