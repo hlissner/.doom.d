@@ -21,8 +21,8 @@
 (map!
  (:leader
    (:prefix "f"
-     :desc "Find file in dotfiles" :n "d" #'+hlissner/find-in-dotfiles
-     :desc "Browse dotfiles"       :n "D" #'+hlissner/browse-dotfiles)))
+     :desc "Find file in dotfiles" :n "t" #'+hlissner/find-in-dotfiles
+     :desc "Browse dotfiles"       :n "T" #'+hlissner/browse-dotfiles)))
 
 
 ;;
