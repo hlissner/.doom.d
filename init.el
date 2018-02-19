@@ -70,7 +70,7 @@
        upload            ; map local to remote projects via ssh/ftp
 
        :lang
-       assembly          ; assembly for fun or debugging
+      ;assembly          ; assembly for fun or debugging
        cc                ; C/C++/Obj-C madness
        crystal           ; ruby at the speed of c
       ;clojure           ; java with a lisp
@@ -87,10 +87,10 @@
        javascript        ; all(hope(abandon(ye(who(enter(here))))))
       ;julia             ; a better, faster MATLAB
       ;latex             ; writing papers in Emacs has never been so fun
-       ledger            ; an accounting system in Emacs
+      ;ledger            ; an accounting system in Emacs
        lua               ; one-based indices? one-based indices
        markdown          ; writing docs for people to ignore
-       ocaml             ; an objective camel
+      ;ocaml             ; an objective camel
        (org              ; organize your plain life in plain text
         +attach          ; custom attachment system
         +babel           ; running code in org
