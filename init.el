@@ -26,7 +26,7 @@
        (lookup           ; helps you navigate your code and documentation
         +devdocs         ; ...on devdocs.io online
         +docsets)        ; ...or in Dash docsets locally
-       services          ; TODO managing external services & code builders
+      ;services          ; TODO managing external services & code builders
        snippets          ; my elves. They type so I don't have to
        spellcheck        ; tasing you for misspelling mispelling
        syntax-checker    ; tasing you for every semicolon you forget
@@ -56,18 +56,18 @@
        dired             ; making dired pretty [functional]
        electric-indent   ; smarter, keyword-based electric-indent
       ;eshell            ; a consistent, cross-platform shell (WIP)
-       gist              ; interacting with github gists
+      ;gist              ; interacting with github gists
        imenu             ; an imenu sidebar and searchable code index
       ;impatient-mode    ; show off code over HTTP
       ;macos             ; MacOS-specific commands
       ;make              ; run make tasks from Emacs
        neotree           ; a project drawer, like NERDTree for vim
-       password-store    ; password manager for nerds
+      ;password-store    ; password manager for nerds
       ;pdf               ; pdf enhancements
        rotate-text       ; cycle region at point between text candidates
       ;term              ; terminals in Emacs
       ;tmux              ; an API for interacting with tmux
-       upload            ; map local to remote projects via ssh/ftp
+      ;upload            ; map local to remote projects via ssh/ftp
 
        :lang
       ;assembly          ; assembly for fun or debugging
