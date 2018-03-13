@@ -7,12 +7,19 @@
       user-mail-address "henrik@lissner.net"
       user-full-name    "Henrik Lissner"
 
-      doom-font (font-spec :family "Input Mono Narrow" :size 12 :weight 'semi-light)
-      doom-variable-pitch-font (font-spec :family "Fira Sans")
-      doom-unicode-font (font-spec :family "Input Mono Narrow" :size 12)
-      doom-big-font (font-spec :family "Fira Mono" :size 19)
+      org-ellipsis " ▼ "
 
-      org-ellipsis " ▼ ")
+      ;; doom-variable-pitch-font (font-spec :family "Fira Sans")
+      ;; doom-unicode-font (font-spec :family "Input Mono Narrow" :size 12)
+      doom-big-font (font-spec :family "Fira Mono" :size 19))
+
+
+(pcase (system-name)
+  ((or "proteus" "halimede")
+   (setq ivy-posframe-font (font-spec :family "Input Mono Narrow" :size 18)
+         ivy-height 12))
+  (_
+   (setq doom-font (font-spec :family "Input Mono Narrow" :size 12 :weight 'semi-light))))
 
 ;;
 (doom! :feature
