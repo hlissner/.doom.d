@@ -1,5 +1,7 @@
 ;;; private/hlissner/init.el -*- lexical-binding: t; -*-
 
+(add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
+
 ;; I've swapped these keys on my keyboard
 (setq x-super-keysym 'alt
       x-alt-keysym   'meta
