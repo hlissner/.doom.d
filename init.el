@@ -19,7 +19,7 @@
 
 (pcase (system-name)
   ((or "proteus" "halimede")
-   (setq ivy-posframe-font (font-spec :family "Input Mono Narrow" :size 18)
+   (setq ivy-posframe-font (font-spec :family "Input Mono Narrow" :size 16)
          ivy-height 12))
   (_
    (setq doom-font (font-spec :family "Input Mono Narrow" :size 12 :weight 'semi-light))))
