@@ -1,4 +1,4 @@
-;;; private/hlissner/init.el -*- lexical-binding: t; -*-
+;;; init.el -*- lexical-binding: t; -*-
 
 (add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
 
