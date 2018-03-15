@@ -9,6 +9,7 @@
       user-mail-address "henrik@lissner.net"
       user-full-name    "Henrik Lissner"
 
+      +org-dir (expand-file-name "~/work/org/")
       org-ellipsis " ▼ "
 
       ;; doom-variable-pitch-font (font-spec :family "Fira Sans")
