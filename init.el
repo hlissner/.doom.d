@@ -71,6 +71,7 @@
        imenu             ; an imenu sidebar and searchable code index
       ;impatient-mode    ; show off code over HTTP
       ;macos             ; MacOS-specific commands
+       magit             ;
       ;make              ; run make tasks from Emacs
        neotree           ; a project drawer, like NERDTree for vim
       ;password-store    ; password manager for nerds
