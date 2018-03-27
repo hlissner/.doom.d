@@ -86,13 +86,13 @@
        cc                ; C/C++/Obj-C madness
        crystal           ; ruby at the speed of c
       ;clojure           ; java with a lisp
-       csharp            ; unity, .NET, and mono shenanigans
+      ;csharp            ; unity, .NET, and mono shenanigans
        data              ; config/data formats
-      ;elixir            ; erlang done right
+       elixir            ; erlang done right
       ;elm               ; care for a cup of TEA?
        emacs-lisp        ; drown in parentheses
       ;ess               ; emacs speaks statistics
-       go                ; the hipster dialect
+      ;go                ; the hipster dialect
        (haskell +intero) ; a language that's lazier than I am
       ;hy                ; readability of scheme w/ speed of python
       ;(java +meghanada) ; the poster child for carpal tunnel syndrome
