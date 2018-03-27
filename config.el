@@ -43,6 +43,7 @@
   (set-face-attribute 'helm-source-header nil :height 0.1))
 
 ;; lang/org
+(add-hook 'org-mode-hook #'auto-fill-mode)
 (after! org-bullets
   ;; The standard unicode characters are usually misaligned depending on the
   ;; font. This bugs me. Personally, markdown #-marks for headlines are more
