@@ -53,7 +53,7 @@
        doom              ; what makes DOOM look the way it does
        doom-dashboard    ; a nifty splash screen for Emacs
        doom-modeline     ; a snazzy Atom-inspired mode-line
-       doom-quit         ; DOOM quit-message prompts when you quit Emacs
+      ;doom-quit         ; DOOM quit-message prompts when you quit Emacs
        hl-todo           ; highlight TODO/FIXME/NOTE tags
        nav-flash         ; blink the current line after jumping
        evil-goggles      ; display visual hints when editing in evil
@@ -66,7 +66,7 @@
        :tools
        dired             ; making dired pretty [functional]
        electric-indent   ; smarter, keyword-based electric-indent
-      ;eshell            ; a consistent, cross-platform shell (WIP)
+       eshell            ; a consistent, cross-platform shell (WIP)
       ;gist              ; interacting with github gists
        imenu             ; an imenu sidebar and searchable code index
       ;impatient-mode    ; show off code over HTTP
