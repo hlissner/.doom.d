@@ -1,6 +1,6 @@
 ;;; init.el -*- lexical-binding: t; -*-
 
-(add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
+(map-put default-frame-alist 'inhibit-double-buffering t)
 
 ;; I've swapped these keys on my keyboard
 (setq x-super-keysym 'alt
