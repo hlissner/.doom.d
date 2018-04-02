@@ -42,25 +42,21 @@
   ;; Hide header lines in helm. I don't like them
   (set-face-attribute 'helm-source-header nil :height 0.1))
 
+;; tools/magit
+(after! magit
+  (setq magit-repository-directories
+        (cl-loop for dir in (directory-files "~/work" t "^[^.]" t)
+                 if (file-directory-p dir)
+                 nconc (cl-loop for subdir in (directory-files dir t "^[^.]" t)
+                                if (and (file-directory-p subdir)
+                                        (file-directory-p (expand-file-name ".git/" subdir)))
+                                collect subdir))))
+
 ;; lang/org
 (add-hook 'org-mode-hook #'auto-fill-mode)
-(after! org-bullets
-  ;; The standard unicode characters are usually misaligned depending on the
-  ;; font. This bugs me. Personally, markdown #-marks for headlines are more
-  ;; elegant, so we use those.
-  (setq org-bullets-bullet-list '("#")))
-
-;; app/irc
-(after! circe
-  (setq +irc-notifications-watch-strings '("v0" "vnought" "hlissner"))
-
-  (set! :irc "irc.snoonet.org"
-    `(:tls t
-      :nick "v0"
-      :port 6697
-      :sasl-username ,(+pass-get-user "irc/snoonet.org")
-      :sasl-password ,(+pass-get-secret "irc/snoonet.org")
-      :channels (:after-auth "#ynought"))))
+;; The standard unicode characters are usually misaligned depending on the font.
+;; This bugs me. Personally, markdown #-marks for headlines are more elegant.
+(setq org-bullets-bullet-list '("#"))
 
 ;; app/email
 (after! mu4e
@@ -143,7 +139,7 @@
           :nv "?"  #'+email/mark
           :nv "r"  #'+email/mark
           :nv "m"  #'+email/mark
-          :n "x"   #'mu4e-mark-execute-all
+          :n  "x"  #'mu4e-mark-execute-all
 
           :n "]]"  #'mu4e-headers-next-unread
           :n "[["  #'mu4e-headers-prev-unread
