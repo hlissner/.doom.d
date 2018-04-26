@@ -7,7 +7,10 @@
 
 (setq +doom-modeline-buffer-file-name-style 'relative-from-project
       show-trailing-whitespace t
-
+      ;; org
+      +org-dir (expand-file-name "~/work/org/")
+      org-ellipsis " ▼ "
+      ;; mu4e
       mu4e-maildir        (expand-file-name "mail" xdg-data)
       mu4e-attachment-dir (expand-file-name "attachments" mu4e-maildir))
 
