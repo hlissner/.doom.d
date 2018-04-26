@@ -3,7 +3,7 @@
 (defvar xdg-data (getenv "XDG_DATA_HOME"))
 ;; (defvar xdg-bin (getenv "XDG_BIN_HOME"))
 ;; (defvar xdg-cache (getenv "XDG_CACHE_HOME"))
-;; (defvar xdg-config (getenv "XDG_CONFIG_HOME"))
+(defvar xdg-config (getenv "XDG_CONFIG_HOME"))
 
 (setq +doom-modeline-buffer-file-name-style 'relative-from-project
       show-trailing-whitespace t
@@ -25,7 +25,10 @@
  (:leader
    (:prefix "f"
      :desc "Find file in dotfiles" :n "t" #'+hlissner/find-in-dotfiles
-     :desc "Browse dotfiles"       :n "T" #'+hlissner/browse-dotfiles)))
+     :desc "Browse dotfiles"       :n "T" #'+hlissner/browse-dotfiles)
+   (:prefix "n"
+     :desc "Browse mode notes"     :n  "m" #'+hlissner/find-notes-for-major-mode
+     :desc "Browse project notes"  :n  "p" #'+hlissner/find-notes-for-project)))
 
 
 ;;
