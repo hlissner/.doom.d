@@ -66,6 +66,8 @@
 
 ;; app/email
 (after! mu4e
+  (setq mu4e-get-mail-command (format "mbsync -c '%s/mbsync/config' -a" xdg-config))
+
   (setq mu4e-bookmarks
         `(("\\\\Inbox" "Inbox" ?i)
           ("\\\\Draft" "Drafts" ?d)
