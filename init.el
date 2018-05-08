@@ -60,6 +60,7 @@
 
        :tools
        dired
+       editorconfig
        electric-indent
        eshell
       ;gist
