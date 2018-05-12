@@ -128,4 +128,4 @@
       ; +langtool)
 
        :config
-       (default +bindings +snippets +evil-commands))
+       (default +bindings +evil-commands))
