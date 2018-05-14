@@ -26,7 +26,6 @@
 
 ;;
 (doom! :feature
-       (popup +all +defaults)
       ;debugger
        eval
        (evil +everywhere)
@@ -35,17 +34,18 @@
        snippets
        file-templates
        spellcheck
-       syntax-checker
+       (syntax-checker +childframe)
        version-control
        workspaces
 
        :completion
-       (company +childframe)
+       (company +childframe +auto)
        (ivy +childframe)
       ;helm
       ;ido
 
        :ui
+       (popup +all +defaults)
        doom
        doom-dashboard
        doom-modeline
@@ -57,6 +57,7 @@
       ;tabbar
        vi-tilde-fringe
        window-select
+       neotree
 
        :tools
        dired
@@ -69,12 +70,11 @@
       ;macos
        magit
       ;make
-       neotree
       ;password-store
       ;pdf
       ;ranger
        rotate-text
-       term
+      ;term
       ;tmux
       ;upload
 
@@ -112,7 +112,6 @@
       ;scala
        sh
       ;swift
-       typescript
        web
 
        :app
