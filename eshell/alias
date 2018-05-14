@@ -1,0 +1,9 @@
+alias q    exit
+alias l    ls -1
+alias ll   ls -l
+alias la   ls -la
+alias g    hub
+alias gs   hub status --short .
+
+alias e    find-file $1
+alias d    dired $1
