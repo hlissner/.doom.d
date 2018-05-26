@@ -43,6 +43,10 @@
   (add-hook! 'evil-mc-after-cursors-deleted
     (remove-hook 'evil-insert-state-entry-hook #'evil-mc-resume-cursors t)))
 
+;; tools/eshell
+(after! eshell
+  (add-hook 'eshell-mode-hook #'hide-mode-line-mode))
+
 ;; completion/helm
 (after! helm
   ;; Hide header lines in helm. I don't like them
