@@ -5,7 +5,20 @@
 ;; (defvar xdg-cache (getenv "XDG_CACHE_HOME"))
 (defvar xdg-config (getenv "XDG_CONFIG_HOME"))
 
-(setq +doom-modeline-buffer-file-name-style 'relative-from-project
+(map-put default-frame-alist 'inhibit-double-buffering t)
+
+(setq user-full-name    "Henrik Lissner"
+      user-mail-address "henrik@lissner.net"
+
+      ;; I've swapped these keys on my keyboard
+      x-super-keysym 'alt
+      x-alt-keysym   'meta
+
+      ;; doom-variable-pitch-font (font-spec :family "Fira Sans")
+      ;; doom-unicode-font (font-spec :family "Input Mono Narrow" :size 12)
+      doom-big-font (font-spec :family "Fira Mono" :size 19)
+
+      +doom-modeline-buffer-file-name-style 'relative-from-project
       show-trailing-whitespace t
       ;; org
       +org-dir (expand-file-name "~/work/org/")
@@ -15,6 +28,21 @@
       mu4e-attachment-dir (expand-file-name "attachments" mu4e-maildir))
 
 (add-hook! minibuffer-setup (setq-local show-trailing-whitespace nil))
+
+
+;;
+;; Host-specific config
+;;
+
+(pcase (system-name)
+  ((or "proteus" "halimede")
+   (setq ivy-height 12
+         +doom-modeline-height 23
+         ivy-posframe-font (font-spec :family "Input Mono Narrow" :size 12)
+         doom-font (font-spec :family "Input Mono Narrow" :size 9)))
+  (_
+   (setq ivy-posframe-font (font-spec :family "Input Mono Narrow" :size 18)
+         doom-font (font-spec :family "Input Mono Narrow" :size 12 :weight 'semi-light))))
 
 
 ;;

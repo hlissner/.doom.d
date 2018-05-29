@@ -1,30 +1,5 @@
 ;;; init.el -*- lexical-binding: t; -*-
 
-(map-put default-frame-alist 'inhibit-double-buffering t)
-
-;; I've swapped these keys on my keyboard
-(setq x-super-keysym 'alt
-      x-alt-keysym   'meta
-
-      user-mail-address "henrik@lissner.net"
-      user-full-name    "Henrik Lissner"
-
-      ;; doom-variable-pitch-font (font-spec :family "Fira Sans")
-      ;; doom-unicode-font (font-spec :family "Input Mono Narrow" :size 12)
-      doom-big-font (font-spec :family "Fira Mono" :size 19))
-
-
-(pcase (system-name)
-  ((or "proteus" "halimede")
-   (setq ivy-height 12
-         +doom-modeline-height 24
-         ivy-posframe-font (font-spec :family "Input Mono Narrow" :size 12)
-         doom-font (font-spec :family "Input Mono Narrow" :size 10)))
-  (_
-   (setq ivy-posframe-font (font-spec :family "Input Mono Narrow" :size 18)
-         doom-font (font-spec :family "Input Mono Narrow" :size 12 :weight 'semi-light))))
-
-;;
 (doom! :feature
       ;debugger
        eval
