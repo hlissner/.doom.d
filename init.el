@@ -45,60 +45,66 @@
       ;ido
 
        :ui
-       (popup +all +defaults)
        doom
        doom-dashboard
        doom-modeline
       ;doom-quit
+       evil-goggles
        hl-todo
        nav-flash
-       evil-goggles
+       neotree
+       (popup +all +defaults)
       ;unicode
       ;tabbar
-       vi-tilde-fringe
        window-select
-       neotree
+       vi-tilde-fringe
+
+       :emacs
+       dired             ; making dired pretty [functional]
+       ediff             ; comparing files in Emacs
+       electric-indent   ; smarter, keyword-based electric-indent
+       eshell            ; a consistent, cross-platform shell (WIP)
+       imenu             ; an imenu sidebar and searchable code index
+      ;term              ; terminals in Emacs
 
        :tools
-       dired
-       editorconfig
-       electric-indent
-       eshell
-      ;gist
-       imenu
-      ;impatient-mode
-      ;macos
-       magit
-      ;make
-      ;password-store
-      ;pdf
-      ;ranger
-       rotate-text
-      ;term
-      ;tmux
-      ;upload
+       editorconfig      ; let someone else argue about tabs vs spaces
+      ;gist              ; interacting with github gists
+      ;macos             ; MacOS-specific commands
+       magit             ;
+      ;make              ; run make tasks from Emacs
+       password-store    ; password manager for nerds
+      ;pdf               ; pdf enhancements
+      ;prodigy           ; FIXME managing external services & code builders
+      ;rgb               ; creating color strings
+       rotate-text       ; cycle region at point between text candidates
+      ;tmux              ; an API for interacting with tmux
+      ;upload            ; map local to remote projects via ssh/ftp
 
        :lang
       ;assembly
        cc
-       crystal
+      ;crystal
       ;clojure
-       csharp
+      ;csharp
        data
-       elixir
+      ;erlang
+      ;elixir
       ;elm
        emacs-lisp
       ;ess
       ;go
-       (haskell +intero)
+      ;(haskell +intero)
       ;hy
       ;(java +meghanada)
        javascript
       ;julia
-      ;latex
+       latex
       ;ledger
        lua
        markdown
+      ;nim
+      ;nix
       ;ocaml
        (org +attach +babel +capture +export +present)
       ;perl
@@ -107,7 +113,7 @@
       ;purescript
        python
        rest
-       ruby
+      ;ruby
        rust
       ;scala
        sh
@@ -116,7 +122,7 @@
 
        :app
       ;crm
-       (email +gmail)
+      ;(email +gmail)
       ;irc
       ;regex
       ;rss
