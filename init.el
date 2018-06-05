@@ -58,7 +58,7 @@
 
        :lang
       ;assembly
-       cc
+       (cc +irony)
       ;crystal
       ;clojure
       ;csharp
