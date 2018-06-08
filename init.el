@@ -74,7 +74,7 @@
       ;(java +meghanada)
        javascript
       ;julia
-       latex
+      ;latex
       ;ledger
        lua
        markdown
