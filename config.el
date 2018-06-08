@@ -25,7 +25,9 @@
       org-ellipsis " ▼ "
       ;; mu4e
       mu4e-maildir        (expand-file-name "mail" xdg-data)
-      mu4e-attachment-dir (expand-file-name "attachments" mu4e-maildir))
+      mu4e-attachment-dir (expand-file-name "attachments" mu4e-maildir)
+
+      +magit-hub-features t)
 
 (add-hook! minibuffer-setup (setq-local show-trailing-whitespace nil))
 
