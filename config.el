@@ -66,23 +66,14 @@
 ;;
 
 ;; tools/eshell
-(after! eshell
-  (add-hook 'eshell-mode-hook #'hide-mode-line-mode))
-
-;; completion/helm
-(after! helm
-  ;; Hide header lines in helm. I don't like them
-  (set-face-attribute 'helm-source-header nil :height 0.1))
+(add-hook 'eshell-mode-hook #'hide-mode-line-mode)
 
 ;; tools/magit
 (after! magit-repos
   (setq magit-repository-directories
-        (cl-loop for dir in (directory-files "~/work" t "^[^.]" t)
-                 if (file-directory-p dir)
-                 nconc (cl-loop for subdir in (directory-files dir t "^[^.]" t)
-                                if (and (file-directory-p subdir)
-                                        (file-directory-p (expand-file-name ".git/" subdir)))
-                                collect subdir))))
+        (doom-files-in "~/work"
+                       :type 'dirs :depth 2 :full t
+                       :filter (lambda (dir) (file-directory-p (expand-file-name ".git/" dir))))))
 
 ;; lang/org
 (add-hook 'org-mode-hook #'auto-fill-mode)
