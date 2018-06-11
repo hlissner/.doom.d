@@ -69,6 +69,10 @@
 (add-hook 'eshell-mode-hook #'hide-mode-line-mode)
 
 ;; tools/magit
+(after! magit
+  ;; Add gpg-sign to rebasing by default
+  (magit-define-popup-option 'magit-rebase-popup
+    ?S "Sign using gpg" "--gpg-sign=" #'magit-read-gpg-secret-key))
 (after! magit-repos
   (setq magit-repository-directories
         (doom-files-in "~/work"
