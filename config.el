@@ -74,10 +74,7 @@
   (magit-define-popup-option 'magit-rebase-popup
     ?S "Sign using gpg" "--gpg-sign=" #'magit-read-gpg-secret-key))
 (after! magit-repos
-  (setq magit-repository-directories
-        (doom-files-in "~/work"
-                       :type 'dirs :depth 2 :full t
-                       :filter (lambda (dir) (file-directory-p (expand-file-name ".git/" dir))))))
+  (setq magit-repository-directories '(("~/work" . 2))))
 
 ;; lang/org
 (add-hook 'org-mode-hook #'auto-fill-mode)
