@@ -27,7 +27,8 @@
       mu4e-maildir        (expand-file-name "mail" xdg-data)
       mu4e-attachment-dir (expand-file-name "attachments" mu4e-maildir)
 
-      +magit-hub-features t)
+      +magit-hub-features t
+      +pretty-code-enabled-modes '(emacs-lisp-mode org-mode))
 
 (add-hook! minibuffer-setup (setq-local show-trailing-whitespace nil))
 
