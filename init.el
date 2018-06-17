@@ -25,10 +25,12 @@
        doom-modeline
       ;doom-quit
        evil-goggles
+      ;fci
        hl-todo
        nav-flash
        neotree
        (popup +all +defaults)
+       pretty-code
       ;unicode
       ;tabbar
        window-select
