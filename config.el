@@ -66,8 +66,18 @@
 ;; Modules
 ;;
 
-;; tools/eshell
-(add-hook 'eshell-mode-hook #'hide-mode-line-mode)
+;; emacs/eshell
+(after! eshell
+  (set-eshell-alias!
+   "q"   "quit-and-close"
+   "l"   "ls -l"
+   "la"  "ls -la"
+   "f"   "find-file $1"
+   "d"   "dired $1"
+   "gl"  "(call-interactively 'magit-log-current)"
+   "gs"  "magit-status"
+   "gc"  "magit-commit"
+   "rg"  "rg --color=always $*"))
 
 ;; tools/magit
 (after! magit
