@@ -29,6 +29,7 @@
        hl-todo
        nav-flash
        neotree
+      ;treemacs
        (popup +all +defaults)
        pretty-code
       ;unicode
@@ -57,13 +58,15 @@
        rotate-text       ; cycle region at point between text candidates
       ;tmux              ; an API for interacting with tmux
       ;upload            ; map local to remote projects via ssh/ftp
+      ;wakatime
 
        :lang
       ;assembly
-       (cc +irony)
+       (cc +irony +rtags)
       ;crystal
       ;clojure
       ;csharp
+      ;common-lisp
        data
       ;erlang
       ;elixir
@@ -78,14 +81,14 @@
       ;julia
       ;latex
       ;ledger
-       lua
+      ;lua
        markdown
       ;nim
       ;nix
       ;ocaml
        (org +attach +babel +capture +export +present)
       ;perl
-       php
+      ;php
       ;plantuml
       ;purescript
        python
@@ -98,6 +101,7 @@
        web
 
        :app
+      ;notmuch
       ;crm
       ;(email +gmail)
       ;irc
