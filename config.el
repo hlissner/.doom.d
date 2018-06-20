@@ -21,7 +21,7 @@
       +doom-modeline-buffer-file-name-style 'relative-from-project
       show-trailing-whitespace t
       ;; org
-      +org-dir (expand-file-name "~/work/org/")
+      org-directory (expand-file-name "~/work/org/")
       org-ellipsis " ▼ "
       ;; mu4e
       mu4e-maildir        (expand-file-name "mail" xdg-data)
@@ -30,7 +30,7 @@
       +magit-hub-features t
       +pretty-code-enabled-modes '(emacs-lisp-mode org-mode))
 
-(add-hook! minibuffer-setup (setq-local show-trailing-whitespace nil))
+(setq-hook! 'minibuffer-setup-hook show-trailing-whitespace nil)
 
 
 ;;
@@ -78,7 +78,6 @@
   (setq magit-repository-directories '(("~/work" . 2))))
 
 ;; lang/org
-(add-hook 'org-mode-hook #'auto-fill-mode)
 ;; The standard unicode characters are usually misaligned depending on the font.
 ;; This bugs me. Personally, markdown #-marks for headlines are more elegant.
 (setq org-bullets-bullet-list '("#"))
@@ -101,7 +100,7 @@
         smtpmail-smtp-server "smtp.gmail.com"
         smtpmail-smtp-service 587)
 
-  (set! :email "gmail.com"
+  (set-email-account! "gmail.com"
     '((mu4e-sent-folder       . "/gmail.com/Sent Mail")
       (mu4e-drafts-folder     . "/gmail.com/Drafts")
       (mu4e-trash-folder      . "/gmail.com/Trash")
@@ -110,7 +109,7 @@
       (user-mail-address      . "hlissner@gmail.com")
       (mu4e-compose-signature . "---\nHenrik")))
 
-  (set! :email "lissner.net"
+  (set-email-account! "lissner.net"
     '((mu4e-sent-folder       . "/lissner.net/Sent Mail")
       (mu4e-drafts-folder     . "/lissner.net/Drafts")
       (mu4e-trash-folder      . "/lissner.net/Trash")
