@@ -10,7 +10,6 @@
        file-templates
        spellcheck
        (syntax-checker +childframe)
-       version-control
        workspaces
 
        :completion
@@ -35,6 +34,7 @@
       ;unicode
       ;tabbar
        window-select
+       vc-gutter
        vi-tilde-fringe
 
        :emacs
@@ -44,6 +44,7 @@
        eshell            ; a consistent, cross-platform shell (WIP)
        imenu             ; an imenu sidebar and searchable code index
       ;term              ; terminals in Emacs
+       vc
 
        :tools
        editorconfig      ; let someone else argue about tabs vs spaces
