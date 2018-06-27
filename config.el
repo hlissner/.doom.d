@@ -22,6 +22,7 @@
       show-trailing-whitespace t
       ;; org
       org-directory (expand-file-name "~/work/org/")
+      org-agenda-files (list org-directory)
       org-ellipsis " ▼ "
       ;; mu4e
       mu4e-maildir        (expand-file-name "mail" xdg-data)
