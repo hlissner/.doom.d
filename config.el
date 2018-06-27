@@ -24,7 +24,6 @@
       mu4e-maildir        (expand-file-name "mail" xdg-data)
       mu4e-attachment-dir (expand-file-name "attachments" mu4e-maildir)
 
-      +magit-hub-features t
       +pretty-code-enabled-modes '(emacs-lisp-mode org-mode))
 
 (setq-hook! 'minibuffer-setup-hook show-trailing-whitespace nil)
@@ -77,12 +76,15 @@
    "rg"  "rg --color=always $*"))
 
 ;; tools/magit
+(setq magit-repository-directories '(("~/work" . 2))
+      magit-commit-arguments '("--gpg-sign=5F6C0EA160557395")
+      magit-rebase-arguments '("--autostash" "--gpg-sign=5F6C0EA160557395")
+      +magit-hub-features t)
+
 (after! magit
   ;; Add gpg-sign to rebasing by default
   (magit-define-popup-option 'magit-rebase-popup
     ?S "Sign using gpg" "--gpg-sign=" #'magit-read-gpg-secret-key))
-(after! magit-repos
-  (setq magit-repository-directories '(("~/work" . 2))))
 
 ;; lang/org
 (setq org-directory (expand-file-name "~/work/org/")
