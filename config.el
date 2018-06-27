@@ -20,10 +20,6 @@
 
       +doom-modeline-buffer-file-name-style 'relative-from-project
       show-trailing-whitespace t
-      ;; org
-      org-directory (expand-file-name "~/work/org/")
-      org-agenda-files (list org-directory)
-      org-ellipsis " ▼ "
       ;; mu4e
       mu4e-maildir        (expand-file-name "mail" xdg-data)
       mu4e-attachment-dir (expand-file-name "attachments" mu4e-maildir)
@@ -89,9 +85,14 @@
   (setq magit-repository-directories '(("~/work" . 2))))
 
 ;; lang/org
-;; The standard unicode characters are usually misaligned depending on the font.
-;; This bugs me. Personally, markdown #-marks for headlines are more elegant.
-(setq org-bullets-bullet-list '("#"))
+(setq org-directory (expand-file-name "~/work/org/")
+      org-agenda-files (list org-directory)
+      org-ellipsis " ▼ "
+
+      ;; The standard unicode characters are usually misaligned depending on the
+      ;; font. This bugs me. Personally, markdown #-marks for headlines are more
+      ;; elegant.
+      org-bullets-bullet-list '("#"))
 
 ;; app/email
 (after! mu4e
