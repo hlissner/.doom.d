@@ -5,7 +5,7 @@
 ;; (defvar xdg-cache (getenv "XDG_CACHE_HOME"))
 (defvar xdg-config (getenv "XDG_CONFIG_HOME"))
 
-(map-put default-frame-alist 'inhibit-double-buffering t)
+(add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
 
 (setq user-full-name    "Henrik Lissner"
       user-mail-address "henrik@lissner.net"
