@@ -43,6 +43,13 @@
    (setq ivy-posframe-font (font-spec :family "Input Mono Narrow" :size 18)
          doom-font (font-spec :family "Input Mono Narrow" :size 12 :weight 'semi-light))))
 
+(when IS-MAC
+  (setq ns-use-thin-smoothing t)
+  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+  (add-to-list 'default-frame-alist '(ns-appearance . dark))
+  ;; maximize first frame
+  (set-frame-parameter nil 'fullscreen 'maximized))
+
 
 ;;
 ;; Keybindings
