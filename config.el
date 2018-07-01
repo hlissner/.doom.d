@@ -69,6 +69,9 @@
 ;; Modules
 ;;
 
+;; app/rss
+(add-hook! 'elfeed-show-mode-hook (text-scale-set 2))
+
 ;; emacs/eshell
 (after! eshell
   (set-eshell-alias!
