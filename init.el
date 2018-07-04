@@ -21,7 +21,7 @@
        :ui
        doom
        doom-dashboard
-       doom-modeline
+       (doom-modeline +new)
       ;doom-quit
        evil-goggles
       ;fci
