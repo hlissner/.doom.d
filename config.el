@@ -28,6 +28,23 @@
 
 (setq-hook! 'minibuffer-setup-hook show-trailing-whitespace nil)
 
+;; be sneaky breeky about loading org+magit
+(when EMACS26+
+  (defun auto-require-packages (packages)
+    (let* ((reqs (cl-remove-if #'featurep packages))
+           (req (pop reqs)))
+      (when req
+        ;; (message "Loading %s" req)
+        (require req)
+        (when reqs
+          (run-with-idle-timer 1 nil #'auto-require-packages reqs)))))
+
+  (run-with-idle-timer 1 nil #'auto-require-packages
+                       '(calendar find-func format-spec org-macs org-compat
+                         org-faces org-entities org-list org-pcomplete org-src
+                         org-footnote org-macro ob org org-clock org-agenda
+                         org-capture with-editor git-commit package magit)))
+
 
 ;;
 ;; Host-specific config
