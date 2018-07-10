@@ -104,6 +104,7 @@
 (setq magit-repository-directories '(("~/work" . 2))
       magit-commit-arguments '("--gpg-sign=5F6C0EA160557395")
       magit-rebase-arguments '("--autostash" "--gpg-sign=5F6C0EA160557395")
+      magit-pull-arguments   '("--rebase" "--autostash" "--gpg-sign=5F6C0EA160557395")
       +magit-hub-features t)
 
 (after! magit
