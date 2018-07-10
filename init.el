@@ -27,8 +27,8 @@
       ;fci
        hl-todo
        nav-flash
-       neotree
-      ;treemacs
+      ;neotree
+       treemacs
        (popup +all +defaults)
        pretty-code
       ;unicode
