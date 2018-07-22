@@ -67,7 +67,7 @@
        :lang
       ;assembly
        (cc +irony +rtags)
-      ;crystal
+       crystal
       ;clojure
       ;csharp
       ;common-lisp
@@ -78,12 +78,12 @@
        emacs-lisp
       ;ess
       ;go
-      ;(haskell +intero)
+       (haskell +intero)
       ;hy
       ;(java +meghanada)
        javascript
       ;julia
-      ;latex
+       latex
       ;ledger
       ;lua
        markdown
@@ -92,12 +92,12 @@
       ;ocaml
        (org +attach +babel +capture +export +present)
       ;perl
-      ;php
+       php
       ;plantuml
       ;purescript
        python
        rest
-      ;ruby
+       ruby
        rust
       ;scala
        sh
