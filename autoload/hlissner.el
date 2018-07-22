@@ -13,9 +13,9 @@
   (doom-project-browse (expand-file-name "~/.dotfiles")))
 
 ;;;###autoload
-(defun +hlissner/find-notes-for-major-mode ()
+(defun +hlissner/find-notes-for-major-mode (&optional arg)
   "TODO"
-  (interactive)
+  (interactive "P")
   (let ((default-directory (expand-file-name "code/" +org-dir)))
     (if arg
         (call-interactively #'find-file)
@@ -23,11 +23,12 @@
        (expand-file-name (concat (string-remove-suffix "-mode" (symbol-name major-mode)) ".org"))))))
 
 ;;;###autoload
-(defun +hlissner/find-notes-for-project ()
+(defun +hlissner/find-notes-for-project (&optional arg)
   "TODO"
-  (interactive)
-  (let ((default-directory (expand-file-name "projects/" +org-dir)))
+  (interactive "P")
+  (let ((project-root (doom-project-name 'nocache))
+        (default-directory (expand-file-name "projects/" +org-dir)))
     (if arg
         (call-interactively #'find-file)
       (find-file
-       (expand-file-name (concat (doom-project-name 'nocache) ".org"))))))
+       (expand-file-name (concat project-root ".org"))))))
