@@ -87,7 +87,7 @@
       ;julia
        latex
       ;ledger
-      ;lua
+       lua
        markdown
       ;nim
       ;nix
