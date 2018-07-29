@@ -69,6 +69,11 @@
 ;;
 
 (map!
+ (:after treemacs
+   (:map evil-treemacs-state-map
+     "C-h" #'evil-window-left
+     "C-l" #'evil-window-right))
+
  (:leader
    (:prefix "f"
      :desc "Find file in dotfiles" :n "t" #'+hlissner/find-in-dotfiles
