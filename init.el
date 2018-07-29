@@ -21,11 +21,12 @@
        :ui
        doom
        doom-dashboard
-       (doom-modeline +new)
+      ;doom-modeline
       ;doom-quit
        evil-goggles
       ;fci
        hl-todo
+       modeline
        nav-flash
       ;neotree
        treemacs
