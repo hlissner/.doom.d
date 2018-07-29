@@ -10,10 +10,6 @@
 (setq user-full-name    "Henrik Lissner"
       user-mail-address "henrik@lissner.net"
 
-      ;; I've swapped these keys on my keyboard
-      x-super-keysym 'alt
-      x-alt-keysym   'meta
-
       ;; doom-variable-pitch-font (font-spec :family "Fira Sans")
       ;; doom-unicode-font (font-spec :family "Input Mono Narrow" :size 12)
       doom-big-font (font-spec :family "Fira Mono" :size 19)
@@ -49,11 +45,13 @@
 ;;
 
 (pcase (system-name)
-  ((or "proteus" "halimede")
+  ("halimede"
    (setq ivy-height 12
-         +doom-modeline-height 23
          ivy-posframe-font (font-spec :family "Input Mono Narrow" :size 12)
-         doom-font (font-spec :family "Input Mono Narrow" :size 9)))
+         doom-font (font-spec :family "Input Mono Narrow" :size 9)
+         ;; I've swapped these keys on my keyboard
+         x-super-keysym 'meta
+         x-meta-keysym  'super))
   (_
    (setq ivy-posframe-font (font-spec :family "Input Mono Narrow" :size 18)
          doom-font (font-spec :family "Input Mono Narrow" :size 12 :weight 'semi-light))))
