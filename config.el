@@ -7,21 +7,18 @@
 
 (add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
 
-(setq user-full-name    "Henrik Lissner"
-      user-mail-address "henrik@lissner.net"
+(setq-default
+ user-full-name    "Henrik Lissner"
+ user-mail-address "henrik@lissner.net"
 
-      ;; doom-variable-pitch-font (font-spec :family "Fira Sans")
-      ;; doom-unicode-font (font-spec :family "Input Mono Narrow" :size 12)
-      doom-big-font (font-spec :family "Fira Mono" :size 19)
+ ;; doom-variable-pitch-font (font-spec :family "Fira Sans")
+ ;; doom-unicode-font (font-spec :family "Input Mono Narrow" :size 12)
+ doom-big-font (font-spec :family "Fira Mono" :size 19)
 
-      show-trailing-whitespace t
-      ;; mu4e
-      mu4e-maildir        (expand-file-name "mail" xdg-data)
-      mu4e-attachment-dir (expand-file-name "attachments" mu4e-maildir)
+ +pretty-code-enabled-modes '(emacs-lisp-mode org-mode)
+ +format-on-save-enabled-modes '(not emacs-lisp-mode))
 
-      +pretty-code-enabled-modes '(emacs-lisp-mode org-mode))
-
-(setq-hook! 'minibuffer-setup-hook show-trailing-whitespace nil)
+;; (setq-hook! 'minibuffer-setup-hook show-trailing-whitespace nil)
 
 ;; load heavy packages all sneaky breeky like
 (defun auto-require-packages (packages)
@@ -53,14 +50,13 @@
          x-meta-keysym  'super))
   (_
    (setq ivy-posframe-font (font-spec :family "Input Mono Narrow" :size 18)
-         doom-font (font-spec :family "Input Mono Narrow" :size 12 :weight 'semi-light))))
+         doom-font (font-spec :family "Input Mono Narrow" :size 12 :weight 'semi-light)
+         +modeline-height 25)))
 
 (when IS-MAC
   (setq ns-use-thin-smoothing t)
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
-  (add-to-list 'default-frame-alist '(ns-appearance . dark))
-  ;; maximize first frame
-  (set-frame-parameter nil 'fullscreen 'maximized))
+  (add-to-list 'default-frame-alist '(ns-appearance . dark)))
 
 
 ;;
@@ -104,8 +100,7 @@
 (setq magit-repository-directories '(("~/work" . 2))
       magit-commit-arguments '("--gpg-sign=5F6C0EA160557395")
       magit-rebase-arguments '("--autostash" "--gpg-sign=5F6C0EA160557395")
-      magit-pull-arguments   '("--rebase" "--autostash" "--gpg-sign=5F6C0EA160557395")
-      +magit-hub-features t)
+      magit-pull-arguments   '("--rebase" "--autostash" "--gpg-sign=5F6C0EA160557395"))
 
 (after! magit
   ;; Add gpg-sign to rebasing by default
@@ -121,4 +116,3 @@
       ;; font. This bugs me. Personally, markdown #-marks for headlines are more
       ;; elegant.
       org-bullets-bullet-list '("#"))
-
