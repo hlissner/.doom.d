@@ -98,6 +98,7 @@
 
 ;; tools/magit
 (setq magit-repository-directories '(("~/work" . 2))
+      magit-save-repository-buffers nil
       magit-commit-arguments '("--gpg-sign=5F6C0EA160557395")
       magit-rebase-arguments '("--autostash" "--gpg-sign=5F6C0EA160557395")
       magit-pull-arguments   '("--rebase" "--autostash" "--gpg-sign=5F6C0EA160557395"))
