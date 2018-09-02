@@ -22,8 +22,10 @@
 
 ;; load heavy packages all sneaky breeky like
 (defun auto-require-packages (packages)
-  (let* ((reqs (cl-remove-if #'featurep packages))
-         (req (pop reqs)))
+  (let* ((gc-cons-threshold most-positive-fixnum)
+         (reqs (cl-remove-if #'featurep packages))
+         (req (pop reqs))
+         file-name-handler-alist)
     (when req
       (require req)
       (when reqs
