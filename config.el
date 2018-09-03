@@ -22,14 +22,14 @@
 
 ;; load heavy packages all sneaky breeky like
 (defun auto-require-packages (packages)
-  (let* ((gc-cons-threshold most-positive-fixnum)
-         (reqs (cl-remove-if #'featurep packages))
-         (req (pop reqs))
-         file-name-handler-alist)
-    (when req
-      (require req)
-      (when reqs
-        (run-with-idle-timer 1 nil #'auto-require-packages reqs)))))
+  (let ((gc-cons-threshold doom-gc-cons-upper-limit)
+        file-name-handler-alist)
+    (let* ((reqs (cl-remove-if #'featurep packages))
+           (req (pop reqs)))
+      (when req
+        (require req)
+        (when reqs
+          (run-with-idle-timer 1 nil #'auto-require-packages reqs))))))
 
 (run-with-idle-timer 1 nil #'auto-require-packages
                      '(calendar find-func format-spec org-macs org-compat
