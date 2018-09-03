@@ -105,11 +105,6 @@
       magit-rebase-arguments '("--autostash" "--gpg-sign=5F6C0EA160557395")
       magit-pull-arguments   '("--rebase" "--autostash" "--gpg-sign=5F6C0EA160557395"))
 
-(after! magit
-  ;; Add gpg-sign to rebasing by default
-  (magit-define-popup-option 'magit-rebase-popup
-    ?S "Sign using gpg" "--gpg-sign=" #'magit-read-gpg-secret-key))
-
 ;; lang/org
 (setq org-directory (expand-file-name "~/work/org/")
       org-agenda-files (list org-directory)
