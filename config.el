@@ -42,17 +42,16 @@
 ;; Host-specific config
 ;;
 
+(unless (equal (system-name) "proteus")
+  ;; I've swapped these keys on my keyboard
+  (setq x-super-keysym 'meta
+        x-meta-keysym  'super))
+
 (pcase (system-name)
   ("halimede"
-   (setq ivy-height 12
-         ivy-posframe-font (font-spec :family "Input Mono Narrow" :size 12)
-         doom-font (font-spec :family "Input Mono Narrow" :size 9)
-         ;; I've swapped these keys on my keyboard
-         x-super-keysym 'meta
-         x-meta-keysym  'super))
+   (setq doom-font (font-spec :family "Input Mono Narrow" :size 9)))
   (_
-   (setq ivy-posframe-font (font-spec :family "Input Mono Narrow" :size 18)
-         doom-font (font-spec :family "Input Mono Narrow" :size 12 :weight 'semi-light)
+   (setq doom-font (font-spec :family "Input Mono Narrow" :size 12 :weight 'semi-light)
          +modeline-height 25)))
 
 (when IS-MAC
