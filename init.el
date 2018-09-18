@@ -14,8 +14,8 @@
 
        :completion
        company
-      ;ivy
-       helm
+       ivy
+      ;helm
       ;ido
 
        :ui
