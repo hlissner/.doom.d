@@ -23,7 +23,6 @@
 
 ;;
 ;; Host-specific config
-;;
 
 (unless (equal (system-name) "proteus")
   ;; I've swapped these keys on my keyboard
@@ -45,7 +44,6 @@
 
 ;;
 ;; Keybindings
-;;
 
 (map!
  ;; Easier window navigation
@@ -70,7 +68,6 @@
 
 ;;
 ;; Modules
-;;
 
 ;; app/rss
 (add-hook! 'elfeed-show-mode-hook (text-scale-set 2))
