@@ -92,7 +92,7 @@
        lua
        markdown
       ;nim
-      ;nix
+       nix
       ;ocaml
        (org +attach +babel +capture +export +present)
       ;perl
