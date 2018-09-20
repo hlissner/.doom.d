@@ -15,6 +15,7 @@
  ;; doom-unicode-font (font-spec :family "Input Mono Narrow" :size 12)
  doom-big-font (font-spec :family "Fira Mono" :size 19)
 
+ +workspaces-switch-project-function #'ignore
  +pretty-code-enabled-modes '(emacs-lisp-mode org-mode)
  +format-on-save-enabled-modes '(not emacs-lisp-mode))
 
