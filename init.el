@@ -99,9 +99,9 @@
        ;;php
        ;;plantuml
        ;;purescript
-       python
+       (python +pyenv)
        rest
-       ruby
+       ;;ruby
        rust
        ;;scala
        sh
