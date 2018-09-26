@@ -1,11 +1,11 @@
 ;;; init.el -*- lexical-binding: t; -*-
 
 (doom! :feature
-      ;debugger
+       ;;debugger
        eval
        (evil +everywhere)
-       (lookup +devdocs +docsets)
-      ;services
+       (lookup +docsets)
+       ;;services
        snippets
        file-templates
        spellcheck
@@ -15,25 +15,25 @@
        :completion
        company
        ivy
-      ;helm
-      ;ido
+       ;;helm
+       ;;ido
 
        :ui
        doom
        doom-dashboard
-      ;doom-modeline
-      ;doom-quit
+       ;;doom-modeline
+       ;;doom-quit
        evil-goggles
-      ;fci
+       ;;fci
        hl-todo
        modeline
        nav-flash
-      ;neotree
+       ;;neotree
        treemacs
        (popup +all +defaults)
        pretty-code
-      ;unicode
-      ;tabbar
+       ;;unicode
+       ;;tabbar
        vc-gutter
        vi-tilde-fringe
        window-select
@@ -41,7 +41,7 @@
        :editor
        format            ; automated prettiness
        multiple-cursors  ; editing in many places at once
-      ;parinfer          ; turn lisp into python, sort of
+       ;;parinfer          ; turn lisp into python, sort of
        rotate-text       ; cycle region at point between text candidates
 
        :emacs
@@ -51,75 +51,75 @@
        eshell            ; a consistent, cross-platform shell (WIP)
        hideshow          ; basic code-folding support
        imenu             ; an imenu sidebar and searchable code index
-      ;term              ; terminals in Emacs
+       ;;term              ; terminals in Emacs
        vc
 
        :tools
        editorconfig      ; let someone else argue about tabs vs spaces
-      ;gist              ; interacting with github gists
-      ;macos             ; MacOS-specific commands
+       ;;gist              ; interacting with github gists
+       ;;macos             ; MacOS-specific commands
        magit             ;
-      ;make              ; run make tasks from Emacs
+       ;;make              ; run make tasks from Emacs
        password-store    ; password manager for nerds
-      ;pdf               ; pdf enhancements
-      ;prodigy           ; FIXME managing external services & code builders
-      ;rgb               ; creating color strings
-      ;tmux              ; an API for interacting with tmux
-      ;upload            ; map local to remote projects via ssh/ftp
-      ;wakatime
+       ;;pdf               ; pdf enhancements
+       ;;prodigy           ; FIXME managing external services & code builders
+       ;;rgb               ; creating color strings
+       ;;tmux              ; an API for interacting with tmux
+       ;;upload            ; map local to remote projects via ssh/ftp
+       ;;wakatime
 
        :lang
-      ;assembly
+       ;;assembly
        (cc +irony +rtags)
-       crystal
-      ;clojure
-      ;csharp
-      ;common-lisp
+       ;;crystal
+       ;;clojure
+       ;;csharp
+       common-lisp
        data
-      ;erlang
-      ;elixir
-      ;elm
+       ;;erlang
+       ;;elixir
+       ;;elm
        emacs-lisp
-      ;ess
-      ;go
+       ;;ess
+       go
        (haskell +intero)
-      ;hy
-      ;(java +meghanada)
+       ;;hy
+       ;;(java +meghanada)
        javascript
-      ;julia
+       ;;julia
        latex
-      ;ledger
+       ;;ledger
        lua
        markdown
-      ;nim
+       ;;nim
        nix
-      ;ocaml
+       ;;ocaml
        (org +attach +babel +capture +export +present)
-      ;perl
-       php
-      ;plantuml
-      ;purescript
+       ;;perl
+       ;;php
+       ;;plantuml
+       ;;purescript
        python
        rest
        ruby
        rust
-      ;scala
+       ;;scala
        sh
-      ;swift
+       ;;swift
        web
 
        :app
-      ;notmuch
-      ;crm
-      ;(email +gmail)
-      ;irc
-      ;regex
-      ;rss
-      ;torrents
-      ;twitter
-      ;(write
-      ; +wordnut
-      ; +langtool)
+       ;;notmuch
+       ;;crm
+       ;;(email +gmail)
+       ;;irc
+       ;;regex
+       ;;(rss +org)
+       ;;torrents
+       ;;twitter
+       ;;(write
+       ;; +wordnut
+       ;; +langtool)
 
        :config
        (default +bindings +evil-commands))
