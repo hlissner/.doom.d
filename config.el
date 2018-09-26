@@ -21,6 +21,8 @@
 
 ;; (setq-hook! 'minibuffer-setup-hook show-trailing-whitespace nil)
 
+(add-to-list 'org-modules 'org-habit t)
+
 
 ;;
 ;; Host-specific config
