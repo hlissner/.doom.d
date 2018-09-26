@@ -81,7 +81,7 @@
        ;;elm
        emacs-lisp
        ;;ess
-       go
+       ;;go
        (haskell +intero)
        ;;hy
        ;;(java +meghanada)
