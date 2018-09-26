@@ -71,7 +71,7 @@
        :lang
        ;;assembly
        (cc +irony +rtags)
-       ;;crystal
+       crystal
        ;;clojure
        ;;csharp
        common-lisp
