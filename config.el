@@ -1,4 +1,4 @@
-;;; private/hlissner/config.el -*- lexical-binding: t; -*-
+;;; ~/.config/doom/config.el -*- lexical-binding: t; -*-
 
 ;; (defvar xdg-data (getenv "XDG_DATA_HOME"))
 ;; (defvar xdg-bin (getenv "XDG_BIN_HOME"))
