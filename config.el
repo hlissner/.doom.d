@@ -133,4 +133,4 @@
   :match "/screeps\\(?:-ai\\)?/.+$"
   :modes (+javascript-npm-mode)
   :add-hooks (+javascript|init-screeps-mode)
-  :on-load (load! "+screeps"))
+  :on-load (load! "lisp/screeps"))
