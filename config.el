@@ -103,3 +103,13 @@
       ;; font. This bugs me. Personally, markdown #-marks for headlines are more
       ;; elegant.
       org-bullets-bullet-list '("#"))
+
+
+;;
+;; Custom
+
+(def-project-mode! +javascript-screeps-mode
+  :match "/screeps\\(?:-ai\\)?/.+$"
+  :modes (+javascript-npm-mode)
+  :add-hooks (+javascript|init-screeps-mode)
+  :on-load (load! "+screeps"))
