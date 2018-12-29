@@ -47,27 +47,48 @@
 
 
 ;;
-;; Keybindings
+;; Keybinds
 
-(map!
- ;; Easier window navigation
- :n "C-h"   #'evil-window-left
- :n "C-j"   #'evil-window-down
- :n "C-k"   #'evil-window-up
- :n "C-l"   #'evil-window-right
+(map! :m "M-j" '+default:multi-next-line
+      :m "M-k" '+default:multi-previous-line
+      ;; Easier window movement
+      :n "C-h" 'evil-window-left
+      :n "C-j" 'evil-window-down
+      :n "C-k" 'evil-window-up
+      :n "C-l" 'evil-window-right
+      ;; Simple window/frame navigation/manipulation
+      :g "s-w" #'delete-window
+      :g "s-W" #'delete-frame
+      :g "s-n" #'+default/new-buffer
+      :g "s-N" #'make-frame
+      ;; Textmate-esque bindings
+      :g "s-a" #'mark-whole-buffer
+      :n "s-b" #'+default/compile
+      :n "s-f" #'swiper
+      :g "s-q" (if (daemonp) #'delete-frame #'evil-quit-all)
+      ;; Restore OS undo, save, copy, & paste keys (without cua-mode, because
+      ;; it imposes some other functionality and overhead we don't need)
+      :g "s-z" #'undo
+      :g "s-s" #'save-buffer
+      :v "s-c" #'copy-region-as-kill
+      :g "s-v" #'yank
+      ;; textmate-esque newline insertion
+      :i [s-return]    #'evil-open-below
+      :i [S-s-return]  #'evil-open-above
+      ;; textmate-esque deletion
+      :i [s-backspace] #'doom/backward-kill-to-bol-and-indent
 
- (:after treemacs-evil
-   (:map evil-treemacs-state-map
-     "C-h" #'evil-window-left
-     "C-l" #'evil-window-right))
+      (:map evil-treemacs-state-map
+        "C-h" 'evil-window-left
+        "C-l" 'evil-window-right)
 
- (:leader
-   (:prefix "f"
-     :desc "Find file in dotfiles" :n "t" #'+hlissner/find-in-dotfiles
-     :desc "Browse dotfiles"       :n "T" #'+hlissner/browse-dotfiles)
-   (:prefix "n"
-     :desc "Browse mode notes"     :n  "m" #'+hlissner/find-notes-for-major-mode
-     :desc "Browse project notes"  :n  "p" #'+hlissner/find-notes-for-project)))
+      :leader
+      (:prefix "f"
+        :desc "Find file in dotfiles" "t" #'+hlissner/find-in-dotfiles
+        :desc "Browse dotfiles"       "T" #'+hlissner/browse-dotfiles)
+      (:prefix "n"
+        :desc "Open mode notes"       "m" #'+hlissner/find-notes-for-major-mode
+        :desc "Open project notes"    "p" #'+hlissner/find-notes-for-project))
 
 
 ;;
