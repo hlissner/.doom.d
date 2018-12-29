@@ -73,7 +73,7 @@
        (cc +irony +rtags)
        crystal
        ;;clojure
-       ;;csharp
+       (csharp +unity)
        common-lisp
        data
        ;;erlang
