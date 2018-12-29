@@ -36,7 +36,7 @@
   ("halimede"
    (setq doom-font (font-spec :family "Input Mono Narrow" :size 9)))
   (_
-   (setq doom-font (font-spec :family "Input Mono Narrow" :size 12 :weight 'semi-light)
+   (setq doom-font (font-spec :family "Input Mono Narrow" :size 12)
          +modeline-height 25)))
 
 (when IS-MAC
