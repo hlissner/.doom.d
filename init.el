@@ -122,4 +122,4 @@
        ;; +langtool)
 
        :config
-       (default +bindings +evil-commands))
+       (default +bindings +smartparens))
