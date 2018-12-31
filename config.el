@@ -27,7 +27,7 @@
 ;;
 ;; Host-specific config
 
-(unless (equal (system-name) "proteus")
+(when (equal (system-name) "triton")
   ;; I've swapped these keys on my keyboard
   (setq x-super-keysym 'meta
         x-meta-keysym  'super))
