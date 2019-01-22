@@ -108,8 +108,7 @@
    "d"   "dired $1"
    "gl"  "(call-interactively 'magit-log-current)"
    "gs"  "magit-status"
-   "gc"  "magit-commit"
-   "rg"  "rg --color=always $*"))
+   "gc"  "magit-commit"))
 
 ;; tools/magit
 (setq magit-repository-directories '(("~/work" . 2))
