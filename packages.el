@@ -1,4 +1,4 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; ~/.config/doom/packages.el
 
-(package! exec-path-from-shell :disable t)
+(disable-packages! emacs-snippets exec-path-from-shell)

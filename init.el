@@ -55,13 +55,14 @@
        vc
 
        :tools
+       docker
        editorconfig      ; let someone else argue about tabs vs spaces
        ;;gist              ; interacting with github gists
        ;;macos             ; MacOS-specific commands
        magit             ;
        ;;make              ; run make tasks from Emacs
        password-store    ; password manager for nerds
-       ;;pdf               ; pdf enhancements
+       pdf               ; pdf enhancements
        ;;prodigy           ; FIXME managing external services & code builders
        ;;rgb               ; creating color strings
        ;;tmux              ; an API for interacting with tmux
