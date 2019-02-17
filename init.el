@@ -72,10 +72,10 @@
        :lang
        ;;assembly
        (cc +irony +rtags)
-       crystal
+       ;;crystal
        ;;clojure
        (csharp +unity)
-       common-lisp
+       ;;common-lisp
        data
        ;;erlang
        ;;elixir
@@ -93,7 +93,7 @@
        lua
        markdown
        ;;nim
-       nix
+       ;;nix
        ;;ocaml
        (org +attach +babel +capture +export +present)
        ;;perl
