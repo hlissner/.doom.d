@@ -16,8 +16,7 @@
  doom-big-font (font-spec :family "Fira Mono" :size 19)
 
  +workspaces-switch-project-function #'ignore
- +pretty-code-enabled-modes '(emacs-lisp-mode org-mode)
- +format-on-save-enabled-modes '(not emacs-lisp-mode))
+ +pretty-code-enabled-modes '(emacs-lisp-mode org-mode))
 
 ;; (setq-hook! 'minibuffer-setup-hook show-trailing-whitespace nil)
 
@@ -63,6 +62,8 @@
         "C-l" 'evil-window-right)
 
       (:when IS-LINUX
+        "s-x" #'execute-extended-command
+        "s-;" #'eval-expression
         ;; use super for window/frame navigation/manipulation
         "s-w" #'delete-window
         "s-W" #'delete-frame
@@ -113,9 +114,9 @@
 ;; tools/magit
 (setq magit-repository-directories '(("~/work" . 2))
       magit-save-repository-buffers nil
-      magit-commit-arguments '("--gpg-sign=5F6C0EA160557395")
-      magit-rebase-arguments '("--autostash" "--gpg-sign=5F6C0EA160557395")
-      magit-pull-arguments   '("--rebase" "--autostash" "--gpg-sign=5F6C0EA160557395"))
+      transient-values '((magit-commit "--gpg-sign=5F6C0EA160557395")
+                         (magit-rebase "--autosquash" "--gpg-sign=5F6C0EA160557395")
+                         (magit-pull "--rebase" "--gpg-sign=5F6C0EA160557395")))
 
 ;; lang/org
 (setq org-directory (expand-file-name "~/work/org/")
@@ -123,8 +124,7 @@
       org-ellipsis " ▼ "
 
       ;; The standard unicode characters are usually misaligned depending on the
-      ;; font. This bugs me. Personally, markdown #-marks for headlines are more
-      ;; elegant.
+      ;; font. This bugs me. Markdown #-marks for headlines are more elegant.
       org-bullets-bullet-list '("#"))
 
 
