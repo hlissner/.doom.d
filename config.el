@@ -7,41 +7,28 @@
 
 (add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
 
-(setq-default
- user-full-name    "Henrik Lissner"
- user-mail-address "henrik@lissner.net"
+(setq user-full-name "Henrik Lissner"
+      user-mail-address "henrik@lissner.net"
 
- ;; doom-variable-pitch-font (font-spec :family "Fira Sans")
- ;; doom-unicode-font (font-spec :family "Input Mono Narrow" :size 12)
- doom-big-font (font-spec :family "Fira Mono" :size 19)
-
- +workspaces-switch-project-function #'ignore
- +pretty-code-enabled-modes '(emacs-lisp-mode org-mode))
-
-;; (setq-hook! 'minibuffer-setup-hook show-trailing-whitespace nil)
-
-(add-to-list 'org-modules 'org-habit t)
+      doom-font (font-spec :family "Input Mono Narrow" :size 12)
+      doom-big-font (font-spec :family "Fira Mono" :size 19))
 
 
 ;;
 ;; Host-specific config
 
-(when (equal (system-name) "triton")
-  ;; I've swapped these keys on my keyboard
-  (setq x-super-keysym 'meta
-        x-meta-keysym  'super))
-
 (pcase (system-name)
   ("halimede"
-   (setq doom-font (font-spec :family "Input Mono Narrow" :size 9)))
+   (font-put doom-font :size 9)) ; smaller display
+  ("triton"
+   ;; I've swapped these keys on my keyboard
+   (setq x-super-keysym 'meta
+         x-meta-keysym  'super))
   (_
-   (setq doom-font (font-spec :family "Input Mono Narrow" :size 12)
-         +modeline-height 25)))
+   (setq +modeline-height 25)))
 
 (when IS-MAC
   (setq ns-use-thin-smoothing t)
-  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
-  (add-to-list 'default-frame-alist '(ns-appearance . dark))
   (add-hook 'window-setup-hook #'toggle-frame-maximized))
 
 
@@ -98,13 +85,16 @@
 ;;
 ;; Modules
 
+(setq +workspaces-switch-project-function #'ignore
+      +pretty-code-enabled-modes '(emacs-lisp-mode org-mode))
+
 ;; app/rss
 (add-hook! 'elfeed-show-mode-hook (text-scale-set 2))
 
 ;; emacs/eshell
 (after! eshell
   (set-eshell-alias!
-   "f"   "find-file $1"
+   "f"   "(other-window 1) && find-file $1"
    "l"   "ls -lh"
    "d"   "dired $1"
    "gl"  "(call-interactively 'magit-log-current)"
@@ -119,6 +109,7 @@
                          (magit-pull "--rebase" "--gpg-sign=5F6C0EA160557395")))
 
 ;; lang/org
+(add-to-list 'org-modules 'org-habit t)
 (setq org-directory (expand-file-name "~/work/org/")
       org-agenda-files (list org-directory)
       org-ellipsis " ▼ "
