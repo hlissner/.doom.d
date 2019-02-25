@@ -8,8 +8,6 @@
        ;;services
        snippets
        file-templates
-       spellcheck
-       (syntax-checker +childframe)
        workspaces
 
        :completion
@@ -59,7 +57,10 @@
        docker
        editorconfig      ; let someone else argue about tabs vs spaces
        ;;ein               ; tame Jupyter notebooks with emacs
+       (flycheck +childframe)
+       flyspell
        ;;gist              ; interacting with github gists
+       lsp
        ;;macos             ; MacOS-specific commands
        magit             ;
        ;;make              ; run make tasks from Emacs
@@ -71,10 +72,11 @@
        ;;tmux              ; an API for interacting with tmux
        ;;upload            ; map local to remote projects via ssh/ftp
        ;;wakatime
+       vterm
 
        :lang
        ;;assembly
-       (cc +irony +rtags)
+       (cc +lsp)
        ;;crystal
        ;;clojure
        (csharp +unity)
@@ -88,8 +90,8 @@
        ;;go
        (haskell +intero)
        ;;hy
-       ;;(java +meghanada)
-       javascript
+       ;;(java +lsp)
+       (javascript +lsp)
        ;;julia
        latex
        ;;ledger
@@ -103,10 +105,10 @@
        ;;php
        ;;plantuml
        ;;purescript
-       (python +pyenv)
+       (python +pyenv +lsp)
        rest
        ;;ruby
-       rust
+       (rust +lsp)
        ;;scala
        sh
        ;;swift
