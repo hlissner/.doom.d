@@ -35,8 +35,8 @@
 ;;
 ;; Keybinds
 
-(map! :m "M-j" '+default:multi-next-line
-      :m "M-k" '+default:multi-previous-line
+(map! :m "M-j" '+hlissner:multi-next-line
+      :m "M-k" '+hlissner:multi-previous-line
 
       ;; Easier window movement
       :n "C-h" 'evil-window-left
