@@ -10,6 +10,7 @@
 (setq user-full-name "Henrik Lissner"
       user-mail-address "henrik@lissner.net"
 
+      doom-modeline-height 31
       doom-font (font-spec :family "Input Mono Narrow" :size 12)
       doom-big-font (font-spec :family "Fira Mono" :size 19))
 
@@ -25,7 +26,7 @@
    (setq x-super-keysym 'meta
          x-meta-keysym  'super))
   (_
-   (setq +modeline-height 25)))
+   (setq doom-modeline-height 27)))
 
 (when IS-MAC
   (setq ns-use-thin-smoothing t)
