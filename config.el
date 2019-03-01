@@ -110,7 +110,8 @@
                          (magit-pull "--rebase" "--gpg-sign=5F6C0EA160557395")))
 
 ;; lang/org
-(add-to-list 'org-modules 'org-habit t)
+(after! org
+  (add-to-list 'org-modules 'org-habit t))
 (setq org-directory (expand-file-name "~/work/org/")
       org-agenda-files (list org-directory)
       org-ellipsis " ▼ "
