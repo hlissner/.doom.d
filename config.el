@@ -26,6 +26,8 @@
    (setq x-super-keysym 'meta
          x-meta-keysym  'super))
   (_
+(when IS-LINUX
+  (font-put doom-font :weight 'semi-light))
    (setq doom-modeline-height 27)))
 
 (when IS-MAC
