@@ -16,7 +16,7 @@
 (defun +hlissner/find-notes-for-major-mode (&optional arg)
   "TODO"
   (interactive "P")
-  (let ((default-directory (expand-file-name "code/" +org-dir)))
+  (let ((default-directory (expand-file-name "code/" org-directory)))
     (if arg
         (call-interactively #'find-file)
       (find-file
@@ -27,7 +27,7 @@
   "TODO"
   (interactive "P")
   (let ((project-root (doom-project-name 'nocache))
-        (default-directory (expand-file-name "projects/" +org-dir)))
+        (default-directory (expand-file-name "projects/" org-directory)))
     (if arg
         (call-interactively #'find-file)
       (find-file
