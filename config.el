@@ -11,6 +11,7 @@
       user-mail-address "henrik@lissner.net"
 
       doom-font (font-spec :family "Input Mono Narrow" :size 12)
+      doom-variable-pitch-font (font-spec :family "Noto Sans" :size 14)
       doom-big-font (font-spec :family "Fira Mono" :size 19))
 
 
@@ -75,11 +76,11 @@
 
       :leader
       (:prefix "f"
-        :desc "Find file in dotfiles" "t" #'+hlissner/find-in-dotfiles
-        :desc "Browse dotfiles"       "T" #'+hlissner/browse-dotfiles)
+        "t" #'+hlissner/find-in-dotfiles
+        "T" #'+hlissner/browse-dotfiles)
       (:prefix "n"
-        :desc "Open mode notes"       "m" #'+hlissner/find-notes-for-major-mode
-        :desc "Open project notes"    "p" #'+hlissner/find-notes-for-project))
+        "m" #'+hlissner/find-notes-for-major-mode
+        "p" #'+hlissner/find-notes-for-project))
 
 
 ;;
@@ -111,7 +112,7 @@
 ;; lang/org
 (after! org
   (add-to-list 'org-modules 'org-habit t))
-(setq org-directory (expand-file-name "~/work/org/")
+(setq org-directory "~/work/org/"
       org-agenda-files (list org-directory)
       org-ellipsis " ▼ "
 
