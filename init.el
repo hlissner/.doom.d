@@ -99,7 +99,7 @@
        ;;nim
        ;;nix
        ;;ocaml
-       (org +attach +babel +capture +export +present)
+       (org +attach +babel +capture +export +present +protocol)
        ;;perl
        ;;php
        ;;plantuml
