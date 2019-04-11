@@ -16,7 +16,7 @@
 
 
 ;;
-;; Host-specific config
+;;; Host-specific config
 
 (pcase (system-name)
   ("halimede"
@@ -34,7 +34,7 @@
 
 
 ;;
-;; Keybinds
+;;; Keybinds
 
 (map! :m "M-j" '+hlissner:multi-next-line
       :m "M-k" '+hlissner:multi-previous-line
@@ -84,10 +84,9 @@
 
 
 ;;
-;; Modules
+;;; Modules
 
-(setq +workspaces-switch-project-function #'ignore
-      +pretty-code-enabled-modes '(emacs-lisp-mode org-mode))
+(setq +pretty-code-enabled-modes '(emacs-lisp-mode org-mode))
 
 ;; app/rss
 (add-hook! 'elfeed-show-mode-hook (text-scale-set 2))
@@ -122,7 +121,7 @@
 
 
 ;;
-;; Custom
+;;; Custom
 
 (def-project-mode! +javascript-screeps-mode
   :match "/screeps\\(?:-ai\\)?/.+$"
