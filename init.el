@@ -20,14 +20,13 @@
        doom
        doom-dashboard
        ;;doom-quit
-       evil-goggles
-       ;;fci
        hl-todo
        modeline
        nav-flash
        ;;neotree
-       treemacs
+       ophints
        (popup +all +defaults)
+       treemacs
        pretty-code
        ;;unicode
        ;;tabbar
