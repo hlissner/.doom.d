@@ -21,7 +21,7 @@
        doom-dashboard
        ;;doom-quit
        hl-todo
-       modeline
+       ;;modeline
        nav-flash
        ;;neotree
        ophints

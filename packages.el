@@ -6,3 +6,10 @@
 
 ;; I never use it.
 (package! which-key :disable t)
+
+;;
+;; (package! persp-mode :ignore t)
+
+;; For personal modeline
+(package! anzu)
+(package! evil-anzu)

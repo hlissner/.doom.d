@@ -34,6 +34,15 @@
 
 
 ;;
+;;; Custom modeline
+
+(load! "lisp/modeline")
+(add-hook! 'doom-load-theme-hook
+  (set-face-foreground 'mode-line (doom-color 'blue))
+  (set-face-foreground 'mode-line-buffer-id (doom-color 'fg)))
+
+
+;;
 ;;; Keybinds
 
 (map! :m "M-j" '+hlissner:multi-next-line
