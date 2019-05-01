@@ -288,7 +288,7 @@ icons.")
                   (current-column)))
 
 (defun add-selection-segment ()
-  (setq mode-line-format-left (append mode-line-format-left (list 'mode-line-selection-info))))
+  (add-to-list 'mode-line-format-left 'mode-line-selection-info 'append))
 (defun remove-selection-segment ()
   (delq! 'mode-line-selection-info mode-line-format-left))
 (add-hook 'activate-mark-hook #'add-selection-segment)
