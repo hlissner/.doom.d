@@ -63,6 +63,15 @@
                                  (if (eq idx len) "\"};" "\",\n")))))
         'xpm t :ascent 'center)))))
 
+(defun mode-line-format-icon (icon label &optional face help-echo voffset)
+  (propertize (concat (all-the-icons-material
+                       icon
+                       :face face
+                       :height 1.1
+                       :v-adjust (or voffset -0.225))
+                      (propertize label 'face face))
+              'help-echo help-echo))
+
 
 ;;
 ;;; Segments
@@ -150,7 +159,7 @@ Requires `anzu', also `evil-anzu' if using `evil-mode' for compatibility with
         (when count
           (concat (propertize " " 'face face)
                   (all-the-icons-faicon "i-cursor" :face face :v-adjust -0.0575)
-                  (propertize doom-modeline-vspc 'face `(:inherit (variable-pitch ,face)))
+                  (propertize vspc 'face `(:inherit (variable-pitch ,face)))
                   (propertize (format "%d " count)
                               'face face))))))
 
@@ -233,6 +242,84 @@ Requires `anzu', also `evil-anzu' if using `evil-mode' for compatibility with
 (setq mode-line-position '("    %l:%C %p  "))
 
 ;; `mode-line-checker'
+(defun mode-line-checker-update (&optional status)
+  "Update flycheck text via STATUS."
+  (setq mode-line-checker
+        (pcase status
+          (`finished
+           (if flycheck-current-errors
+               (let-alist (flycheck-count-errors flycheck-current-errors)
+                 (let ((error (or .error 0))
+                       (warning (or .warning 0))
+                       (info (or .info 0)))
+                   (mode-line-format-icon "do_not_disturb_alt"
+                                          (number-to-string (+ error warning info))
+                                          (cond ((> error 0)   'error)
+                                                ((> warning 0) 'warning)
+                                                ('success))
+                                          (format "Errors: %d, Warnings: %d, Debug: %d"
+                                                  error
+                                                  warning
+                                                  info))))
+             (mode-line-format-icon "check" "" 'success)))
+          (`running     (mode-line-format-icon "access_time" "*" 'doom-modeline-debug "Running..."))
+          (`no-checker  (mode-line-format-icon "do_not_disturb_alt" "-" 'doom-modeline-debug "No checker"))
+          (`errored     (mode-line-format-icon "sim_card_alert" "!" 'doom-modeline-urgent "Errored!"))
+          (`interrupted (mode-line-format-icon "pause" "!" 'doom-modeline-debug "Interrupted"))
+          (`suspicious  (mode-line-format-icon "priority_high" "!" 'doom-modeline-urgent "Suspicious")))))
+(add-hook 'flycheck-status-changed-functions #'mode-line-checker-update)
+(add-hook 'flycheck-mode-hook #'mode-line-checker-update)
+
+(defvar-local mode-line-checker nil
+  "Displays color-coded error status in the current buffer with pretty
+icons.")
+(put 'mode-line-checker 'risky-local-variable t)
+
+;; `mode-line-selection-info'
+(defsubst doom-modeline-column (pos)
+  "Get the column of the position `POS'."
+  (save-excursion (goto-char pos)
+                  (current-column)))
+
+(defun add-selection-segment ()
+  (setq mode-line-format-left (append mode-line-format-left (list 'mode-line-selection-info))))
+(defun remove-selection-segment ()
+  (delq! 'mode-line-selection-info mode-line-format-left))
+(add-hook 'activate-mark-hook #'add-selection-segment)
+(add-hook 'deactivate-mark-hook #'remove-selection-segment)
+
+(defconst mode-line-selection-info
+  '(:eval
+    (when (or mark-active
+              (and (bound-and-true-p evil-local-mode)
+                   (eq evil-state 'visual)))
+      (cl-destructuring-bind (beg . end)
+          (if (and (bound-and-true-p evil-local-mode)
+                   (eq evil-state 'visual))
+              (cons evil-visual-beginning evil-visual-end)
+            (cons (region-beginning) (region-end)))
+        (propertize
+         (let ((lines (count-lines beg (min end (point-max)))))
+           (concat " "
+                   (cond ((or (bound-and-true-p rectangle-mark-mode)
+                              (and (bound-and-true-p evil-visual-selection)
+                                   (eq 'block evil-visual-selection)))
+                          (let ((cols (abs (- (doom-modeline-column end)
+                                              (doom-modeline-column beg)))))
+                            (format "%dx%dB" lines cols)))
+                         ((and (bound-and-true-p evil-visual-selection)
+                               (eq evil-visual-selection 'line))
+                          (format "%dL" lines))
+                         ((> lines 1)
+                          (format "%dC %dL" (- end beg) lines))
+                         ((format "%dC" (- end beg))))
+                   (when (derived-mode-p 'text-mode)
+                     (format " %dW" (count-words beg end)))
+                   " "))
+         'face (if (active) 'success)))))
+  "Information about the current selection, such as how many characters and
+lines are selected, or the NxM dimensions of a block selection.")
+(put 'mode-line-selection-info 'risky-local-variable t)
 
 ;; `mode-line-encoding'
 (defconst mode-line-encoding
@@ -275,7 +362,8 @@ Requires `anzu', also `evil-anzu' if using `evil-mode' for compatibility with
    (vc-mode ("  "
              ,(all-the-icons-octicon "git-branch" :v-adjust 0.0)
              vc-mode "  "))
-   mode-line-encoding)
+   mode-line-encoding
+   (mode-line-checker ("" mode-line-checker "   ")))
 
  ;;
  mode-line-format
