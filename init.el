@@ -1,16 +1,6 @@
 ;;; ~/.doom.d/init.el -*- lexical-binding: t; -*-
 
-(doom! :feature
-       ;;debugger
-       eval
-       (evil +everywhere)
-       (lookup +docsets)
-       ;;services
-       snippets
-       file-templates
-       workspaces
-
-       :completion
+(doom! :completion
        company
        ivy
        ;;helm
@@ -33,17 +23,21 @@
        vc-gutter
        vi-tilde-fringe
        window-select
+       workspaces
 
        :editor
+       (evil +everywhere)
+       file-templates
        fold              ; (nigh) universal code folding
-       format            ; automated prettiness
+       ;;format            ; automated prettiness
        ;;lispy             ; vim for lisp, for people who dont like vim
        multiple-cursors  ; editing in many places at once
        ;;parinfer          ; turn lisp into python, sort of
        rotate-text       ; cycle region at point between text candidates
+       snippets
 
        :emacs
-       (dired +ranger)   ; making dired pretty [functional]
+       dired             ; making dired pretty [functional]
        electric          ; smarter, keyword-based electric-indent
        eshell            ; a consistent, cross-platform shell (WIP)
        imenu             ; an imenu sidebar and searchable code index
@@ -52,12 +46,15 @@
 
        :tools
        ;;ansible
+       ;;debugger
        docker
        editorconfig      ; let someone else argue about tabs vs spaces
        ;;ein               ; tame Jupyter notebooks with emacs
+       eval
        (flycheck +childframe)
        flyspell
        ;;gist              ; interacting with github gists
+       (lookup +docsets)
        lsp
        ;;macos             ; MacOS-specific commands
        magit             ;
@@ -70,7 +67,7 @@
        ;;tmux              ; an API for interacting with tmux
        ;;upload            ; map local to remote projects via ssh/ftp
        ;;wakatime
-       vterm
+       ;;vterm
 
        :lang
        ;;assembly
