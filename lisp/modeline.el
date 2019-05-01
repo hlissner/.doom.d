@@ -230,13 +230,19 @@ Requires `anzu', also `evil-anzu' if using `evil-mode' for compatibility with
 
  ;; `mode-line-buffer-identification'
  mode-line-buffer-identification ; slightly more informative buffer id
- '(:eval
-   (propertize
-    "%b"
-    'face (if (active)
-              (if (buffer-modified-p)
-                  '(mode-line-buffer-id error)
-                'mode-line-buffer-id)))))
+ '((:eval
+    (propertize
+     (if buffer-file-name
+         (let ((project (file-truename (doom-project-root)))
+               (filename (or buffer-file-truename (file-truename buffer-file-name))))
+           (file-relative-name filename project))
+       "%b")
+     'face (if (active)
+               (if (buffer-modified-p)
+                   '(mode-line-buffer-id error)
+                 'mode-line-buffer-id))
+     'help-echo buffer-file-name))
+   (buffer-read-only (:propertize " RO" face warning))))
 
 ;; `mode-line-position'
 (setq mode-line-position '("    %l:%C %p  "))
