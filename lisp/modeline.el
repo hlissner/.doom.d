@@ -67,11 +67,6 @@
 ;;
 ;;; Segments
 
-
-
-;;
-;;; Segments
-
 ;; `mode-line-bar'
 (defvar mode-line-bar
   (make-xpm nil 1 (max mode-line-height (frame-char-height))))
@@ -79,7 +74,9 @@
 
 ;; `mode-line-matches'
 (progn
-  (after! anzu
+  (def-package! anzu
+    :after-call isearch-mode
+    :config
     ;; anzu and evil-anzu expose current/total state that can be displayed in the
     ;; mode-line.
     (defun doom-modeline-fix-anzu-count (positions here)
@@ -102,6 +99,10 @@
           '(anzu--total-matched anzu--current-position anzu--state
                                 anzu--cached-count anzu--cached-positions anzu--last-command
                                 anzu--last-isearch-string anzu--overflow-p)))
+
+  (def-package! evil-anzu
+    :when (featurep! :editor evil)
+    :after-call (evil-ex-start-search evil-ex-start-word-search evil-ex-search-activate-highlight))
 
   (defsubst modeline--anzu ()
     "Show the match index and total number thereof.
@@ -231,61 +232,52 @@ Requires `anzu', also `evil-anzu' if using `evil-mode' for compatibility with
 ;; `mode-line-position'
 (setq mode-line-position '("    %l:%C %p  "))
 
+;; `mode-line-checker'
 
-;; Show indentation style in modeline. I'm not using `doom-modeline-def-segment'
-;; to prevent eager macro expansion from loading the package too soon.
-(defvar mode-line-indent-style
-  (propertize (format "%s%d"
-                      (if indent-tabs-mode "SPC" "TAB")
-                      tab-width)
-              'face (if (active) 'mode-line)
-              'mouse-face 'mode-line-highlight
-              'help-echo
-              (let ((subsegs
-                     (list (format "Indentation style: %s (%d wide)"
-                                   (if indent-tabs-mode "tabs" "spaces")
-                                   tab-width)
-                           (cond ((eq doom-inhibit-indent-detection 'editorconfig)
-                                  (propertize "✓ Editorconfig applied" 'face 'success))
-                                 (doom-inhibit-indent-detection
-                                  (propertize "✘ Indentation auto-detection disabled" 'face 'warning))
-                                 ((bound-and-true-p dtrt-indent-original-indent)
-                                  (propertize (format "✓ Indentation auto-detected (original: %s)"
-                                                      dtrt-indent-original-indent)
-                                              'face 'success)))
-                           (when (bound-and-true-p ws-butler-mode)
-                             (propertize "✓ ws-butler active (whitespace cleanup on save)"
-                                         'face 'success)))))
-                (string-join (delq nil subsegs) "   ")))
-  "indent modeline segment")
-(put 'mode-line-indent-style 'risky-local-variable t)
+;; `mode-line-encoding'
+(defconst mode-line-encoding
+  '(:eval
+    (concat (pcase (coding-system-eol-type buffer-file-coding-system)
+              (0 " LF ")
+              (1 " RLF ")
+              (2 " CR "))
+            (let ((sys (coding-system-plist buffer-file-coding-system)))
+              (if (memq (plist-get sys :category)
+                        '(coding-category-undecided coding-category-utf-8))
+                  "UTF-8"
+                (upcase (symbol-name (plist-get sys :name)))))
+            "  ")))
+(put 'mode-line-encoding 'risky-local-variable t)
 
 
 ;;
 ;;; Setup
 
-(defvar-local mode-line-format-left
-  '(""
-    mode-line-matches
-    " "
-    mode-line-buffer-identification
-    mode-line-position))
+(defvar-local mode-line-format-left nil)
 (put 'mode-line-format-left 'risky-local-variable t)
 
 
-(defvar-local mode-line-format-right
-  `(""
-    ;; mode-line-indent-style
-    ;; "  "
-    mode-line-modes
-    (vc-mode ("  "
-              ,(all-the-icons-octicon "git-branch" :v-adjust 0.0)
-              vc-mode "  "))
-    mode-line-misc-info
-    mode-line-end-spaces))
+(defvar-local mode-line-format-right nil)
 (put 'mode-line-format-right 'risky-local-variable t)
 
 (setq-default
+ mode-line-format-left
+ '(""
+   mode-line-matches
+   " "
+   mode-line-buffer-identification
+   mode-line-position)
+
+ mode-line-format-right
+ `(""
+   mode-line-misc-info
+   mode-line-modes
+   (vc-mode ("  "
+             ,(all-the-icons-octicon "git-branch" :v-adjust 0.0)
+             vc-mode "  "))
+   mode-line-encoding)
+
+ ;;
  mode-line-format
  '(""
    mode-line-bar
@@ -325,7 +317,7 @@ Requires `anzu', also `evil-anzu' if using `evil-mode' for compatibility with
         mode-line-format-right
         '("" mode-line-modes)))
 
-(add-hook 'special-mode-hook #'set-special-modeline)
+(defun set-pdf-modeline ()) ; TODO `set-pdf-modeline'
 
 
 ;;
@@ -340,3 +332,8 @@ Requires `anzu', also `evil-anzu' if using `evil-mode' for compatibility with
       (set-project-modeline)
     (hide-mode-line-mode)))
 (add-hook 'magit-mode-hook #'set-modeline-in-magit)
+
+(add-hook 'special-mode-hook #'set-special-modeline)
+(add-hook 'image-mode-hook #'set-special-modeline)
+(add-hook 'circe-mode-hook #'set-special-modeline)
+(add-hook 'pdf-tools-enabled-hook #'set-pdf-modeline)
