@@ -113,7 +113,7 @@
     :when (featurep! :editor evil)
     :after-call (evil-ex-start-search evil-ex-start-word-search evil-ex-search-activate-highlight))
 
-  (defsubst modeline--anzu ()
+  (defun mode-line--anzu ()
     "Show the match index and total number thereof.
 Requires `anzu', also `evil-anzu' if using `evil-mode' for compatibility with
 `evil-search'."
@@ -132,7 +132,7 @@ Requires `anzu', also `evil-anzu' if using `evil-mode' for compatibility with
                 (format " %s/%d " here total))))
        'face (if (active) 'mode-line-highlight))))
 
-  (defsubst modeline--evil-substitute ()
+  (defun mode-line--evil-substitute ()
     "Show number of matches for evil-ex substitutions and highlights in real time."
     (when (and (bound-and-true-p evil-local-mode)
                (or (assq 'evil-ex-substitute evil-ex-active-highlights-alist)
@@ -148,26 +148,25 @@ Requires `anzu', also `evil-anzu' if using `evil-mode' for compatibility with
            " - "))
        'face (if (active) 'mode-line-highlight))))
 
-  (defsubst modeline--multiple-cursors ()
+  (defun mode-line--multiple-cursors ()
     "Show the number of multiple cursors."
     (when (bound-and-true-p evil-mc-cursor-list)
-      (cl-destructuring-bind (count . face)
-          (cons (length evil-mc-cursor-list)
-                (cond ((not (active)) 'mode-line-inactive)
-                      ;; (evil-mc-frozen 'mode-line-highlight)
-                      ('mode-line-highlight)))
-        (when count
-          (concat (propertize " " 'face face)
-                  (all-the-icons-faicon "i-cursor" :face face :v-adjust -0.0575)
-                  (propertize vspc 'face `(:inherit (variable-pitch ,face)))
-                  (propertize (format "%d " count)
-                              'face face))))))
+      (let ((count (length evil-mc-cursor-list)))
+        (when (> count 0)
+          (let ((face (cond ((not (active)) 'mode-line-inactive)
+                            (evil-mc-frozen 'mode-line-highlight)
+                            ('mode-line-success-highlight))))
+            (concat (propertize " " 'face face)
+                    (all-the-icons-faicon "i-cursor" :face face :v-adjust -0.0575)
+                    (propertize " " 'face `(:inherit (variable-pitch ,face)))
+                    (propertize (format "%d " count)
+                                'face face)))))))
 
-  (defun doom-modeline-themes--overlay-sort (a b)
+  (defun mode-line--overlay< (a b)
     "Sort overlay A and B."
     (< (overlay-start a) (overlay-start b)))
 
-  (defsubst modeline--iedit ()
+  (defun mode-line--iedit ()
     "Show the number of iedit regions matches + what match you're on."
     (when (and (bound-and-true-p iedit-mode)
                (bound-and-true-p iedit-occurrences-overlays))
@@ -181,13 +180,13 @@ Requires `anzu', also `evil-anzu' if using `evil-mode' for compatibility with
                  (if this-oc
                      (- length
                         (length (memq this-oc (sort (append iedit-occurrences-overlays nil)
-                                                    #'doom-modeline-themes--overlay-sort)))
+                                                    #'mode-line--overlay<)))
                         -1)
                    "-")
                  length))
        'face (if (active) 'mode-line-highlight))))
 
-  (defsubst modeline--macro-recording ()
+  (defun mode-line--macro-recording ()
     "Display current Emacs or evil macro being recorded."
     (when (and (active)
                (or defining-kbd-macro
@@ -206,14 +205,13 @@ Requires `anzu', also `evil-anzu' if using `evil-mode' for compatibility with
 
   (defvar mode-line-matches
     '(:eval
-      (let ((meta (concat (modeline--macro-recording)
-                          (modeline--anzu)
-                          (modeline--evil-substitute)
-                          (modeline--iedit)
-                          (modeline--multiple-cursors))))
+      (let ((meta (concat (mode-line--macro-recording)
+                          (mode-line--anzu)
+                          (mode-line--evil-substitute)
+                          (mode-line--iedit)
+                          (mode-line--multiple-cursors))))
         (or (and (not (equal meta "")) meta)
-            " %I ")))
-    "TODO")
+            " %I "))))
   (put 'mode-line-matches 'risky-local-variable t))
 
 ;; `mode-line-modes'
@@ -296,7 +294,7 @@ icons.")
 (add-hook 'activate-mark-hook #'add-selection-segment)
 (add-hook 'deactivate-mark-hook #'remove-selection-segment)
 
-(defconst mode-line-selection-info
+(defvar mode-line-selection-info
   '(:eval
     (when (or mark-active
               (and (bound-and-true-p evil-local-mode)
