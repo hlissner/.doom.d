@@ -232,20 +232,22 @@ Requires `anzu', also `evil-anzu' if using `evil-mode' for compatibility with
  mode-line-buffer-identification ; slightly more informative buffer id
  '((:eval
     (propertize
-     (if buffer-file-name
-         (let ((project (file-truename (doom-project-root)))
-               (filename (or buffer-file-truename (file-truename buffer-file-name))))
-           (file-relative-name filename project))
-       "%b")
-     'face (if (active)
-               (if (buffer-modified-p)
-                   '(mode-line-buffer-id error)
-                 'mode-line-buffer-id))
+     (let ((buffer-file-name (buffer-file-name (buffer-base-buffer))))
+       (or (when buffer-file-name
+             (if-let* ((project (doom-project-root buffer-file-name)))
+                 (let ((project (file-truename project))
+                       (filename (or buffer-file-truename (file-truename buffer-file-name))))
+                   (file-relative-name filename (concat project "..")))))
+           "%b"))
+     'face (cond ((buffer-modified-p)
+                  '(error mode-line-buffer-id))
+                 ((active)
+                  'mode-line-buffer-id))
      'help-echo buffer-file-name))
    (buffer-read-only (:propertize " RO" face warning))))
 
 ;; `mode-line-position'
-(setq mode-line-position '("    %l:%C %p  "))
+(setq mode-line-position '("  %l:%C %p  "))
 
 ;; `mode-line-checker'
 (defun mode-line-checker-update (&optional status)
