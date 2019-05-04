@@ -268,11 +268,10 @@ Requires `anzu', also `evil-anzu' if using `evil-mode' for compatibility with
                                                   warning
                                                   info))))
              (mode-line-format-icon "check" "" 'success)))
-          (`running     (mode-line-format-icon "access_time" "*" 'doom-modeline-debug "Running..."))
-          (`no-checker  (mode-line-format-icon "do_not_disturb_alt" "-" 'doom-modeline-debug "No checker"))
-          (`errored     (mode-line-format-icon "sim_card_alert" "!" 'doom-modeline-urgent "Errored!"))
-          (`interrupted (mode-line-format-icon "pause" "!" 'doom-modeline-debug "Interrupted"))
-          (`suspicious  (mode-line-format-icon "priority_high" "!" 'doom-modeline-urgent "Suspicious")))))
+          (`running     (mode-line-format-icon "access_time" "*" 'font-lock-comment-face "Running..."))
+          (`errored     (mode-line-format-icon "sim_card_alert" "!" 'error "Errored!"))
+          (`interrupted (mode-line-format-icon "pause" "!" 'font-lock-comment-face "Interrupted"))
+          (`suspicious  (mode-line-format-icon "priority_high" "!" 'error "Suspicious")))))
 (add-hook 'flycheck-status-changed-functions #'mode-line-checker-update)
 (add-hook 'flycheck-mode-hook #'mode-line-checker-update)
 
