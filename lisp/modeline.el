@@ -2,8 +2,8 @@
 
 ;; This is a slimmed down modeline that manipulates `mode-line-format' directly.
 ;; Its purpose is to be a *significantly* lighter modeline for doom. Doom's
-;; modeline has grown so much to meet the demand of users that it no longer
-;; meets my needs, so I went back to the roots.
+;; modeline has grown so much to meet the demand of users in general that it has
+;; become overkill for my needs, so I've returned to the roots.
 
 (defvar mode-line-height 33)
 
@@ -36,7 +36,7 @@
   (eq (selected-window) selected-window))
 
 ;;; Helpers
-(defun make-xpm (face width height)
+(defun make-xpm (_face width height)
   "Create an XPM bitmap via FACE, WIDTH and HEIGHT. Inspired by `powerline''s `pl/make-xpm'."
   (propertize
    " " 'display
@@ -366,7 +366,8 @@ lines are selected, or the NxM dimensions of a block selection.")
    mode-line-modes
    (vc-mode ("  "
              ,(all-the-icons-octicon "git-branch" :v-adjust 0.0)
-             vc-mode "  "))
+             vc-mode " "))
+   " "
    mode-line-encoding
    (mode-line-checker ("" mode-line-checker "   ")))
 

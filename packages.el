@@ -1,4 +1,3 @@
-;; -*- no-byte-compile: t; -*-
 ;;; ~/.config/doom/packages.el
 
 ;; `emacs-snippets' *is* my personal snippets library (in $DOOMDIR/snippets)
