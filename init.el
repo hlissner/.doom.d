@@ -109,18 +109,20 @@
        ;;swift
        web
 
+       :email
+       ;;(mu4e +gmail)       ; WIP
+       ;;notmuch             ; WIP
+       ;;(wanderlust +gmail) ; WIP
+
        :app
-       ;;notmuch
-       ;;crm
-       ;;(email +gmail)
+       ;;calendar
        ;;irc
-       ;;regex
        ;;(rss +org)
-       ;;torrents
        ;;twitter
        ;;(write
-       ;; +wordnut
-       ;; +langtool)
+       ;; ;; +wordnut
+       ;; ;; +langtool
+       ;; )
 
        :config
        (default +bindings +smartparens))
