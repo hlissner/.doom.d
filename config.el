@@ -49,18 +49,18 @@
 ;;
 ;;; Keybinds
 
-(map! :m "M-j" '+hlissner:multi-next-line
-      :m "M-k" '+hlissner:multi-previous-line
+(map! :m "M-j" #'+hlissner:multi-next-line
+      :m "M-k" #'+hlissner:multi-previous-line
 
       ;; Easier window movement
-      :n "C-h" 'evil-window-left
-      :n "C-j" 'evil-window-down
-      :n "C-k" 'evil-window-up
-      :n "C-l" 'evil-window-right
+      :n "C-h" #'evil-window-left
+      :n "C-j" #'evil-window-down
+      :n "C-k" #'evil-window-up
+      :n "C-l" #'evil-window-right
 
       (:map evil-treemacs-state-map
-        "C-h" 'evil-window-left
-        "C-l" 'evil-window-right)
+        "C-h" #'evil-window-left
+        "C-l" #'evil-window-right)
 
       (:when IS-LINUX
         "s-x" #'execute-extended-command
