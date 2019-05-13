@@ -81,6 +81,23 @@
   (make-xpm nil 1 (max mode-line-height (frame-char-height))))
 (put 'mode-line-bar 'risky-local-variable t)
 
+(defvar mode-line--old-height nil)
+(defun adjust-mode-line-height ()
+  (unless mode-line--old-height
+    (setq mode-line--old-height mode-line-height))
+  (let ((default-height mode-line--old-height)
+        (scale (or (frame-parameter nil 'font-scale) 0)))
+    (if (> scale 0)
+        (let* ((font-size (string-to-number
+                           (aref (doom--font-name (frame-parameter nil 'font)
+                                                  (selected-frame))
+                                 xlfd-regexp-pixelsize-subnum)))
+               (scale (frame-parameter nil 'font-scale)))
+          (setq mode-line-height (+ default-height (* scale doom-font-increment))))
+      (setq mode-line-height default-height))
+    (setq mode-line-bar (make-xpm nil 1 mode-line-height))))
+(add-hook 'doom-change-font-size-hook #'adjust-mode-line-height)
+
 ;; `mode-line-matches'
 (progn
   (def-package! anzu
