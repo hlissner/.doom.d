@@ -1,6 +1,10 @@
 ;;; ~/.doom.d/init.el -*- lexical-binding: t; -*-
 
-(doom! :completion
+(doom! :input
+       ;;chinese
+       ;;japanese
+
+       :completion
        company
        ivy
        ;;helm
@@ -11,6 +15,7 @@
        doom-dashboard
        ;;doom-quit
        hl-todo
+       indent-guides     ; highlighted indent columns
        ;;modeline
        nav-flash
        ;;neotree
@@ -74,7 +79,7 @@
        (cc +lsp)
        ;;crystal
        ;;clojure
-       (csharp +unity)
+       ;;(csharp +unity)
        ;;common-lisp
        data
        ;;erlang

@@ -1,20 +1,12 @@
 ;;; ~/.config/doom/config.el -*- lexical-binding: t; -*-
 
-;; (defvar xdg-data (getenv "XDG_DATA_HOME"))
-;; (defvar xdg-bin (getenv "XDG_BIN_HOME"))
-;; (defvar xdg-cache (getenv "XDG_CACHE_HOME"))
-;; (defvar xdg-config (getenv "XDG_CONFIG_HOME"))
-
-(add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
-
 (setq user-full-name "Henrik Lissner"
       user-mail-address "henrik@lissner.net"
 
-      doom-font (font-spec :family "Input Mono Narrow" :size 12)
-      doom-variable-pitch-font (font-spec :family "Noto Sans" :size 14)
-
       which-key-idle-delay 2.0
       company-idle-delay nil
+
+      doom-docs-dir "~/work/conf/doom-emacs-docs/docs"
 
       ;; This functionality is already provided by the lookup module and
       ;; eldoc, on demand, so we disable them by default.
@@ -23,7 +15,11 @@
 
 
 ;;
-;;; Host-specific config
+;;; UI
+
+;;; Fonts
+(setq doom-font (font-spec :family "Input Mono Narrow" :size 12)
+      doom-variable-pitch-font (font-spec :family "Noto Sans" :size 14))
 
 (pcase (system-name)
   ("halimede"
@@ -36,8 +32,22 @@
 (when IS-LINUX
   (font-put doom-font :weight 'semi-light))
 (when IS-MAC
-  (setq ns-use-thin-smoothing t)
+  (setq ns-use-thin-smoothing t))
+
+;;; Frames/Windows
+(add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
+(when IS-MAC
   (add-hook 'window-setup-hook #'toggle-frame-maximized))
+
+;;; Modeline
+(defface mode-line-success-highlight '((t (:inherit mode-line-highlight)))
+  "TODO")
+
+(load! "lisp/modeline")
+(add-hook! 'doom-load-theme-hook
+  (set-face-foreground 'mode-line (doom-color 'blue))
+  (set-face-foreground 'mode-line-buffer-id (doom-color 'fg))
+  (set-face-background 'mode-line-success-highlight (doom-color 'green)))
 
 
 ;;
@@ -93,12 +103,10 @@
 ;;
 ;;; Modules
 
+;;; :ui pretty-code
 (setq +pretty-code-enabled-modes '(emacs-lisp-mode org-mode))
 
-;; app/rss
-(add-hook! 'elfeed-show-mode-hook (text-scale-set 2))
-
-;; emacs/eshell
+;;; :emacs eshell
 (after! eshell
   (set-eshell-alias!
    "f"   "(other-window 1) && find-file $1"
@@ -108,14 +116,14 @@
    "gs"  "magit-status"
    "gc"  "magit-commit"))
 
-;; tools/magit
+;;; :tools magit
 (setq magit-repository-directories '(("~/work" . 2))
       magit-save-repository-buffers nil
       transient-values '((magit-commit "--gpg-sign=5F6C0EA160557395")
                          (magit-rebase "--autosquash" "--gpg-sign=5F6C0EA160557395")
                          (magit-pull "--rebase" "--gpg-sign=5F6C0EA160557395")))
 
-;; lang/org
+;;; :lang org
 (after! org
   (add-to-list 'org-modules 'org-habit t))
 (setq org-directory "~/work/org/"
@@ -126,25 +134,22 @@
       ;; font. This bugs me. Markdown #-marks for headlines are more elegant.
       org-bullets-bullet-list '("#"))
 
+;;; :app rss
+(add-hook! 'elfeed-show-mode-hook (text-scale-set 2))
+
 
 ;;
 ;;; Custom
+
+;;; Keycast
+(load! "lisp/keycast")
+
+
+;;
+;;; Frameworks
 
 (def-project-mode! +javascript-screeps-mode
   :match "/screeps\\(?:-ai\\)?/.+$"
   :modes (+javascript-npm-mode)
   :add-hooks (+javascript|init-screeps-mode)
   :on-load (load! "lisp/screeps"))
-
-;;; Modeline
-(defface mode-line-success-highlight '((t (:inherit mode-line-highlight)))
-  "TODO")
-
-(load! "lisp/modeline")
-(add-hook! 'doom-load-theme-hook
-  (set-face-foreground 'mode-line (doom-color 'blue))
-  (set-face-foreground 'mode-line-buffer-id (doom-color 'fg))
-  (set-face-background 'mode-line-success-highlight (doom-color 'green)))
-
-;;; Keycast
-(load! "lisp/keycast")
