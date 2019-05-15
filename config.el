@@ -13,7 +13,13 @@
       doom-font (font-spec :family "Input Mono Narrow" :size 12)
       doom-variable-pitch-font (font-spec :family "Noto Sans" :size 14)
 
-      company-idle-delay nil)
+      which-key-idle-delay 2.0
+      company-idle-delay nil
+
+      ;; This functionality is already provided by the lookup module and
+      ;; eldoc, on demand, so we disable them by default.
+      lsp-ui-sideline-enable nil
+      lsp-ui-doc-enable nil)
 
 
 ;;
