@@ -22,8 +22,7 @@
   (setq selected-window nil)
   (force-mode-line-update))
 
-(add-hook 'buffer-list-update-hook #'set-selected-window)
-(add-hook 'window-configuration-change-hook 'set-selected-window)
+(add-hook 'doom-switch-window-hook #'set-selected-window)
 (add-hook 'focus-in-hook 'set-selected-window)
 (add-hook 'focus-out-hook 'unset-selected-window)
 ;; Executes after the window manager requests that the user's events
@@ -36,12 +35,12 @@
   (eq (selected-window) selected-window))
 
 ;;; Helpers
-(defun make-xpm (_face width height)
-  "Create an XPM bitmap via FACE, WIDTH and HEIGHT. Inspired by `powerline''s `pl/make-xpm'."
+(defun make-xpm (color width height)
+  "Create an XPM bitmap via COLOR, WIDTH and HEIGHT. Inspired by `powerline''s `pl/make-xpm'."
   (propertize
    " " 'display
    (let ((data (make-list height (make-list width 1)))
-         (color "None"))
+         (color (or color "None")))
      (ignore-errors
        (create-image
         (concat
