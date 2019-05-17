@@ -3,15 +3,12 @@
 (setq user-full-name "Henrik Lissner"
       user-mail-address "henrik@lissner.net"
 
-      which-key-idle-delay 2.0
+      ;; On-demand code completion. I don't often need it.
       company-idle-delay nil
 
-      doom-docs-dir "~/work/conf/doom-emacs-docs/docs"
-
-      ;; This functionality is already provided by the lookup module and
-      ;; eldoc, on demand, so we disable them by default.
-      lsp-ui-sideline-enable nil
-      lsp-ui-doc-enable nil)
+      ;; lsp-ui-sideline is redundant with eldoc and much more invasive, so
+      ;; disable it by default.
+      lsp-ui-sideline-enable nil)
 
 
 ;;
@@ -64,7 +61,9 @@
 
       (:map evil-treemacs-state-map
         "C-h" #'evil-window-left
-        "C-l" #'evil-window-right)
+        "C-l" #'evil-window-right
+        "M-j" #'+hlissner:multi-next-line
+        "M-k" #'+hlissner:multi-previous-line)
 
       (:when IS-LINUX
         "s-x" #'execute-extended-command
