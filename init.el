@@ -88,17 +88,17 @@
        emacs-lisp
        ;;ess
        ;;go
-       (haskell +intero)
+       ;;(haskell +intero)
        ;;hy
        ;;(java +lsp)
        (javascript +lsp)
        ;;julia
-       latex
+       ;;latex
        ;;ledger
-       lua
+       ;;lua
        markdown
        ;;nim
-       ;;nix
+       nix
        ;;ocaml
        (org +attach +babel +capture +export +present +protocol)
        ;;perl
