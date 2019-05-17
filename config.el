@@ -106,22 +106,16 @@
 ;;; :ui pretty-code
 (setq +pretty-code-enabled-modes '(emacs-lisp-mode org-mode))
 
-;;; :emacs eshell
-(after! eshell
-  (set-eshell-alias!
-   "f"   "(other-window 1) && find-file $1"
-   "l"   "ls -lh"
-   "d"   "dired $1"
-   "gl"  "(call-interactively 'magit-log-current)"
-   "gs"  "magit-status"
-   "gc"  "magit-commit"))
-
 ;;; :tools magit
 (setq magit-repository-directories '(("~/work" . 2))
       magit-save-repository-buffers nil
       transient-values '((magit-commit "--gpg-sign=5F6C0EA160557395")
                          (magit-rebase "--autosquash" "--gpg-sign=5F6C0EA160557395")
                          (magit-pull "--rebase" "--gpg-sign=5F6C0EA160557395")))
+
+;;; :tools vterm
+(after! vterm
+  (setenv "DOOM_TERM" "1"))
 
 ;;; :lang org
 (after! org
