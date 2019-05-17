@@ -113,10 +113,6 @@
                          (magit-rebase "--autosquash" "--gpg-sign=5F6C0EA160557395")
                          (magit-pull "--rebase" "--gpg-sign=5F6C0EA160557395")))
 
-;;; :tools vterm
-(after! vterm
-  (setenv "DOOM_TERM" "1"))
-
 ;;; :lang org
 (after! org
   (add-to-list 'org-modules 'org-habit t))
