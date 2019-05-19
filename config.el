@@ -41,10 +41,10 @@
   "TODO")
 
 (load! "lisp/modeline")
-(add-hook! 'doom-load-theme-hook
-  (set-face-foreground 'mode-line (doom-color 'blue))
-  (set-face-foreground 'mode-line-buffer-id (doom-color 'fg))
-  (set-face-background 'mode-line-success-highlight (doom-color 'green)))
+(custom-set-faces!
+ (mode-line :foreground (doom-color 'blue))
+ (mode-line-buffer-id :foreground (doom-color 'fg))
+ (mode-line-success-highlight :background (doom-color 'green)))
 
 
 ;;
