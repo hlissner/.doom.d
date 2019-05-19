@@ -50,8 +50,8 @@
 ;;
 ;;; Keybinds
 
-(map! :m "M-j" #'+hlissner:multi-next-line
-      :m "M-k" #'+hlissner:multi-previous-line
+(map! :m "M-j" #'multi-next-line
+      :m "M-k" #'multi-previous-line
 
       ;; Easier window movement
       :n "C-h" #'evil-window-left
@@ -62,8 +62,8 @@
       (:map evil-treemacs-state-map
         "C-h" #'evil-window-left
         "C-l" #'evil-window-right
-        "M-j" #'+hlissner:multi-next-line
-        "M-k" #'+hlissner:multi-previous-line)
+        "M-j" #'multi-next-line
+        "M-k" #'multi-previous-line)
 
       (:when IS-LINUX
         "s-x" #'execute-extended-command
@@ -92,11 +92,8 @@
 
       :leader
       (:prefix "f"
-        "t" #'+hlissner/find-in-dotfiles
-        "T" #'+hlissner/browse-dotfiles)
-      (:prefix "n"
-        "m" #'+hlissner/find-notes-for-major-mode
-        "p" #'+hlissner/find-notes-for-project))
+        "t" #'find-in-dotfiles
+        "T" #'browse-dotfiles))
 
 
 ;;
