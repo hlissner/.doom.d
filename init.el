@@ -1,19 +1,17 @@
 ;;; ~/.doom.d/init.el -*- lexical-binding: t; -*-
 
-(doom! :input
-       ;;chinese
-       ;;japanese
-
-       :completion
+(doom! :completion
        company
        ivy
        ;;helm
        ;;ido
 
        :ui
+       ;;deft
        doom
        doom-dashboard
        ;;doom-quit
+       ;;fill-column
        hl-todo
        indent-guides     ; highlighted indent columns
        ;;modeline
@@ -30,6 +28,10 @@
        window-select
        workspaces
 
+       :input
+       ;;chinese
+       ;;japanese
+
        :editor
        (evil +everywhere)
        file-templates
@@ -44,10 +46,12 @@
        :emacs
        dired             ; making dired pretty [functional]
        electric          ; smarter, keyword-based electric-indent
-       ;;eshell            ; a consistent, cross-platform shell (WIP)
-       imenu             ; an imenu sidebar and searchable code index
-       ;;term              ; terminals in Emacs
        vc
+
+       :term
+       ;;eshell            ; a consistent, cross-platform shell (WIP)
+       ;;term              ; terminals in Emacs
+       vterm
 
        :tools
        ;;ansible
