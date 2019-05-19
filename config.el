@@ -59,6 +59,13 @@
       :n "C-k" #'evil-window-up
       :n "C-l" #'evil-window-right
 
+      (:map vterm-mode-map
+        ;; Easier window movement
+        :i "C-h" #'evil-window-left
+        :i "C-j" #'evil-window-down
+        :i "C-k" #'evil-window-up
+        :i "C-l" #'evil-window-right)
+
       (:map evil-treemacs-state-map
         "C-h" #'evil-window-left
         "C-l" #'evil-window-right
