@@ -2,6 +2,7 @@
 
 (setq user-full-name "Henrik Lissner"
       user-mail-address "henrik@lissner.net"
+      epa-file-encrypt-to user-mail-address
 
       ;; On-demand code completion. I don't often need it.
       company-idle-delay nil
@@ -15,16 +16,13 @@
 ;;; UI
 
 ;;; Fonts
-(setq doom-font (font-spec :family "Input Mono Narrow" :size 12)
+(setq doom-font (font-spec :family "Fira Code" :size 12)
       doom-variable-pitch-font (font-spec :family "Noto Sans" :size 14))
 
-(pcase (system-name)
-  ("halimede"
-   (font-put doom-font :size 9)) ; smaller display
-  ("triton"
-   ;; I've swapped these keys on my keyboard
-   (setq x-super-keysym 'meta
-         x-meta-keysym  'super)))
+(when (string= (system-name) "kuro")
+  ;; I've swapped these keys on my keyboard
+  (setq x-super-keysym 'meta
+        x-meta-keysym  'super))
 
 (when IS-LINUX
   (font-put doom-font :weight 'semi-light))
@@ -36,15 +34,8 @@
 (when IS-MAC
   (add-hook 'window-setup-hook #'toggle-frame-maximized))
 
-;;; Modeline
-(defface mode-line-success-highlight '((t (:inherit mode-line-highlight)))
-  "TODO")
-
+;;; Custom modeline
 (load! "lisp/modeline")
-(custom-set-faces!
- (mode-line :foreground (doom-color 'blue))
- (mode-line-buffer-id :foreground (doom-color 'fg))
- (mode-line-success-highlight :background (doom-color 'green)))
 
 
 ;;
@@ -107,7 +98,7 @@
 ;;; Modules
 
 ;;; :ui pretty-code
-(setq +pretty-code-enabled-modes '(emacs-lisp-mode org-mode))
+(setq +pretty-code-enabled-modes '(emacs-lisp-mode))
 
 ;;; :tools magit
 (setq magit-repository-directories '(("~/work" . 2))
@@ -126,9 +117,6 @@
       ;; The standard unicode characters are usually misaligned depending on the
       ;; font. This bugs me. Markdown #-marks for headlines are more elegant.
       org-bullets-bullet-list '("#"))
-
-;;; :app rss
-(add-hook! 'elfeed-show-mode-hook (text-scale-set 2))
 
 
 ;;

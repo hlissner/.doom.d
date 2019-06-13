@@ -5,6 +5,10 @@
 ;; modeline has grown so much to meet the demand of users in general that it has
 ;; become overkill for my needs, so I've returned to the roots.
 
+(defface mode-line-success-highlight '((t (:inherit mode-line-highlight)))
+  "TODO")
+
+
 (defvar mode-line-height 33)
 
 ;;; `active'
@@ -432,6 +436,11 @@ lines are selected, or the NxM dimensions of a block selection.")
 
 ;;
 ;;; Bootstrap
+
+(custom-set-faces!
+ (mode-line :foreground (doom-color 'blue))
+ (mode-line-buffer-id :foreground (doom-color 'fg))
+ (mode-line-success-highlight :background (doom-color 'green)))
 
 (size-indication-mode +1) ; filesize in modeline
 (add-hook '+doom-dashboard-mode-hook #'set-project-modeline)
