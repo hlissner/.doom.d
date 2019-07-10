@@ -50,8 +50,9 @@
 
        :term
        ;;eshell            ; a consistent, cross-platform shell (WIP)
+       ;;shell
        ;;term              ; terminals in Emacs
-       vterm
+       ;;vterm
 
        :tools
        ;;ansible
