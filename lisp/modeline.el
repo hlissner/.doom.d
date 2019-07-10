@@ -122,7 +122,7 @@
     ;; Ensure anzu state is cleared when searches & iedit are done
     (add-hook 'isearch-mode-end-hook #'anzu--reset-status t)
     (add-hook 'iedit-mode-end-hook #'anzu--reset-status)
-    (advice-add #'evil-force-normal-state :after #'anzu--reset-status)
+    (advice-add #'evil-force-normal-state :before #'anzu--reset-status)
     ;; Fix matches segment mirroring across all buffers
     (mapc #'make-variable-buffer-local
           '(anzu--total-matched anzu--current-position anzu--state
