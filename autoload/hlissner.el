@@ -13,6 +13,12 @@
   (doom-project-browse (expand-file-name "~/.dotfiles")))
 
 (defvar +hlissner--recording-frame nil)
+
+(defun cleanup-recording-frame ()
+  (when (eq (selected-frame) +hlissner--recording-frame)
+    (keycast-mode -1)
+    (remove-hook 'delete-frame-hook #'cleanup-recording-frame)))
+
 ;;;###autoload
 (defun open-recording-frame ()
   "TODO"
@@ -40,4 +46,5 @@
     (make-frame-visible +hlissner--recording-frame)
     (redraw-frame +hlissner--recording-frame)
     (with-selected-frame +hlissner--recording-frame
-      (keycast-mode +1))))
+      (keycast-mode +1)
+      (add-hook 'delete-frame-hook #'cleanup-recording-frame))))
