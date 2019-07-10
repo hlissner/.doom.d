@@ -102,7 +102,7 @@
        ;;nim
        nix
        ;;ocaml
-       (org +attach +babel +capture +export +present +protocol)
+       (org +present)
        ;;perl
        ;;php
        ;;plantuml
