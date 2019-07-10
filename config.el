@@ -118,6 +118,10 @@
       ;; font. This bugs me. Markdown #-marks for headlines are more elegant.
       org-bullets-bullet-list '("#"))
 
+;;; :lang lua
+(after! moonscript
+  (require 'flycheck-moonscript))
+
 
 ;;
 ;;; Custom

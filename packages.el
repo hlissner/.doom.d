@@ -12,3 +12,6 @@
 ;; For personal modeline
 (package! anzu)
 (package! evil-anzu)
+
+(package! flycheck-moonscript
+  :recipe (:fetcher github :repo "hlissner/emacs-flycheck-moonscript"))

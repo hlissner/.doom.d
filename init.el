@@ -97,7 +97,7 @@
        ;;julia
        ;;latex
        ;;ledger
-       ;;lua
+       (lua +moonscript)
        markdown
        ;;nim
        nix
