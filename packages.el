@@ -14,4 +14,4 @@
 (package! evil-anzu)
 
 (package! flycheck-moonscript
-  :recipe (:fetcher github :repo "hlissner/emacs-flycheck-moonscript"))
+  :recipe (:host github :repo "hlissner/emacs-flycheck-moonscript"))
