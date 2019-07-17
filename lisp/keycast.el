@@ -38,6 +38,7 @@ here.")
 (defvar keycast-height 25)
 
 (defvar keycast--deferred nil)
+(defvar keycast--deferred-count nil)
 (defvar keycast--frame nil)
 (defvar keycast--dim-timer nil)
 (defvar keycast--last-operator nil)
@@ -111,24 +112,36 @@ here.")
          (keys (this-command-keys)))
      (cond ((memq cmd keycast-blacklist))
            ((and (vectorp keys)
-                 (mouse-event-p (aref keys 0))))
+                 (-event-p (aref keys 0))))
            ((memq cmd keycast-deferring-commands)
-            (setq keycast--deferred keys))
+            (setq keycast--deferred keys
+                  keycast--deferred-count prefix-arg))
            ((funcall keycast-insert-fn keys cmd prefix-arg))))))
 
-(defun keycast-log-post-command (&optional cmd)
+(defun keycast-log-post-command-advice (&optional cmd)
   (when keycast--deferred
     (keycast-save-command
      (let ((cmd (or cmd this-command))
-           (keys (this-command-keys)))
+           (keys (this-command-keys))
+           (count-p (and (not keycast--deferred-count)
+                         (integerp evil-this-motion-count))))
        (funcall keycast-insert-fn
-                (concat keycast--deferred keys)
+                (concat keycast--deferred
+                        (if count-p
+                            (format "%d" evil-this-motion-count)
+                          "")
+                        keys)
                 (list cmd
                       (pcase (substring keys 0 1)
                         ("i" (lookup-key evil-inner-text-objects-map (substring keys 1) t))
                         ("a" (lookup-key evil-outer-text-objects-map (substring keys 1) t))))
-                current-prefix-arg)
-       (setq keycast--deferred nil)))))
+                (unless count-p current-prefix-arg))
+       (setq keycast--deferred nil
+             keycast--deferred-count nil)))))
+
+(defun keycast-log-post-command (&optional cmd)
+  (unless (bound-and-true-p evil-local-mode)
+    (keycast-log-post-command-advice cmd)))
 
 
 ;;
@@ -206,17 +219,27 @@ here.")
     map))
 
 (define-minor-mode keycast-mode
-  :global t
+  "TODO"
   :init-value nil
   (if keycast-mode
       (progn
+        (add-hook 'pre-command-hook #'keycast-log-command nil t)
+        (add-hook 'post-command-hook #'keycast-log-post-command nil t))
+    (remove-hook 'pre-command-hook #'keycast-log-command t)
+    (remove-hook 'post-command-hook #'keycast-log-post-command t)))
+
+(define-globalized-minor-mode global-keycast-mode
+  keycast-mode keycast-mode)
+
+(defun keycast-init ()
+  (if global-keycast-mode
+      (progn
+        (advice-add 'evil-normal-post-command :before #'keycast-log-post-command-advice)
         (keycast-clear-buffer)
-        (funcall keycast-display-fn)
-        (add-hook 'pre-command-hook #'keycast-log-command)
-        (add-hook 'post-command-hook #'keycast-log-post-command))
-    (remove-hook 'pre-command-hook #'keycast-log-command)
-    (remove-hook 'post-command-hook #'keycast-log-post-command)
+        (funcall keycast-display-fn))
+    (advice-remove 'evil-normal-post-command #'keycast-log-post-command-advice)
     (keycast-cleanup)))
+(add-hook 'global-keycast-mode-hook #'keycast-init)
 
 
 ;;
@@ -238,7 +261,8 @@ here.")
       (message "Saved to %s" (abbreviate-file-name keycast--current-filename))
       (when (y-or-n-p "Preview file?")
         (async-shell-command (format "mpv %S" keycast--current-filename))))
-    (setq keycast--current-filename nil)))
+    (setq keycast--current-filename nil
+          keycast--aborting nil)))
 
 (defun keycast-start-recording ()
   (interactive)
@@ -280,4 +304,4 @@ here.")
   (setq keycast--aborting t)
   (message "Aborting..."))
 
-(global-set-key [remap global-command-log-mode] #'keycast-mode)
+(global-set-key [remap global-command-log-mode] #'global-keycast-mode)
