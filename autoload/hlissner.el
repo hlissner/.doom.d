@@ -40,11 +40,11 @@
     (goto-char (point-min))
     (set-window-buffer (frame-root-window +hlissner--recording-frame)
                        (current-buffer)))
-  (set-frame-size +hlissner--recording-frame 840 300 t)
-  (doom-adjust-font-size 2 +hlissner--recording-frame)
-  (unless (frame-visible-p +hlissner--recording-frame)
-    (make-frame-visible +hlissner--recording-frame)
-    (redraw-frame +hlissner--recording-frame)
-    (with-selected-frame +hlissner--recording-frame
+  (with-selected-frame +hlissner--recording-frame
+    (set-frame-size nil 840 300 t)
+    (doom-adjust-font-size 2)
+    (unless (frame-visible-p +hlissner--recording-frame)
+      (make-frame-visible)
+      (redraw-frame)
       (keycast-mode +1)
       (add-hook 'delete-frame-hook #'cleanup-recording-frame))))
