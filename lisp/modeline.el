@@ -103,7 +103,7 @@
 
 ;; `mode-line-matches'
 (progn
-  (def-package! anzu
+  (use-package! anzu
     :after-call isearch-mode
     :config
     ;; anzu and evil-anzu expose current/total state that can be displayed in the
@@ -129,7 +129,7 @@
                                 anzu--cached-count anzu--cached-positions anzu--last-command
                                 anzu--last-isearch-string anzu--overflow-p)))
 
-  (def-package! evil-anzu
+  (use-package! evil-anzu
     :when (featurep! :editor evil)
     :after-call (evil-ex-start-search evil-ex-start-word-search evil-ex-search-activate-highlight))
 
