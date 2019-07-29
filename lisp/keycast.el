@@ -36,7 +36,7 @@ here.")
 (defvar keycast-pulse-iterations 10
   "Value for `pulse-iterations' in the keycast log window.")
 
-(defvar keycast-pulse-delay 0.2
+(defvar keycast-pulse-delay 0.1
   "Value for `pulse-delay' in the keycast log window.")
 
 (defvar keycast-column 11
@@ -65,29 +65,30 @@ this many spaces of indentation.")
 (defun keycast--buffer ()
   (get-buffer-create keycase-buffer-name))
 
-(defun keycast--dim (pos fg bg max)
+(defun keycast--dim (fg bg max)
   (with-current-buffer (keycast--buffer)
-    (let ((line (line-number-at-pos pos))
+    (let ((i 0)
           color)
       (while (and (not (eobp))
-                  (< line max))
-        (setq color (doom-blend bg fg (min 1.0 (/ line (float (1- max))))))
+                  (< i max))
+        (setq color (doom-blend bg fg (min 1.0 (/ i (float (1- max))))))
         (set-text-properties (line-beginning-position) (line-end-position) `(face (:foreground ,color :weight normal)))
         (forward-line 1)
-        (cl-incf line)))))
+        (cl-incf i)))))
 
 (defun keycast--fontify ()
   (let ((max (* 1.5 (frame-char-height keycast--frame)))
         (fg (face-foreground 'default))
         (bg (face-foreground 'font-lock-comment-face))
         (line 0)
+        (pulse-flag t)
         (pulse-iterations keycast-pulse-iterations)
         (pulse-delay keycast-pulse-delay))
     (save-excursion
       (goto-char (point-min))
       (pulse-momentary-highlight-one-line (point) 'lazy-highlight)
       (forward-line 1)
-      (keycast--dim (point) fg bg max))))
+      (keycast--dim fg bg max))))
 
 (defun keycast-insert-command (keystr command &optional arg)
   (with-current-buffer (keycast--buffer)
