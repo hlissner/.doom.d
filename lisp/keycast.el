@@ -16,7 +16,7 @@
 Frequently used non-interesting commands (like cursor movements) should be put
 here.")
 
-(defconst keycast-deferring-commands
+(defvar keycast-deferring-commands
   '(evil-yank
     evil-cp-yank
     evil-sp-yank
@@ -30,13 +30,31 @@ here.")
     +eval:region)
   "TODO")
 
-(defvar keycast-column 11)
-(defvar keycast-insert-fn #'keycast-insert-command)
-(defvar keycast-display-fn #'keycast-display-popup)
-(defvar keycast-cleanup-hook nil)
-(defvar keycase-buffer-name "*keycast*")
+(defvar keycast-storage-dir "~/rec"
+  "Where to store recordings created by `keycast-start-recording'.")
+
+(defvar keycast-pulse-iterations 10
+  "Value for `pulse-iterations' in the keycast log window.")
+
+(defvar keycast-pulse-delay 0.2
+  "Value for `pulse-delay' in the keycast log window.")
+
+(defvar keycast-column 11
+  "Column to display a key's command at.
+
+If the key sequence is too long, the command is pushed to the next line after
+this many spaces of indentation.")
+
+(defvar keycast-insert-fn #'keycast-insert-command
+  "Function used to display a key sequence.")
+
+(defvar keycast-display-fn #'keycast-display-popup
+  "Function used to display the buffer containing keycast's log.")
+
 (defvar keycast-width 40)
 (defvar keycast-height 25)
+(defvar keycast-cleanup-hook nil)
+(defvar keycase-buffer-name "*keycast*")
 
 (defvar keycast--deferred nil)
 (defvar keycast--deferred-count nil)
@@ -63,8 +81,8 @@ here.")
         (fg (face-foreground 'default))
         (bg (face-foreground 'font-lock-comment-face))
         (line 0)
-        (pulse-iterations 10)
-        (pulse-delay 0.2))
+        (pulse-iterations keycast-pulse-iterations)
+        (pulse-delay keycast-pulse-delay))
     (save-excursion
       (goto-char (point-min))
       (pulse-momentary-highlight-one-line (point) 'lazy-highlight)
@@ -273,7 +291,7 @@ here.")
   (keycast-clear-buffer)
   (cl-destructuring-bind (left top _right _bottom)
       (frame-edges)
-    (let ((dest (format (expand-file-name "~/rec/%s-%s.mp4")
+    (let ((dest (format (expand-file-name "%s-%s.mp4" keycast-storage-dir)
                         (format-time-string "%F-%T")
                         (replace-regexp-in-string "[^[:alnum:]]" "" (buffer-name)))))
       (setq keycast--current-filename dest
