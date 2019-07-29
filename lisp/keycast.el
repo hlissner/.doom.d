@@ -22,6 +22,7 @@ here.")
     evil-sp-yank
     lispyville-yank
     evil-delete
+    evil-change
     evil-cp-delete
     evil-sp-delete
     lispyville-delete
@@ -118,7 +119,7 @@ here.")
                   keycast--deferred-count prefix-arg))
            ((funcall keycast-insert-fn keys cmd prefix-arg))))))
 
-(defun keycast-log-post-command-advice (&optional cmd)
+(defun keycast-log-post-command (&optional cmd)
   (when keycast--deferred
     (keycast-save-command
      (let ((cmd (or cmd this-command))
@@ -139,9 +140,13 @@ here.")
        (setq keycast--deferred nil
              keycast--deferred-count nil)))))
 
-(defun keycast-log-post-command (&optional cmd)
+(defun keycast-log-pre-command-a (&optional cmd)
   (unless (bound-and-true-p evil-local-mode)
     (keycast-log-post-command-advice cmd)))
+
+(defun keycast-log-post-command-a (&rest _)
+  (unless (bound-and-true-p evil-local-mode)
+    (keycast-log-post-command-advice)))
 
 
 ;;
@@ -234,10 +239,12 @@ here.")
 (defun keycast-init ()
   (if global-keycast-mode
       (progn
-        (advice-add 'evil-normal-post-command :before #'keycast-log-post-command-advice)
+        (advice-add 'evil-normal-post-command :before #'keycast-log-pre-command-a)
+        (advice-add 'evil-change :after #'keycast-log-post-command-a)
         (keycast-clear-buffer)
         (funcall keycast-display-fn))
-    (advice-remove 'evil-normal-post-command #'keycast-log-post-command-advice)
+    (advice-remove 'evil-normal-post-command #'keycast-log-pre-command-a)
+    (advice-remove 'evil-change #'keycast-log-post-command-a)
     (keycast-cleanup)))
 (add-hook 'global-keycast-mode-hook #'keycast-init)
 
