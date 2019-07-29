@@ -126,11 +126,11 @@ here.")
            (count-p (and (not keycast--deferred-count)
                          (integerp evil-this-motion-count))))
        (funcall keycast-insert-fn
-                (concat keycast--deferred
-                        (if count-p
-                            (format "%d" evil-this-motion-count)
-                          "")
-                        keys)
+                (vconcat keycast--deferred
+                         (if count-p
+                             (format "%d" evil-this-motion-count)
+                           "")
+                         keys)
                 (list cmd
                       (pcase (ignore-errors (substring keys 0 1))
                         ("i" (lookup-key evil-inner-text-objects-map (substring keys 1) t))
