@@ -20,6 +20,7 @@ here.")
   '(evil-yank
     evil-cp-yank
     evil-sp-yank
+    evil-exchange
     lispyville-yank
     evil-delete
     evil-change
