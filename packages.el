@@ -15,3 +15,5 @@
 
 (package! flycheck-moonscript
   :recipe (:host github :repo "hlissner/emacs-flycheck-moonscript"))
+
+(package! atomic-chrome)
