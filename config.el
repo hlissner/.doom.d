@@ -9,20 +9,19 @@
 
       ;; lsp-ui-sideline is redundant with eldoc and much more invasive, so
       ;; disable it by default.
-      lsp-ui-sideline-enable nil)
+      lsp-ui-sideline-enable nil
+      lsp-enable-indentation nil
+      lsp-enable-on-type-formatting nil
+      lsp-enable-symbol-highlighting nil)
 
 
 ;;
 ;;; UI
 
-;;; Fonts
-(setq doom-font (font-spec :family "Fira Code" :size 12)
-      doom-variable-pitch-font (font-spec :family "Noto Sans" :size 14))
+(load-theme 'doom-one t)
 
-(when (string= (system-name) "kuro")
-  ;; I've swapped these keys on my keyboard
-  (setq x-super-keysym 'meta
-        x-meta-keysym  'super))
+(setq doom-font (font-spec :family "Fira Code" :size 12)
+      doom-variable-pitch-font (font-spec :family "Noto Sans" :size 13))
 
 (when IS-LINUX
   (font-put doom-font :weight 'semi-light))
@@ -45,17 +44,10 @@
       :m "M-k" #'multi-previous-line
 
       ;; Easier window movement
-      :n "C-h" #'evil-window-left
-      :n "C-j" #'evil-window-down
-      :n "C-k" #'evil-window-up
-      :n "C-l" #'evil-window-right
-
-      (:map vterm-mode-map
-        ;; Easier window movement
-        :i "C-h" #'evil-window-left
-        :i "C-j" #'evil-window-down
-        :i "C-k" #'evil-window-up
-        :i "C-l" #'evil-window-right)
+      :ni "C-h" #'evil-window-left
+      :ni "C-j" #'evil-window-down
+      :ni "C-k" #'evil-window-up
+      :ni "C-l" #'evil-window-right
 
       (:map evil-treemacs-state-map
         "C-h" #'evil-window-left
@@ -89,6 +81,7 @@
         :gi [s-backspace] #'doom/backward-kill-to-bol-and-indent)
 
       :leader
+      "h L" #'global-keycast-mode
       (:prefix "f"
         "t" #'find-in-dotfiles
         "T" #'browse-dotfiles))
@@ -101,40 +94,20 @@
 (setq +pretty-code-enabled-modes '(emacs-lisp-mode))
 
 ;;; :tools magit
-(setq magit-repository-directories '(("~/work" . 2))
+(setq magit-repository-directories '(("~/projects" . 2))
       magit-save-repository-buffers nil
       transient-values '((magit-commit "--gpg-sign=5F6C0EA160557395")
                          (magit-rebase "--autosquash" "--gpg-sign=5F6C0EA160557395")
                          (magit-pull "--rebase" "--gpg-sign=5F6C0EA160557395")))
 
 ;;; :lang org
-(after! org
-  (add-to-list 'org-modules 'org-habit t))
-(setq org-directory "~/work/org/"
-      org-agenda-files (list org-directory)
+(setq org-directory "~/projects/org/"
       org-ellipsis " ▼ "
-
       ;; The standard unicode characters are usually misaligned depending on the
       ;; font. This bugs me. Markdown #-marks for headlines are more elegant.
       org-bullets-bullet-list '("#"))
-
-;;; :lang lua
-(after! moonscript
-  (require 'flycheck-moonscript))
-
-
-;;
-;;; Custom
-
-;;; Keycast
-(load! "lisp/keycast")
-
-(use-package! atomic-chrome
-  :after-call focus-out-hook
-  :config
-  (setq atomic-chrome-default-major-mode 'markdown-mode)
-  (setq atomic-chrome-buffer-open-style 'frame)
-  (atomic-chrome-start-server))
+(after! org
+  (add-to-list 'org-modules 'org-habit t))
 
 
 ;;

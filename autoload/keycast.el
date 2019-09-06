@@ -1,4 +1,4 @@
-;;; /mnt/projects/conf/doom-emacs-private/lisp/keycast.el -*- lexical-binding: t; -*-
+;;; /mnt/projects/conf/doom-emacs-private/autoload/keycast.el -*- lexical-binding: t; -*-
 
 (defvar keycast-blacklist
   '(nil self-insert-command backward-char forward-char
@@ -31,7 +31,7 @@ here.")
     +eval:region)
   "TODO")
 
-(defvar keycast-storage-dir "~/rec"
+(defvar keycast-storage-dir "~/recordings"
   "Where to store recordings created by `keycast-start-recording'.")
 
 (defvar keycast-pulse-iterations 10
@@ -250,6 +250,7 @@ this many spaces of indentation.")
     (remove-hook 'pre-command-hook #'keycast-log-command t)
     (remove-hook 'post-command-hook #'keycast-log-post-command t)))
 
+;;;###autoload
 (define-globalized-minor-mode global-keycast-mode
   keycast-mode keycast-mode)
 
@@ -327,5 +328,3 @@ this many spaces of indentation.")
     (keycast-finish-recording))
   (setq keycast--aborting t)
   (message "Aborting..."))
-
-(global-set-key [remap global-command-log-mode] #'global-keycast-mode)

@@ -169,5 +169,5 @@
 
 (defun +javascript|init-screeps-mode ()
   (when (eq major-mode 'js2-mode)
-    (push 'javascript-jshint flycheck-disabled-checkers)
+    (add-to-list 'flycheck-disabled-checkers 'javascript-jshint)
     (setq js2-additional-externs (append '("_") screeps-objects screeps-constants))))
