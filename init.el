@@ -13,7 +13,8 @@
        ;;doom-quit
        ;;fill-column
        hl-todo
-       indent-guides     ; highlighted indent columns
+       ;;hydra
+       ;;indent-guides     ; highlighted indent columns
        ;;modeline
        nav-flash
        ;;neotree
@@ -22,7 +23,7 @@
        treemacs
        pretty-code
        ;;unicode
-       ;;tabbar
+       ;;tabs
        vc-gutter
        vi-tilde-fringe
        window-select
@@ -36,6 +37,7 @@
        (evil +everywhere)
        file-templates
        fold              ; (nigh) universal code folding
+       ;;objed
        ;;format            ; automated prettiness
        ;;lispy             ; vim for lisp, for people who dont like vim
        multiple-cursors  ; editing in many places at once
@@ -64,6 +66,7 @@
        eval
        (flycheck +childframe)
        flyspell
+       ;;gist
        (lookup +docsets)
        lsp
        ;;macos             ; MacOS-specific commands
@@ -85,6 +88,7 @@
        ;;clojure
        ;;(csharp +unity)
        ;;common-lisp
+       ;;coq
        data
        ;;erlang
        ;;elixir
