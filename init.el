@@ -17,10 +17,10 @@
        ;;indent-guides     ; highlighted indent columns
        ;;modeline
        nav-flash
-       ;;neotree
+       neotree
        ophints
        (popup +all +defaults)
-       treemacs
+       ;;treemacs
        pretty-code
        ;;unicode
        ;;tabs
@@ -60,11 +60,11 @@
        ;;ansible
        ;;debugger
        direnv
-       docker
+       ;;docker
        editorconfig      ; let someone else argue about tabs vs spaces
        ;;ein               ; tame Jupyter notebooks with emacs
        eval
-       (flycheck +childframe)
+       flycheck
        flyspell
        ;;gist
        (lookup +docsets)
@@ -114,7 +114,7 @@
        ;;plantuml
        ;;purescript
        (python +pyenv +lsp)
-       rest
+       ;;rest
        ;;ruby
        (rust +lsp)
        ;;scala
