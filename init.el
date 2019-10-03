@@ -21,7 +21,7 @@
        ophints
        (popup +all +defaults)
        ;;treemacs
-       pretty-code
+       ;;pretty-code
        ;;unicode
        ;;tabs
        vc-gutter
