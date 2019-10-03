@@ -48,5 +48,5 @@
     (unless (frame-visible-p +hlissner--recording-frame)
       (make-frame-visible)
       (redraw-frame)
-      (keycast-mode +1)
+      (global-keycast-mode +1)
       (add-hook 'delete-frame-functions #'cleanup-recording-frame))))
