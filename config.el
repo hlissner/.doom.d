@@ -87,6 +87,10 @@
 ;;; :ui pretty-code
 (setq +pretty-code-enabled-modes '(emacs-lisp-mode))
 
+;;; :ui doom-dashboard
+;; Remove the dashboard menu. I know all their shortcuts.
+(remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
+
 ;;; :tools magit
 (setq magit-repository-directories '(("~/projects" . 2))
       magit-save-repository-buffers nil
