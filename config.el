@@ -18,20 +18,14 @@
 ;;
 ;;; UI
 
-(load-theme 'doom-one t)
-
 (setq doom-font (font-spec :family "Fira Code" :size 12)
       doom-variable-pitch-font (font-spec :family "Noto Sans" :size 13))
 
 (when IS-LINUX
   (font-put doom-font :weight 'semi-light))
-(when IS-MAC
-  (setq ns-use-thin-smoothing t))
 
 ;;; Frames/Windows
 (add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
-(when IS-MAC
-  (add-hook 'window-setup-hook #'toggle-frame-maximized))
 
 ;;; Custom modeline
 (load! "lisp/modeline")
