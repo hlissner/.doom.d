@@ -96,6 +96,8 @@
 ;;; :tools magit
 (setq magit-repository-directories '(("~/projects" . 2))
       magit-save-repository-buffers nil
+      ;; Don't restore the wconf after quitting magit
+      magit-inhibit-save-previous-winconf t
       transient-values '((magit-commit "--gpg-sign=5F6C0EA160557395")
                          (magit-rebase "--autosquash" "--gpg-sign=5F6C0EA160557395")
                          (magit-pull "--rebase" "--gpg-sign=5F6C0EA160557395")))
