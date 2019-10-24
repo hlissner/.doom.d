@@ -17,10 +17,10 @@
        ;;indent-guides     ; highlighted indent columns
        ;;modeline
        nav-flash
-       neotree
+       ;;neotree
        ophints
        (popup +all +defaults)
-       ;;treemacs
+       treemacs
        ;;pretty-code
        ;;unicode
        ;;tabs
