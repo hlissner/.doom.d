@@ -405,6 +405,9 @@ lines are selected, or the NxM dimensions of a block selection.")
                              (format-mode-line '("" mode-line-format-right))))))))
    mode-line-format-right))
 
+(with-current-buffer "*Messages*"
+  (setq mode-line-format (default-value 'mode-line-format)))
+
 
 ;;
 ;;; Other modelines
