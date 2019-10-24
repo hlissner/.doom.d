@@ -40,22 +40,7 @@
 ;;
 ;;; Keybinds
 
-(map! :m "M-j" #'multi-next-line
-      :m "M-k" #'multi-previous-line
-
-      ;; Easier window movement
-      :ni "C-h" #'evil-window-left
-      :ni "C-j" #'evil-window-down
-      :ni "C-k" #'evil-window-up
-      :ni "C-l" #'evil-window-right
-
-      (:map evil-treemacs-state-map
-        "C-h" #'evil-window-left
-        "C-l" #'evil-window-right
-        "M-j" #'multi-next-line
-        "M-k" #'multi-previous-line)
-
-      (:when IS-LINUX
+(map! (:when IS-LINUX
         "s-x" #'execute-extended-command
         "s-;" #'eval-expression
         ;; use super for window/frame navigation/manipulation
