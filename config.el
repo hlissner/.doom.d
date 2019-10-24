@@ -30,6 +30,12 @@
 ;;; Custom modeline
 (load! "lisp/modeline")
 
+(custom-theme-set-faces! 'doom-one
+  '(org-priority :background "#23272e")
+  `(mode-line :foreground ,(doom-color 'blue))
+  '(mode-line-buffer-id :foreground "#bbc2cf")
+  '(mode-line-success-highlight :background "#98be65"))
+
 
 ;;
 ;;; Keybinds
@@ -84,12 +90,12 @@
 ;;
 ;;; Modules
 
-;;; :ui pretty-code
-(setq +pretty-code-enabled-modes '(emacs-lisp-mode))
+;;; :completion ivy
+(setf (alist-get 'counsel-projectile-find-file ivy-re-builders-alist)
+      'ivy--regex-plus)
 
-;;; :ui doom-dashboard
-;; Remove the dashboard menu. I know all their shortcuts.
-(remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
+;;; :tools direnv
+(setq direnv-always-show-summary nil)
 
 ;;; :tools magit
 (setq magit-repository-directories '(("~/projects" . 2))

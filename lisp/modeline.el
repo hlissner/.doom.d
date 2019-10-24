@@ -436,11 +436,6 @@ lines are selected, or the NxM dimensions of a block selection.")
 ;;
 ;;; Bootstrap
 
-(custom-theme-set-faces! 'doom-one
-  `(mode-line :foreground ,(doom-color 'blue))
-  `(mode-line-buffer-id :foreground ,(doom-color 'fg))
-  `(mode-line-success-highlight :background ,(doom-color 'green)))
-
 (size-indication-mode +1) ; filesize in modeline
 (add-hook '+doom-dashboard-mode-hook #'set-project-modeline)
 
