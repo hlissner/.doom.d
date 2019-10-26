@@ -64,7 +64,7 @@
        ;;docker
        editorconfig      ; let someone else argue about tabs vs spaces
        ;;ein               ; tame Jupyter notebooks with emacs
-       eval
+       (eval +overlay)
        flycheck
        flyspell
        ;;gist
