@@ -4,6 +4,10 @@
       user-mail-address "henrik@lissner.net"
       epa-file-encrypt-to user-mail-address
 
+      ;; Line numbers are pretty slow all around. The performance boost of
+      ;; disabling them outweighs the utility of always keeping them on.
+      display-line-numbers-type nil
+
       ;; On-demand code completion. I don't often need it.
       company-idle-delay nil
 
