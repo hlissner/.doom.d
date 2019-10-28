@@ -310,8 +310,14 @@ icons.")
   (add-to-list 'mode-line-format-left 'mode-line-selection-info 'append))
 (defun remove-selection-segment ()
   (delq! 'mode-line-selection-info mode-line-format-left))
-(add-hook 'activate-mark-hook #'add-selection-segment)
-(add-hook 'deactivate-mark-hook #'remove-selection-segment)
+
+(if (featurep 'evil)
+    (progn
+      (add-hook 'evil-visual-state-entry-hook #'add-selection-segment)
+      (add-hook 'evil-visual-state-exit-hook #'remove-selection-segment))
+  (add-hook 'activate-mark-hook #'add-selection-segment)
+  (add-hook 'deactivate-mark-hook #'remove-selection-segment))
+
 
 (defvar mode-line-selection-info
   '(:eval
@@ -319,8 +325,7 @@ icons.")
               (and (bound-and-true-p evil-local-mode)
                    (eq evil-state 'visual)))
       (cl-destructuring-bind (beg . end)
-          (if (and (bound-and-true-p evil-local-mode)
-                   (eq evil-state 'visual))
+          (if (boundp 'evil-local-mode)
               (cons evil-visual-beginning evil-visual-end)
             (cons (region-beginning) (region-end)))
         (propertize
