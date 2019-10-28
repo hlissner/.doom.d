@@ -31,41 +31,16 @@
 (load! "lisp/modeline")
 
 (custom-theme-set-faces! 'doom-one
-  '(org-priority :background "#23272e")
+  `(org-priority :background ,(doom-color 'bg))
   `(mode-line :foreground ,(doom-color 'blue))
-  '(mode-line-buffer-id :foreground "#bbc2cf")
-  '(mode-line-success-highlight :background "#98be65"))
+  `(mode-line-buffer-id :foreground ,(doom-color 'fg))
+  `(mode-line-success-highlight :background ,(doom-color 'green)))
 
 
 ;;
 ;;; Keybinds
 
-(map! (:when IS-LINUX
-        "s-x" #'execute-extended-command
-        "s-;" #'eval-expression
-        ;; use super for window/frame navigation/manipulation
-        "s-w" #'delete-window
-        "s-W" #'delete-frame
-        "s-n" #'+default/new-buffer
-        "s-N" #'make-frame
-        "s-q" (if (daemonp) #'delete-frame #'evil-quit-all)
-        ;; Restore OS undo, save, copy, & paste keys (without cua-mode, because
-        ;; it imposes some other functionality and overhead we don't need)
-        "s-z" #'undo
-        "s-c" (if (featurep 'evil) #'evil-yank #'copy-region-as-kill)
-        "s-v" #'yank
-        "s-s" #'save-buffer
-        ;; Buffer-local font scaling
-        "s-+" #'doom/reset-font-size
-        "s-=" #'doom/increase-font-size
-        "s--" #'doom/decrease-font-size
-        ;; Conventional text-editing keys
-        "s-a" #'mark-whole-buffer
-        :gi [s-return]    #'+default/newline-below
-        :gi [s-S-return]  #'+default/newline-above
-        :gi [s-backspace] #'doom/backward-kill-to-bol-and-indent)
-
-      :leader
+(map! :leader
       "h L" #'global-keycast-mode
       (:prefix "f"
         "t" #'find-in-dotfiles
