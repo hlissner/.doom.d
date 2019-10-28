@@ -16,7 +16,8 @@
       lsp-ui-sideline-enable nil
       lsp-enable-indentation nil
       lsp-enable-on-type-formatting nil
-      lsp-enable-symbol-highlighting nil)
+      lsp-enable-symbol-highlighting nil
+      lsp-enable-file-watchers nil)
 
 
 ;;
