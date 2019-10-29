@@ -59,6 +59,10 @@
 (setf (alist-get 'counsel-projectile-find-file ivy-re-builders-alist)
       'ivy--regex-plus)
 
+;;; :editor evil
+(setq evil-split-window-below t
+      evil-vsplit-window-right t)
+
 ;;; :tools direnv
 (setq direnv-always-show-summary nil)
 
