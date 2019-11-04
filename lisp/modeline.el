@@ -11,6 +11,13 @@
 
 (defvar mode-line-height 33)
 
+(defvar modeline--redisplayed-p nil)
+(defadvice! modeline-recalculate-height-a (&optional _force &rest _ignored)
+  :before '(fit-window-to-buffer resize-temp-buffer-window)
+  (unless modeline--redisplayed-p
+    (setq-local modeline--redisplayed-p t)
+    (redisplay t)))
+
 ;;; `active'
 (defvar selected-window (selected-window))
 
