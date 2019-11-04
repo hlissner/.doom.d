@@ -12,31 +12,17 @@
 (defvar mode-line-height 33)
 
 ;;; `active'
-(defvar selected-window (frame-selected-window)
-  "Selected window.")
-
-(defun set-selected-window ()
-  "Set the variable `selected-window' appropriately."
-  (when (not (minibuffer-window-active-p (frame-selected-window)))
-    (setq selected-window (frame-selected-window))
-    (force-mode-line-update)))
-
-(defun unset-selected-window ()
-  "Unset the variable `selected-window' and update the mode line."
-  (setq selected-window nil)
-  (force-mode-line-update))
-
-(add-hook 'doom-switch-window-hook #'set-selected-window)
-(add-hook 'focus-in-hook 'set-selected-window)
-(add-hook 'focus-out-hook 'unset-selected-window)
-;; Executes after the window manager requests that the user's events
-;; be directed to a different frame.
-(defadvice handle-switch-frame (after powerline-handle-switch-frame activate)
-  "Call `set-selected-window'."
-  (set-selected-window))
+(defvar selected-window (selected-window))
 
 (defun active ()
   (eq (selected-window) selected-window))
+
+(add-hook! 'pre-redisplay-functions
+  (defun set-selected-window (&rest _)
+    "Set the variable `selected-window' appropriately."
+    (let ((win (selected-window)))
+      (unless (minibuffer-window-active-p win)
+        (setq selected-window (frame-selected-window))))))
 
 ;;; Helpers
 (defun make-xpm (color width height)
