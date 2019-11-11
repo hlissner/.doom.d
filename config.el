@@ -77,6 +77,7 @@
 
 ;;; :lang org
 (setq org-directory "~/projects/org/"
+      org-archive-location (concat org-directory "archive/%s::")
       org-ellipsis " ▼ "
       ;; The standard unicode characters are usually misaligned depending on the
       ;; font. This bugs me. Markdown #-marks for headlines are more elegant.
