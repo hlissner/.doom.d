@@ -84,13 +84,3 @@
       org-bullets-bullet-list '("#"))
 (after! org
   (add-to-list 'org-modules 'org-habit t))
-
-
-;;
-;;; Frameworks
-
-(def-project-mode! +javascript-screeps-mode
-  :match "/screeps\\(?:-ai\\)?/.+$"
-  :modes (+javascript-npm-mode)
-  :add-hooks (+javascript|init-screeps-mode)
-  :on-load (load! "lisp/screeps"))
