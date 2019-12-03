@@ -44,9 +44,10 @@
        ;;parinfer          ; turn lisp into python, sort of
        rotate-text       ; cycle region at point between text candidates
        snippets
+       ;;word-wrap
 
        :emacs
-       (dired +icons)    ; making dired pretty [functional]
+       dired             ; making dired pretty [functional]
        electric          ; smarter, keyword-based electric-indent
        ibuffer           ; interactive buffer management
        vc
@@ -80,7 +81,6 @@
        ;;terraform         ; infrastructure as code
        ;;tmux              ; an API for interacting with tmux
        ;;upload            ; map local to remote projects via ssh/ftp
-       ;;wakatime
 
        :lang
        ;;assembly
@@ -96,6 +96,7 @@
        ;;elm
        emacs-lisp
        ;;ess
+       ;;faust
        ;;go
        ;;(haskell +intero)
        ;;hy
