@@ -17,7 +17,12 @@
       lsp-enable-indentation nil
       lsp-enable-on-type-formatting nil
       lsp-enable-symbol-highlighting nil
-      lsp-enable-file-watchers nil)
+      lsp-enable-file-watchers nil
+
+      ;; Disable help mouse-overs for mode-line segments (i.e. :help-echo text).
+      ;; They're generally unhelpful and only add confusing visual clutter.
+      mode-line-default-help-echo nil
+      show-help-function nil)
 
 
 ;;
