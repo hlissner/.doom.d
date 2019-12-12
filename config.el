@@ -40,7 +40,7 @@
 ;;; Custom modeline
 (load! "lisp/modeline")
 
-(custom-theme-set-faces! 'doom-one
+(custom-set-faces!
   `(org-priority :background ,(doom-color 'bg))
   `(mode-line :foreground ,(doom-color 'blue))
   `(mode-line-buffer-id :foreground ,(doom-color 'fg))
