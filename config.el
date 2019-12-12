@@ -28,8 +28,10 @@
 ;;
 ;;; UI
 
-(setq doom-font (font-spec :family "Fira Code" :size 12)
-      doom-variable-pitch-font (font-spec :family "Noto Sans" :size 13))
+;; In case we use this config on a system without these fonts, fail silently
+(ignore-errors
+  (setq doom-font (font-spec :family "Fira Code" :size 12)
+        doom-variable-pitch-font (font-spec :family "Noto Sans" :size 13)))
 
 (when IS-LINUX
   (font-put doom-font :weight 'semi-light))
