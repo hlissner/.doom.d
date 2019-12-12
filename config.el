@@ -64,6 +64,9 @@
 (setf (alist-get 'counsel-projectile-find-file ivy-re-builders-alist)
       'ivy--regex-plus)
 
+;;; :ui doom-dashboard
+;; (remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
+
 ;;; :editor evil
 (setq evil-split-window-below t
       evil-vsplit-window-right t)
