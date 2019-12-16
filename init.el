@@ -15,7 +15,7 @@
        hl-todo
        ;;hydra
        ;;indent-guides     ; highlighted indent columns
-       ;;modeline
+       (modeline +light)
        nav-flash
        ;;neotree
        ophints

@@ -30,23 +30,11 @@
 
 ;; In case we use this config on a system without these fonts, fail silently
 (ignore-errors
-  (setq doom-font (font-spec :family "Fira Code" :size 12)
+  (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
         doom-variable-pitch-font (font-spec :family "Noto Sans" :size 13)))
-
-(when IS-LINUX
-  (font-put doom-font :weight 'semi-light))
 
 ;;; Frames/Windows
 (add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
-
-;;; Custom modeline
-(load! "lisp/modeline")
-
-(custom-set-faces!
-  `(org-priority :background ,(doom-color 'bg))
-  `(mode-line :foreground ,(doom-color 'blue))
-  `(mode-line-buffer-id :foreground ,(doom-color 'fg))
-  `(mode-line-success-highlight :background ,(doom-color 'green)))
 
 
 ;;
@@ -54,17 +42,15 @@
 
 (map! :leader
       "h L" #'global-keycast-mode
-      (:prefix "f"
-        "t" #'find-in-dotfiles
-        "T" #'browse-dotfiles))
+      "f t" #'find-in-dotfiles
+      "f T" #'browse-dotfiles)
 
 
 ;;
 ;;; Modules
 
 ;;; :completion ivy
-(setf (alist-get 'counsel-projectile-find-file ivy-re-builders-alist)
-      'ivy--regex-plus)
+(add-to-list 'ivy-re-builders-alist '(counsel-projectile-find-file . ivy--regex-plus))
 
 ;;; :ui doom-dashboard
 ;; (remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
