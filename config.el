@@ -29,9 +29,8 @@
 ;;; UI
 
 ;; In case we use this config on a system without these fonts, fail silently
-(ignore-errors
-  (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
-        doom-variable-pitch-font (font-spec :family "Noto Sans" :size 13)))
+(setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
+      doom-variable-pitch-font (font-spec :family "sans"))
 
 ;;; Frames/Windows
 (add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
