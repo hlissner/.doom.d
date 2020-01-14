@@ -28,6 +28,7 @@
        vi-tilde-fringe
        window-select
        workspaces
+       zen
 
        :input
        ;;chinese
@@ -49,7 +50,7 @@
        :emacs
        dired             ; making dired pretty [functional]
        electric          ; smarter, keyword-based electric-indent
-       ibuffer           ; interactive buffer management
+       ;;ibuffer           ; interactive buffer management
        vc
 
        :term
@@ -57,6 +58,11 @@
        ;;shell
        ;;term              ; terminals in Emacs
        ;;vterm
+
+       :checkers
+       syntax
+       spell
+       ;; grammar
 
        :tools
        ;;ansible
@@ -66,10 +72,8 @@
        editorconfig      ; let someone else argue about tabs vs spaces
        ;;ein               ; tame Jupyter notebooks with emacs
        (eval +overlay)
-       flycheck
-       flyspell
        ;;gist
-       (lookup +docsets)
+       (lookup +docsets +dictionary)
        lsp
        ;;macos             ; MacOS-specific commands
        magit             ;
@@ -98,7 +102,7 @@
        ;;ess
        ;;faust
        ;;go
-       ;;(haskell +intero)
+       ;;(haskell +dante)
        ;;hy
        ;;(java +lsp)
        (javascript +lsp)
@@ -110,12 +114,12 @@
        ;;nim
        nix
        ;;ocaml
-       (org +present)
+       (org +present +journal)
        ;;perl
        ;;php
        ;;plantuml
        ;;purescript
-       (python +pyenv +lsp)
+       (python +lsp)
        ;;rest
        ;;ruby
        (rust +lsp)
@@ -133,10 +137,6 @@
        ;;calendar
        ;;irc
        ;;(rss +org)
-       ;;(write
-       ;; ;; +wordnut
-       ;; ;; +langtool
-       ;; )
 
        :config
        (default +bindings +smartparens))
