@@ -1,11 +1,12 @@
 ;;; ~/.config/doom/packages.el
 
-;; `doom-snippets' *is* my personal snippets library (in $DOOMDIR/snippets)
-(package! doom-snippets :disable t)
+(package! forge :disable t)
 
-;; I never use it.
-(package! which-key :disable t)
-
-;; For personal modeline
-(package! anzu)
-(package! evil-anzu)
+(package! doom-snippets
+  :recipe (:local-repo "~/projects/conf/doom-snippets"
+           :files ("*.el" "snippets")))
+(package! doom-themer
+  :recipe (:local-repo "~/projects/plugins/emacs-doom-themer/"))
+(package! doom-themes
+  :recipe (:local-repo "~/projects/plugins/emacs-doom-themes-2/"
+           :files ("*.el" "themes/*.el" "extensions/*.el")))

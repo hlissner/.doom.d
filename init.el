@@ -19,7 +19,7 @@
        nav-flash
        ;;neotree
        ophints
-       (popup +all +defaults)
+       (popup +defaults)
        treemacs
        ;;pretty-code
        ;;unicode
@@ -92,7 +92,7 @@
        ;;crystal
        ;;clojure
        ;;(csharp +unity)
-       ;;common-lisp
+       common-lisp
        ;;coq
        data
        ;;erlang
@@ -107,20 +107,20 @@
        ;;(java +lsp)
        (javascript +lsp)
        ;;julia
-       ;;latex
+       latex
        ;;ledger
        (lua +moonscript)
        markdown
        ;;nim
        nix
        ;;ocaml
-       (org +present +journal)
+       (org +dragndrop +present +journal)
        ;;perl
        ;;php
        ;;plantuml
        ;;purescript
        (python +lsp)
-       ;;rest
+       rest
        ;;ruby
        (rust +lsp)
        ;;scala
