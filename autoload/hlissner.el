@@ -48,7 +48,7 @@
     (set-window-buffer (frame-root-window +hlissner--recording-frame)
                        (current-buffer)))
   (with-selected-frame +hlissner--recording-frame
-    (doom-adjust-font-size 2 +hlissner--recording-frame)
+    (doom-adjust-font-size 2)
     (set-frame-size nil 840 300 t)
     (unless (frame-visible-p +hlissner--recording-frame)
       (make-frame-visible)

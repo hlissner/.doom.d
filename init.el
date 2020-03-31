@@ -62,7 +62,7 @@
        :checkers
        syntax
        spell
-       ;; grammar
+       ;;grammar
 
        :tools
        ;;ansible
@@ -125,6 +125,7 @@
        (rust +lsp)
        ;;scala
        sh
+       ;;sml
        ;;swift
        web
 
