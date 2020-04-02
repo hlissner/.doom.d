@@ -89,6 +89,7 @@
 ;;; :lang org
 (setq org-directory "~/projects/org/"
       org-archive-location (concat org-directory ".archive/%s::")
+      org-roam-directory (concat org-directory "roam/")
       org-ellipsis " ▼ "
       org-bullets-bullet-list '("☰" "☱" "☲" "☳" "☴" "☵" "☶" "☷" "☷" "☷" "☷"))
 (after! org
