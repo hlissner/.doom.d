@@ -20,7 +20,7 @@
        ;;neotree
        ophints
        (popup +defaults)
-       treemacs
+       ;;treemacs
        ;;pretty-code
        ;;unicode
        ;;tabs
