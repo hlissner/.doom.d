@@ -35,7 +35,7 @@
 (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
       doom-variable-pitch-font (font-spec :family "sans" :size 13))
 
-;;; Frames/Windows
+;; Prevents some cases of Emacs flickering
 (add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
 
 
@@ -64,17 +64,17 @@
 ;;
 ;;; Modules
 
-;;; :completion ivy
+;; I prefer search matching to be ordered; it's more precise
 (add-to-list 'ivy-re-builders-alist '(counsel-projectile-find-file . ivy--regex-plus))
 
-;;; :ui doom-dashboard
+;; I don't need the menu. I know all the shortcuts.
 (remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
 
-;;; :editor evil
+;; Switch to the new window after splitting
 (setq evil-split-window-below t
       evil-vsplit-window-right t)
 
-;;; :tools direnv
+;; Silence all that useless output
 (setq direnv-always-show-summary nil)
 
 ;;; :tools magit
