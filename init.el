@@ -115,7 +115,7 @@
        ;;nim
        nix
        ;;ocaml
-       (org +dragndrop +present +journal)
+       (org +dragndrop +present +journal +roam)
        ;;perl
        ;;php
        ;;plantuml
