@@ -7,6 +7,10 @@
       doom-theme 'doom-dracula
       treemacs-width 32
 
+      ;; Line numbers are pretty slow all around. The performance boost of
+      ;; disabling them outweighs the utility of always keeping them on.
+      display-line-numbers-type nil
+
       ;; IMO, modern editors have trained a bad habit into us all: a burning
       ;; need for completion all the time -- as we type, as we breathe, as we
       ;; pray to the ancient ones -- but how often do you *really* need that
