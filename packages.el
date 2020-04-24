@@ -1,7 +1,5 @@
 ;;; ~/.config/doom/packages.el
 
-(package! forge :disable t)
-
 (package! doom-snippets
   :recipe (:local-repo "~/projects/conf/doom-snippets"
            :files ("*.el" "snippets")))
