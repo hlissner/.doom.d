@@ -25,10 +25,9 @@
        ;;unicode
        ;;tabs
        vc-gutter
-       vi-tilde-fringe
-       window-select
+       ;;window-select
        workspaces
-       zen
+       ;;zen
 
        :input
        ;;chinese
@@ -55,7 +54,7 @@
        vc
 
        :term
-       eshell            ; a consistent, cross-platform shell (WIP)
+       ;;eshell            ; a consistent, cross-platform shell (WIP)
        ;;shell
        ;;term              ; terminals in Emacs
        ;;vterm
@@ -108,9 +107,9 @@
        ;;(java +lsp)
        (javascript +lsp)
        ;;julia
-       latex
-       ;;ledger
-       (lua +moonscript)
+       ;;latex
+       ledger
+       ;;(lua +moonscript)
        markdown
        ;;nim
        nix
@@ -121,10 +120,11 @@
        ;;plantuml
        ;;purescript
        (python +lsp)
-       rest
+       ;;rest
        ;;ruby
        (rust +lsp)
        ;;scala
+       ;;scheme
        sh
        ;;sml
        ;;swift
