@@ -35,7 +35,8 @@
 ;;
 ;;; UI
 
-;; In case we use this config on a system without these fonts, fail silently
+;; "monospace" means use the system default. However, the default is usually two
+;; points larger than I'd like, so I specify size 12 here.
 (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
       doom-variable-pitch-font (font-spec :family "sans" :size 13))
 
