@@ -97,7 +97,7 @@
       org-roam-directory (concat org-directory "notes/")
       org-journal-encrypt-journal t
       org-ellipsis " ▼ "
-      org-superstar-headline-bullets-list '("☰" "☱" "☲" "☳" "☴" "☵" "☶" "☷" "☷" "☷" "☷"))
+      org-superstar-headline-bullets-list '("#"))
 (after! org
   (add-to-list 'org-modules 'org-habit t))
 
