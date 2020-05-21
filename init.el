@@ -1,7 +1,7 @@
 ;;; ~/.doom.d/init.el -*- lexical-binding: t; -*-
 
 (doom! :completion
-       (company +childframe)
+       company
        ivy
        ;;helm
        ;;ido
@@ -21,7 +21,7 @@
        ophints
        (popup +defaults)
        ;;treemacs
-       ;;pretty-code
+       ;;(pretty-code +fira)
        ;;unicode
        ;;tabs
        vc-gutter
@@ -38,7 +38,7 @@
        file-templates
        fold              ; (nigh) universal code folding
        ;;objed
-       ;;format            ; automated prettiness
+       format            ; automated prettiness
        ;;lispy             ; vim for lisp, for people who dont like vim
        multiple-cursors  ; editing in many places at once
        ;;parinfer          ; turn lisp into python, sort of
@@ -87,14 +87,15 @@
        ;;upload            ; map local to remote projects via ssh/ftp
 
        :lang
+       ;;agda
        ;;assembly
        (cc +lsp)
        ;;crystal
        ;;clojure
-       ;;(csharp +unity)
+       ;;(csharp +unity +lsp)
        common-lisp
        ;;coq
-       data
+       ;;data
        ;;erlang
        ;;elixir
        ;;elm
@@ -108,13 +109,13 @@
        (javascript +lsp)
        ;;julia
        ;;latex
-       ledger
+       ;;ledger
        ;;(lua +moonscript)
        markdown
        ;;nim
        nix
        ;;ocaml
-       (org +dragndrop +present +journal +roam)
+       (org +dragndrop +journal +roam)
        ;;perl
        ;;php
        ;;plantuml
@@ -141,4 +142,5 @@
        ;;(rss +org)
 
        :config
+       ;;literate
        (default +bindings +smartparens))
