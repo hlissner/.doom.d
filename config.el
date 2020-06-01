@@ -47,19 +47,18 @@
 ;;
 ;;; Keybinds
 
-(map! :n [tab] (general-predicate-dispatch nil
-                 (and (featurep! :editor fold)
-                      (save-excursion (end-of-line) (invisible-p (point))))
-                 #'+fold/toggle
-                 (fboundp 'evil-jump-item)
-                 #'evil-jump-item)
-      :v [tab] (general-predicate-dispatch nil
-                 (and (bound-and-true-p yas-minor-mode)
-                      (or (eq evil-visual-selection 'line)
-                          (not (memq (char-after) (list ?\( ?\[ ?\{ ?\} ?\] ?\))))))
-                 #'yas-insert-snippet
-                 (fboundp 'evil-jump-item)
-                 #'evil-jump-item)
+(map! :n [tab] (cmds! (and (featurep! :editor fold)
+                           (save-excursion (end-of-line) (invisible-p (point))))
+                      #'+fold/toggle
+                      (fboundp 'evil-jump-item)
+                      #'evil-jump-item)
+      :v [tab] (cmds! (and (bound-and-true-p yas-minor-mode)
+                           (or (eq evil-visual-selection 'line)
+                               (not (memq (char-after) (list ?\( ?\[ ?\{ ?\} ?\] ?\))))))
+                      #'yas-insert-snippet
+                      (fboundp 'evil-jump-item)
+                      #'evil-jump-item)
+
       :leader
       "h L" #'global-keycast-mode
       "f t" #'find-in-dotfiles
