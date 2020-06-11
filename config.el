@@ -96,28 +96,12 @@
       org-archive-location (concat org-directory ".archive/%s::")
       org-roam-directory (concat org-directory "notes/")
       org-journal-encrypt-journal t
+      org-journal-file-format "%Y%m%d.org"
       org-ellipsis " ▼ "
       org-superstar-headline-bullets-list '("#"))
-(after! org
-  (add-to-list 'org-modules 'org-habit t))
 
 ;;; :ui doom-dashboard
 (setq fancy-splash-image (concat doom-private-dir "splash.png"))
-
-;;; :ui modeline
-;; (custom-set-faces!
-;;   `(doom-modeline-bar-inactive :background ,(face-background 'mode-line-inactive)))
-
-;; (use-package! keypression
-;;   :defer t
-;;   :config
-;;   (setq ;;keypression-use-child-frame nil
-;;         keypression-fade-out-delay 1.0
-;;         keypression-frame-justify 'keypression-left-justified
-;;         keypression-cast-command-name t
-;;         keypression-cast-command-name-format "%s  %s"
-;;         keypression-combine-same-keystrokes t
-;;         keypression-font-face-attribute '(:width normal :height 200 :weight bold)))
 
 
 ;;
