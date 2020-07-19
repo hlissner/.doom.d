@@ -41,5 +41,7 @@
 
 (use-package! spell-fu
   :hook (text-mode . spell-fu-mode)
+  :init
+  (setq spell-fu-directory (concat doom-etc-dir "spell-fu"))
   :config
   (pushnew! spell-fu-faces-exclude 'org-meta-line 'org-link 'org-code))
