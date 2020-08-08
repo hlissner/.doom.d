@@ -1,4 +1,4 @@
 ;; -*- no-byte-compile: t; -*-
 ;;; checkers/spell/packages.el
 
-(package! spell-fu :pin "e62cfc4f08fc4743d6961fe3402adbf2260d7e70")
+(package! spell-fu :pin "e94d01cdc822e02968971cde09276047a5d55772")
