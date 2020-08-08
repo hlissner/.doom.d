@@ -16,7 +16,7 @@
        ;;hydra
        ;;indent-guides     ; highlighted indent columns
        (modeline +light)
-       nav-flash
+       ;;nav-flash
        ;;neotree
        ophints
        (popup +defaults)
@@ -54,7 +54,7 @@
        vc
 
        :term
-       ;;eshell            ; a consistent, cross-platform shell (WIP)
+       eshell            ; a consistent, cross-platform shell (WIP)
        ;;shell
        ;;term              ; terminals in Emacs
        ;;vterm
@@ -86,6 +86,12 @@
        ;;tmux              ; an API for interacting with tmux
        ;;upload            ; map local to remote projects via ssh/ftp
 
+       :os
+       ;;arch
+       (:if IS-MAC macos)
+       ;;nixos
+       ;;tty               ; enable terminal integration
+
        :lang
        ;;agda
        ;;assembly
@@ -102,8 +108,9 @@
        emacs-lisp
        ;;ess
        ;;faust
+       ;;fsharp            ; ML stands for Microsoft's Language
        ;;go
-       ;;(haskell +dante)
+       ;;haskell
        ;;hy
        ;;(java +lsp)
        (javascript +lsp)
@@ -115,12 +122,14 @@
        ;;nim
        nix
        ;;ocaml
-       (org +dragndrop +journal +roam)
+       (org +dragndrop +journal +roam +present)
        ;;perl
        ;;php
        ;;plantuml
        ;;purescript
        (python +lsp)
+       ;;qt
+       ;;racket
        ;;rest
        ;;ruby
        (rust +lsp)
@@ -130,6 +139,7 @@
        ;;sml
        ;;swift
        web
+       ;;yaml
 
        :email
        ;;(mu4e +gmail)       ; WIP
