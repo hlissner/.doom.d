@@ -20,7 +20,10 @@
       ;; lsp-ui-sideline is redundant with eldoc and much more invasive, so
       ;; disable it by default.
       lsp-ui-sideline-enable nil
-      lsp-enable-symbol-highlighting nil)
+      lsp-enable-symbol-highlighting nil
+
+      ;; More common use-case
+      evil-ex-substitute-global t)
 
 (add-load-path! "~/projects/conf/doom-snippets")
 
