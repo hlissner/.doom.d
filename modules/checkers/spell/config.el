@@ -44,4 +44,14 @@
   :init
   (setq spell-fu-directory (concat doom-etc-dir "spell-fu"))
   :config
-  (pushnew! spell-fu-faces-exclude 'org-meta-line 'org-link 'org-code))
+  (setq-hook! 'markdown-mode-hook
+    spell-fu-faces-exclude '(markdown-code-face
+                             markdown-reference-face
+                             markdown-link-face
+                             markdown-url-face
+                             markdown-markup-face
+                             markdown-html-attr-value-face
+                             markdown-html-attr-name-face
+                             markdown-html-tag-name-face))
+  (setq-hook! 'org-mode-hook
+    spell-fu-faces-exclude '(org-meta-line org-link org-code)))
