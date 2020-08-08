@@ -2,6 +2,10 @@
 
 (defvar ispell-dictionary "en_US")
 
+
+;;
+;;; Packages
+
 (after! ispell
   ;; Don't spellcheck org blocks
   (pushnew! ispell-skip-region-alist

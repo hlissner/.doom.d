@@ -75,15 +75,9 @@
   ;; I prefer search matching to be ordered; it's more precise
   (add-to-list 'ivy-re-builders-alist '(counsel-projectile-find-file . ivy--regex-plus)))
 
-;; I don't need the menu. I know all the shortcuts.
-(remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
-
 ;; Switch to the new window after splitting
 (setq evil-split-window-below t
       evil-vsplit-window-right t)
-
-;; Silence all that useless output
-(setq direnv-always-show-summary nil)
 
 ;;; :tools magit
 (setq magit-repository-directories '(("~/projects" . 2))
@@ -105,6 +99,8 @@
 
 ;;; :ui doom-dashboard
 (setq fancy-splash-image (concat doom-private-dir "splash.png"))
+;; Don't need the menu; I know them all by heart
+(remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
 
 
 ;;
