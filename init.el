@@ -15,13 +15,13 @@
        hl-todo
        ;;hydra
        ;;indent-guides     ; highlighted indent columns
+       ;;ligatures
        (modeline +light)
        ;;nav-flash
        ;;neotree
        ophints
        (popup +defaults)
        ;;treemacs
-       ;;(pretty-code +fira)
        ;;unicode
        ;;tabs
        vc-gutter
@@ -66,7 +66,7 @@
 
        :tools
        ;;ansible
-       ;;debugger
+       ;;(debugger +lsp)
        direnv
        ;;docker
        editorconfig      ; let someone else argue about tabs vs spaces
@@ -74,7 +74,7 @@
        (eval +overlay)
        ;;gist
        (lookup +docsets +dictionary)
-       lsp
+       (lsp +eglot)
        ;;macos             ; MacOS-specific commands
        magit             ;
        ;;make              ; run make tasks from Emacs
