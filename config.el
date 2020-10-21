@@ -92,10 +92,11 @@
 (setq org-directory "~/projects/org/"
       org-archive-location (concat org-directory ".archive/%s::")
       org-roam-directory (concat org-directory "notes/")
+      org-roam-db-location (concat org-roam-directory ".org-roam.db")
       org-journal-encrypt-journal t
       org-journal-file-format "%Y%m%d.org"
-      org-ellipsis " ▼ "
-      org-superstar-headline-bullets-list '("#"))
+      org-startup-folded 'overview
+      org-ellipsis " [...] ")
 
 ;;; :ui doom-dashboard
 (setq fancy-splash-image (concat doom-private-dir "splash.png"))
