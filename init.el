@@ -29,6 +29,7 @@
        ;;window-select
        workspaces
        ;;zen
+       ;;vi-tilde-fringe
 
        :input
        ;;chinese
@@ -75,7 +76,7 @@
        (eval +overlay)
        ;;gist
        (lookup +docsets +dictionary)
-       (lsp +eglot)
+       lsp
        ;;macos             ; MacOS-specific commands
        magit             ;
        ;;make              ; run make tasks from Emacs
@@ -118,7 +119,7 @@
        ;;julia
        ;;latex
        ;;ledger
-       ;;(lua +moonscript)
+       (lua +fennel)
        markdown
        ;;nim
        nix
