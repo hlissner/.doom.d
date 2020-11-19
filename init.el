@@ -22,6 +22,7 @@
        ophints
        (popup +defaults)
        ;;treemacs
+       tree-sitter
        ;;unicode
        ;;tabs
        vc-gutter
