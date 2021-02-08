@@ -28,6 +28,10 @@
 
 (add-load-path! "~/projects/conf/doom-snippets")
 
+;; Easier to match with a bspwm rule:
+;;   bspc rule -a 'Emacs:emacs-everywhere' state=floating sticky=on
+(setq emacs-everywhere-frame-name-format "emacs-anywhere")
+
 ;; The modeline is not useful to me in the popup window. It looks much nicer
 ;; to hide it.
 (add-hook 'emacs-everywhere-init-hooks #'hide-mode-line-mode)
