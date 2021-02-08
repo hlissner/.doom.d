@@ -21,6 +21,7 @@
       ;; disable it by default.
       lsp-ui-sideline-enable nil
       lsp-enable-symbol-highlighting nil
+      +lsp-prompt-to-install-server nil
 
       ;; More common use-case
       evil-ex-substitute-global t)
