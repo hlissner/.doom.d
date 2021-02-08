@@ -150,6 +150,7 @@
 
        :app
        ;;calendar
+       everywhere
        ;;irc
        ;;(rss +org)
 

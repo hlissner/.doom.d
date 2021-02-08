@@ -27,12 +27,22 @@
 
 (add-load-path! "~/projects/conf/doom-snippets")
 
-(use-package! atomic-chrome
-  :after-call focus-out-hook
-  :config
-  (setq atomic-chrome-default-major-mode 'markdown-mode
-        atomic-chrome-buffer-open-style 'frame)
-  (atomic-chrome-start-server))
+;; The modeline is not useful to me in the popup window. It looks much nicer
+;; to hide it.
+(add-hook 'emacs-everywhere-init-hooks #'hide-mode-line-mode)
+
+;; Semi-center it over the target window, rather than at the cursor position
+;; (which could be anywhere).
+(defadvice! my-emacs-everywhere-set-frame-position (&rest _)
+  :override #'emacs-everywhere-set-frame-position
+  (cl-destructuring-bind (width . height)
+      (alist-get 'outer-size (frame-geometry))
+    (set-frame-position (selected-frame)
+                        (+ emacs-everywhere-window-x
+                           (/ emacs-everywhere-window-width 2)
+                           (- (/ width 2)))
+                        (+ emacs-everywhere-window-y
+                           (/ emacs-everywhere-window-height 2)))))
 
 
 ;;
