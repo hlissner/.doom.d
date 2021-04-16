@@ -21,7 +21,7 @@
       ;; disable it by default.
       lsp-ui-sideline-enable nil
       lsp-enable-symbol-highlighting nil
-      +lsp-prompt-to-install-server nil
+      +lsp-prompt-to-install-server 'quiet
 
       ;; More common use-case
       evil-ex-substitute-global t)
@@ -34,20 +34,17 @@
 
 ;; The modeline is not useful to me in the popup window. It looks much nicer
 ;; to hide it.
-(add-hook 'emacs-everywhere-init-hooks #'hide-mode-line-mode)
+(remove-hook 'emacs-everywhere-init-hooks #'hide-mode-line-mode)
 
 ;; Semi-center it over the target window, rather than at the cursor position
 ;; (which could be anywhere).
-(defadvice! my-emacs-everywhere-set-frame-position (&rest _)
+(defadvice! center-emacs-everywhere-in-origin-window (frame window-info)
   :override #'emacs-everywhere-set-frame-position
-  (cl-destructuring-bind (width . height)
-      (alist-get 'outer-size (frame-geometry))
-    (set-frame-position (selected-frame)
-                        (+ emacs-everywhere-window-x
-                           (/ emacs-everywhere-window-width 2)
-                           (- (/ width 2)))
-                        (+ emacs-everywhere-window-y
-                           (/ emacs-everywhere-window-height 2)))))
+  (cl-destructuring-bind (x y width height)
+      (emacs-everywhere-window-geometry window-info)
+    (set-frame-position frame
+                        (+ x (/ width 2) (- (/ width 2)))
+                        (+ y (/ height 2)))))
 
 
 ;;
@@ -55,8 +52,9 @@
 
 ;; "monospace" means use the system default. However, the default is usually two
 ;; points larger than I'd like, so I specify size 12 here.
-(setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
-      doom-variable-pitch-font (font-spec :family "sans" :size 13))
+(setq doom-font (font-spec :family "JetBrainsMono" :size 12 :weight 'light)
+      doom-variable-pitch-font (font-spec :family "Noto Serif" :size 13)
+      ivy-posframe-font (font-spec :family "JetBrainsMono" :size 15))
 
 ;; Prevents some cases of Emacs flickering
 (add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
@@ -65,17 +63,14 @@
 ;;
 ;;; Keybinds
 
-(map! :n [tab] (cmds! (and (featurep! :editor fold)
-                           (save-excursion (end-of-line) (invisible-p (point))))
-                      #'+fold/toggle
-                      (fboundp 'evil-jump-item)
-                      #'evil-jump-item)
-      :v [tab] (cmds! (and (bound-and-true-p yas-minor-mode)
-                           (or (eq evil-visual-selection 'line)
-                               (not (memq (char-after) (list ?\( ?\[ ?\{ ?\} ?\] ?\))))))
-                      #'yas-insert-snippet
-                      (fboundp 'evil-jump-item)
-                      #'evil-jump-item)
+(map! (:after evil-org
+       :map evil-org-mode-map
+       :n "gk" (cmd! (if (org-on-heading-p)
+                         (org-backward-element)
+                       (evil-previous-visual-line)))
+       :n "gj" (cmd! (if (org-on-heading-p)
+                         (org-forward-element)
+                       (evil-next-visual-line))))
 
       :leader
       "h L" #'global-keycast-mode
@@ -99,9 +94,8 @@
       magit-save-repository-buffers nil
       ;; Don't restore the wconf after quitting magit, it's jarring
       magit-inhibit-save-previous-winconf t
-      transient-values '((magit-commit "--gpg-sign=5F6C0EA160557395")
-                         (magit-rebase "--autosquash" "--gpg-sign=5F6C0EA160557395")
-                         (magit-pull "--rebase" "--gpg-sign=5F6C0EA160557395")))
+      transient-values '((magit-rebase "--autosquash" "--autostash")
+                         (magit-pull "--rebase" "--autostash")))
 
 ;;; :lang org
 (setq org-directory "~/projects/org/"
@@ -110,18 +104,19 @@
       org-roam-db-location (concat org-roam-directory ".org-roam.db")
       org-journal-encrypt-journal t
       org-journal-file-format "%Y%m%d.org"
-      org-startup-folded 'overview
       org-ellipsis " [...] ")
 
 ;;; :ui doom-dashboard
 (setq fancy-splash-image (concat doom-private-dir "splash.png"))
-;; Don't need the menu; I know them all by heart
+;; Hide the menu for as minimalistic a startup screen as possible.
 (remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
 
 
 ;;
 ;;; Language customizations
 
-(custom-theme-set-faces! 'doom-dracula
-  `(markdown-code-face :background ,(doom-darken 'bg 0.075))
-  `(font-lock-variable-name-face :foreground ,(doom-lighten 'magenta 0.6)))
+(define-generic-mode sxhkd-mode
+  '(?#)
+  '("alt" "Escape" "super" "bspc" "ctrl" "space" "shift") nil
+  '("sxhkdrc") nil
+  "Simple mode for sxhkdrc files.")

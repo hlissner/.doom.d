@@ -11,24 +11,26 @@
        doom
        doom-dashboard
        ;;doom-quit
+       ;;(emoji +unicode)
        ;;fill-column
        hl-todo
        ;;hydra
        ;;indent-guides     ; highlighted indent columns
        ;;ligatures
+       ;;minimap
        (modeline +light)
-       ;;nav-flash
+       nav-flash
        ;;neotree
        ophints
        (popup +defaults)
        ;;treemacs
-       tree-sitter
+       ;;tree-sitter
        ;;unicode
        ;;tabs
        vc-gutter
        ;;window-select
        workspaces
-       ;;zen
+       zen
        ;;vi-tilde-fringe
 
        :input
@@ -81,7 +83,7 @@
        magit             ;
        ;;make              ; run make tasks from Emacs
        ;;pass                ; password manager for nerds
-       ;;pdf               ; pdf enhancements
+       pdf               ; pdf enhancements
        ;;prodigy           ; FIXME managing external services & code builders
        ;;rgb               ; creating color strings
        ;;terraform         ; infrastructure as code
@@ -97,6 +99,7 @@
        :lang
        ;;agda
        ;;assembly
+       beancount
        (cc +lsp)
        ;;crystal
        ;;clojure
@@ -104,6 +107,7 @@
        common-lisp
        ;;coq
        ;;data
+       ;;(dart +lsp)
        ;;erlang
        ;;elixir
        ;;elm
@@ -114,7 +118,7 @@
        ;;go
        ;;haskell
        ;;hy
-       ;;(java +lsp)
+       ;;(java +meghanada)
        (javascript +lsp)
        ;;julia
        ;;latex
@@ -132,16 +136,16 @@
        (python +lsp)
        ;;qt
        ;;racket
-       ;;rest
-       ;;ruby
+       rest
+       ruby
        (rust +lsp)
        ;;scala
-       ;;scheme
+       ;;(scheme +guile)
        sh
        ;;sml
        ;;swift
        web
-       ;;yaml
+       yaml
 
        :email
        ;;(mu4e +gmail)       ; WIP

@@ -2,7 +2,8 @@
 
 (package! doom-snippets
   :recipe (:local-repo "~/projects/conf/doom-snippets"
-           :files ("*.el" "snippets")))
+           :files ("*.el" "snippets")
+           :build (:not compile)))
 
 ;; (package! doom-themer
 ;;   :recipe (:local-repo "~/projects/plugins/emacs-doom-themer/"))
