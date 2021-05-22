@@ -19,7 +19,7 @@
        ;;ligatures
        ;;minimap
        (modeline +light)
-       nav-flash
+       ;;nav-flash
        ;;neotree
        ophints
        (popup +defaults)
@@ -156,7 +156,8 @@
        ;;calendar
        everywhere
        ;;irc
-       ;;(rss +org)
+       (rss +org)
+       ereader
 
        :config
        ;;literate
