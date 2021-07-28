@@ -88,11 +88,6 @@
 ;;
 ;;; Modules
 
-;;; :completion ivy
-(after! ivy
-  ;; I prefer search matching to be ordered; it's more precise
-  (add-to-list 'ivy-re-builders-alist '(counsel-projectile-find-file . ivy--regex-plus)))
-
 ;;; :editor evil
 ;; Focus new window after splitting
 (setq evil-split-window-below t

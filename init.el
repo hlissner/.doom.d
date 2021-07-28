@@ -2,9 +2,10 @@
 
 (doom! :completion
        (company +childframe)
-       ivy
+       ;; ivy
        ;;helm
        ;;ido
+       vertico
 
        :ui
        ;;deft
