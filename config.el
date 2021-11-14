@@ -1,7 +1,7 @@
 ;;; ~/.config/doom/config.el -*- lexical-binding: t; -*-
 
 (setq user-full-name "Henrik Lissner"
-      user-mail-address "henrik@lissner.net")
+      user-mail-address "contact@henrik.io")
 
 ;; When I bring up Doom's scratch buffer with SPC x, it's often to play with
 ;; elisp or note something down (that isn't worth an entry in my org files). I
