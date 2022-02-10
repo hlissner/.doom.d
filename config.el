@@ -176,7 +176,20 @@
   (add-hook 'org-roam-find-file-hook #'org-roam-update-slug-on-save-h)
 
   ;; Make the backlinks buffer easier to peruse by folding leaves by default.
-  (add-hook 'org-roam-buffer-postrender-functions #'magit-section-show-level-2))
+  (add-hook 'org-roam-buffer-postrender-functions #'magit-section-show-level-2)
+
+  (defadvice! org-roam-restore-insertion-order-for-tags-a (nodes)
+    "`org-roam-node-list' returns a list of `org-roam-node's whose tags property
+are arbitrarily sorted, due to the use of group_concat in the sqlite query used
+to generate it."
+    :filter-return #'org-roam-node-list
+    (mapcar (lambda (node)
+              (oset node tags
+                    (ignore-errors
+                      (split-string (cdr (assoc "ALLTAGS" (oref node properties)))
+                                    ":" t)))
+              node)
+            nodes)))
 
 
 ;;; :ui doom-dashboard
