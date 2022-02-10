@@ -1,0 +1,117 @@
+;;; autoload/org-roam.el -*- lexical-binding: t; -*-
+
+(defun org-roam-backlinks-sort-by-date (a b)
+  "Sort backlinks by date (heuristic)."
+  (string< (file-name-base (org-roam-node-file (org-roam-backlink-source-node b)))
+           (file-name-base (org-roam-node-file (org-roam-backlink-source-node a)))))
+
+(cl-defun org-roam-node-insert-section-with-tags (&key source-node point properties)
+  (magit-insert-section section (org-roam-node-section)
+    (let ((outline (when-let (outline (plist-get properties :outline))
+                     (mapconcat #'org-link-display-format outline " > ")))
+          (tags (org-roam-node-doom-tags source-node)))
+      (insert (concat (propertize (org-roam-node-title source-node)
+                                  'font-lock-face 'org-roam-title)
+                      (when outline
+                        (format " (%s)"
+                                (propertize outline 'font-lock-face 'org-roam-olp)))
+                      (when tags
+                        (format " %s" (mapconcat (lambda (tag) (propertize tag 'face 'org-tag))
+                                                 tags " "))))))
+    (magit-insert-heading)
+    (oset section node source-node)
+    (magit-insert-section section (org-roam-preview-section)
+      (insert (org-roam-fontify-like-in-org-mode
+               (org-roam-preview-get-contents (org-roam-node-file source-node) point))
+              "\n")
+      (oset section file (org-roam-node-file source-node))
+      (oset section point point)
+      (insert ?\n))))
+
+(defvar org-roam-group-order
+  '((nil       "Backlinks")
+    ("journal" "Journal references" org-roam-backlinks-sort-by-date)
+    ("note"    "Notes")
+    ("project" "Projects")
+    ("contact" "Contacts")
+    ("invoice" "Invoices" org-roam-backlinks-sort-by-date)))
+
+;;;###autoload
+(defun org-roam-grouped-backlinks-section (node)
+  "The backlinks section for NODE."
+  (let ((groups (seq-group-by
+                 (lambda (backlink)
+                   (org-roam-node-doom-type
+                    (org-roam-backlink-source-node backlink)))
+                 (org-roam-backlinks-get node))))
+    (dolist (group org-roam-group-order)
+      (seq-let (key title sortfn) group
+        (when-let (backlinks (cdr (assoc key groups)))
+          (magit-insert-section (gensym "roam")
+            (magit-insert-heading (format "%s:" title))
+            (dolist (backlink (seq-sort (or sortfn #'org-roam-backlinks-sort) backlinks))
+              (org-roam-node-insert-section-with-tags
+               :source-node (org-roam-backlink-source-node backlink)
+               :point (org-roam-backlink-point backlink)
+               :properties (org-roam-backlink-properties backlink)))
+            (insert ?\n)))))))
+
+;;;###autoload
+(defun org-roam-complete-tag-at-point ()
+  "Complete #tags at point (tags are notes in {org-roam-directory}/tags/*.org)."
+  (when (or (save-match-data
+              (org-in-regexp "\\(?:^\\|[ \t]\\)#[a-zA-Z/_-]*"))
+            (save-excursion
+              (goto-char (line-beginning-position))
+              (looking-at-p "#\\+filetags:")))
+    (cl-destructuring-bind (beg . end)
+        (or (bounds-of-thing-at-point 'symbol)
+            (cons (point) (point)))
+      (list beg end
+            (append org-file-tags
+                    (cl-loop for (tag)
+                             in (org-roam-db-query
+                                 [:select alias :from aliases :where (like alias $s1)]
+                                 (concat "#" (buffer-substring-no-properties beg end) "%"))
+                             if (string-prefix-p "#" tag)
+                             collect (substring tag 1)))
+            :exit-function
+            (lambda (str _status)
+              (delete-char (- (length str)))
+              (insert str))
+            :exclusive 'no))))
+
+(defvar org-roam-old-slug nil)
+;;;###autoload
+(defun org-roam-update-slug-on-save-h ()
+  "Set up auto-updating for the current node's filename.
+
+Calls `org-roam-update-slug-h' on `after-save-hook'."
+  (setq-local org-roam-old-slug (ignore-errors (org-roam-node-slug (org-roam-node-at-point))))
+  (add-hook 'after-save-hook #'org-roam-update-slug-h
+            'append 'local))
+
+(defun org-roam-update-slug-h ()
+  "Rename the current file if #+title has changed.
+
+Will ask for confirmation if the new filename already exists."
+  (when (org-roam-buffer-p)
+    (when-let* ((node (org-roam-node-at-point))
+                (new-slug (org-roam-node-slug node))
+                (old-slug org-roam-old-slug)
+                (old-slug-re (concat "/[^/]*\\(" (regexp-quote old-slug) "\\)[^/]*\\.org$"))
+                (file-name (org-roam-node-file node))
+                ((not (equal old-slug new-slug)))
+                ((string-match-p old-slug-re file-name)))
+      (setq org-roam-old-slug new-slug)
+      (condition-case _
+          (let ((new-file-name
+                 (replace-regexp-in-string
+                  old-slug-re (regexp-quote new-slug)
+                  file-name nil nil 1)))
+            (message "Updating slug in filename (%S -> %S)" old-slug new-slug)
+            (rename-file file-name new-file-name 1)
+            (set-visited-file-name new-file-name t t)
+            (org-roam-db-autosync--setup-file-h))
+        (error
+         (setq org-roam-old-slug old-slug))))))
