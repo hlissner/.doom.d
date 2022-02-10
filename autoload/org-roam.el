@@ -16,8 +16,10 @@
                         (format " (%s)"
                                 (propertize outline 'font-lock-face 'org-roam-olp)))
                       (when tags
-                        (format " %s" (mapconcat (lambda (tag) (propertize tag 'face 'org-tag))
-                                                 tags " "))))))
+                        (format
+                         " %s" (mapconcat (lambda (tag)
+                                            (propertize (concat "#" tag) 'face 'org-tag))
+                                          tags " "))))))
     (magit-insert-heading)
     (oset section node source-node)
     (magit-insert-section section (org-roam-preview-section)
