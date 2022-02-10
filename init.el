@@ -2,7 +2,7 @@
 
 (doom! :completion
        (company +childframe)
-       ;; ivy
+       ;;ivy
        ;;helm
        ;;ido
        vertico
@@ -19,7 +19,7 @@
        ;;indent-guides     ; highlighted indent columns
        ;;ligatures
        ;;minimap
-       (modeline +light)
+       modeline
        ;;nav-flash
        ;;neotree
        ophints
@@ -62,7 +62,7 @@
        eshell            ; a consistent, cross-platform shell (WIP)
        ;;shell
        ;;term              ; terminals in Emacs
-       ;;vterm
+       vterm
 
        :checkers
        syntax
@@ -108,13 +108,14 @@
        common-lisp
        ;;coq
        ;;data
-       ;;(dart +lsp)
+       ;;dart
        ;;erlang
        ;;elixir
        ;;elm
        emacs-lisp
        ;;ess
        ;;faust
+       ;;fortran
        ;;fsharp            ; ML stands for Microsoft's Language
        ;;go
        ;;haskell
@@ -129,7 +130,7 @@
        ;;nim
        nix
        ;;ocaml
-       (org +dragndrop +journal +roam +present)
+       (org +dragndrop +roam2 +present)
        ;;perl
        ;;php
        ;;plantuml
