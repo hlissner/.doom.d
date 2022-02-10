@@ -32,6 +32,7 @@
   '((nil       "Backlinks")
     ("journal" "Journal references" org-roam-backlinks-sort-by-date)
     ("note"    "Notes")
+    ("topic"   "Topics")
     ("project" "Projects")
     ("contact" "Contacts")
     ("invoice" "Invoices" org-roam-backlinks-sort-by-date)))
