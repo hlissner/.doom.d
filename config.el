@@ -189,7 +189,27 @@ to generate it."
                       (split-string (cdr (assoc "ALLTAGS" (oref node properties)))
                                     ":" t)))
               node)
-            nodes)))
+            nodes))
+
+  (defadvice! org-roam-add-preamble-a (&rest _)
+    :after #'org-roam-buffer-set-header-line-format
+    (let ((node org-roam-buffer-current-node))
+      (insert
+       (format "%-10s %s\n" (propertize "ID:" 'face 'bold)
+               (org-roam-node-id node))
+       (format "%-10s %s\n" (propertize "Type:" 'face 'bold)
+               (or (org-roam-node-doom-type node) "-"))
+       (format "%-10s %s\n" (propertize "Tags:" 'face 'bold)
+               (if-let (tags (org-roam-node-tags node))
+                   (mapconcat (lambda (tag)
+                                (propertize (concat "#" tag) 'face 'org-tag))
+                              tags " ")
+                 "-"))
+       (format "%-10s %s\n" (propertize "Aliases:" 'face 'bold)
+               (if-let (aliases (org-roam-node-aliases node))
+                   (string-join aliases ", ")
+                 "-"))
+       ?\n))))
 
 
 ;;; :ui doom-dashboard
