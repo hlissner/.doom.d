@@ -7,20 +7,36 @@
 
 (cl-defun org-roam-node-insert-section-with-tags (&key source-node point properties)
   (magit-insert-section section (org-roam-node-section)
-    (let ((outline (when-let (outline (plist-get properties :outline))
-                     (mapconcat #'org-link-display-format outline " > ")))
-          (tags (org-roam-node-doom-tags source-node)))
-      (insert (concat (propertize (org-roam-node-title source-node)
-                                  'font-lock-face 'org-roam-title)
-                      (when outline
-                        (format " (%s)"
-                                (propertize outline 'font-lock-face 'org-roam-olp)))
-                      (when tags
-                        (format
-                         " %s" (mapconcat (lambda (tag)
-                                            (propertize (concat "#" tag) 'face 'org-tag))
-                                          tags " "))))))
-    (magit-insert-heading)
+    (let* ((outline
+            (when-let ((outline (plist-get properties :outline))
+                       ;; Don't repeat redundant leaves
+                       (outline (if (member (car (last outline))
+                                            (list (org-roam-node-title org-roam-buffer-current-node)
+                                                  (org-roam-node-title source-node)))
+                                    (butlast outline)
+                                  outline)))
+              (mapconcat #'org-link-display-format outline " > ")))
+           (title (concat (when outline
+                            (format "%s > "
+                                    (propertize outline 'font-lock-face 'org-roam-olp)))
+                          (propertize (org-roam-node-title source-node)
+                                      'font-lock-face 'org-roam-title)))
+           (tags (org-roam-node-doom-tags source-node))
+           (tags (if tags
+                     (mapconcat (lambda (tag)
+                                  (propertize (concat "#" tag) 'face 'shadow))
+                                tags " ")
+                   ""))
+           (window (get-buffer-window org-roam-buffer)))
+      (magit-insert-heading
+        (format (format "%%s %%%ds"
+                        (- (window-total-width (get-buffer-window org-roam-buffer))
+                           (length title)
+                           left-margin-width
+                           right-margin-width
+                           5))  ; who doesn't love magic numbers?
+                title
+                tags)))
     (oset section node source-node)
     (magit-insert-section section (org-roam-preview-section)
       (insert (org-roam-fontify-like-in-org-mode
