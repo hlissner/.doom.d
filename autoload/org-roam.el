@@ -46,14 +46,14 @@
       (oset section point point)
       (insert ?\n))))
 
-(defvar org-roam-group-order
-  '((nil       "Backlinks")
-    ("journal" "Journal references" org-roam-backlinks-sort-by-date)
-    ("note"    "Notes")
-    ("topic"   "Topics")
-    ("project" "Projects")
-    ("contact" "Contacts")
-    ("invoice" "Invoices" org-roam-backlinks-sort-by-date)))
+(defconst org-roam-group-order
+  '((nil       "🔗 Backlinks")
+    ("journal" "📅 Journal references" org-roam-backlinks-sort-by-date)
+    ("note"    "📓 Notes")
+    ("topic"   "📌 Topics")
+    ("project" "🛠 Projects")
+    ("contact" "🪪 Contacts")
+    ("invoice" "💷 Invoices" org-roam-backlinks-sort-by-date)))
 
 ;;;###autoload
 (defun org-roam-grouped-backlinks-section (node)
