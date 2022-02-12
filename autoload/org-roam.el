@@ -1,12 +1,13 @@
 ;;; autoload/org-roam.el -*- lexical-binding: t; -*-
 
-(defconst org-roam-group-order
+(defvar org-roam-group-order
   '(("Backlinks" t
      (("thought" "💭" org-roam-backlinks-sort-by-date)
       ("note" "📑" org-roam-backlinks-sort-by-date)
       ("journal" "📅" org-roam-backlinks-sort-by-date)))
     ("Relevant" t
-     (("topic" "🏷")
+     (("secret" "🔒")
+      ("topic" "🏷")
       ("project" "🛠")
       ("contact" "🪪")
       ("invoice" "💷" org-roam-backlinks-sort-by-date)))
@@ -55,13 +56,14 @@
                 title
                 tags)))
     (oset section node source-node)
-    (magit-insert-section section (org-roam-preview-section)
-      (insert (org-roam-fontify-like-in-org-mode
-               (org-roam-preview-get-contents (org-roam-node-file source-node) point))
-              "\n")
-      (oset section file (org-roam-node-file source-node))
-      (oset section point point)
-      (insert ?\n))))
+    (unless (string-suffix-p ".org.gpg" (org-roam-node-file source-node))
+      (magit-insert-section section (org-roam-preview-section)
+        (insert (org-roam-fontify-like-in-org-mode
+                 (org-roam-preview-get-contents (org-roam-node-file source-node) point))
+                "\n")
+        (oset section file (org-roam-node-file source-node))
+        (oset section point point)
+        (insert ?\n)))))
 
 ;;;###autoload
 (defun org-roam-grouped-backlinks-section (node)
@@ -76,17 +78,17 @@
       (magit-insert-section (gensym "roam")
         (set-marker heading (point))
         (pcase-dolist (`(,key ,prefix ,sortfn) group)
-          (when-let (backlinks (cdr (assoc key groups)))
+          (let ((backlinks (cdr (assoc key groups))))
+            (when (and (or backlinks always-show)
+                       (marker-position heading))
+              (goto-char heading)
+              (magit-insert-heading (format "%s:" title))
+              (set-marker heading nil))
             (dolist (backlink (seq-sort (or sortfn #'org-roam-backlinks-sort) backlinks))
               (org-roam-node-insert-section-with-tags prefix
                 :source-node (org-roam-backlink-source-node backlink)
                 :point (org-roam-backlink-point backlink)
-                :properties (org-roam-backlink-properties backlink)))
-            (when (marker-position heading)
-              (save-excursion
-                (goto-char heading)
-                (magit-insert-heading (format "%s:" title)))
-              (set-marker heading nil)))))
+                :properties (org-roam-backlink-properties backlink))))))
       (set-marker heading nil)
       (insert ?\n))))
 

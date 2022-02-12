@@ -158,6 +158,9 @@
           ("w" "works" plain
            ,(format "#+title: ${title}\n%%[%s/template/works.org]" org-roam-directory)
            :target (file "works/%<%Y%m%d%H%M%S>-${slug}.org")
+           :unnarrowed t)
+          ("s" "secret" plain "#+title: ${title}\n\n"
+           :target (file "secret/%<%Y%m%d%H%M%S>-${slug}.org.gpg")
            :unnarrowed t))
         ;; Use human readable dates for dailies titles
         org-roam-dailies-capture-templates
