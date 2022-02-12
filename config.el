@@ -177,9 +177,6 @@
   ;; Offer completion for #tags and @areas separately from notes.
   (add-to-list 'org-roam-completion-functions #'org-roam-complete-tag-at-point)
 
-  ;; No line wrapping! I fill my notes.
-  (remove-hook 'org-roam-mode-hook #'turn-on-visual-line-mode)
-
   ;; Automatically update the slug in the filename when #+title: has changed.
   (add-hook 'org-roam-find-file-hook #'org-roam-update-slug-on-save-h)
 
