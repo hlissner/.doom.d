@@ -131,6 +131,10 @@
            ,(format "#+title: ${title}\n%%[%s/template/note.org]" org-roam-directory)
            :target (file "note/%<%Y%m%d%H%M%S>-${slug}.org")
            :unnarrowed t)
+          ("r" "thought" plain
+           ,(format "#+title: ${title}\n%%[%s/template/thought.org]" org-roam-directory)
+           :target (file "thought/%<%Y%m%d%H%M%S>-${slug}.org")
+           :unnarrowed t)
           ("t" "topic" plain
            ,(format "#+title: ${title}\n%%[%s/template/topic.org]" org-roam-directory)
            :target (file "topic/%<%Y%m%d%H%M%S>-${slug}.org")
@@ -147,9 +151,13 @@
            ,(format "#+title: %%<%%Y%%m%%d>-${title}\n%%[%s/template/invoice.org]" org-roam-directory)
            :target (file "invoice/%<%Y%m%d>-${slug}.org")
            :unnarrowed t)
-          ("r" "ref" plain
+          ("f" "ref" plain
            ,(format "#+title: ${title}\n%%[%s/template/ref.org]" org-roam-directory)
            :target (file "ref/%<%Y%m%d%H%M%S>-${slug}.org")
+           :unnarrowed t)
+          ("w" "works" plain
+           ,(format "#+title: ${title}\n%%[%s/template/works.org]" org-roam-directory)
+           :target (file "works/%<%Y%m%d%H%M%S>-${slug}.org")
            :unnarrowed t))
         ;; Use human readable dates for dailies titles
         org-roam-dailies-capture-templates
@@ -163,14 +171,11 @@
   (setq org-tree-slide-skip-outline-level 2))
 
 (after! org-roam
-  ;; List dailies and zettels separately in the backlinks buffer.
-  (advice-add #'org-roam-backlinks-section :override #'org-roam-grouped-backlinks-section)
-
   ;; Offer completion for #tags and @areas separately from notes.
   (add-to-list 'org-roam-completion-functions #'org-roam-complete-tag-at-point)
 
-  ;; Open in focused buffer, despite popups
-  (advice-add #'org-roam-node-visit :around #'+popup-save-a)
+  ;; No line wrapping! I fill my notes.
+  (remove-hook 'org-roam-mode-hook #'turn-on-visual-line-mode)
 
   ;; Automatically update the slug in the filename when #+title: has changed.
   (add-hook 'org-roam-find-file-hook #'org-roam-update-slug-on-save-h)
@@ -178,38 +183,18 @@
   ;; Make the backlinks buffer easier to peruse by folding leaves by default.
   (add-hook 'org-roam-buffer-postrender-functions #'magit-section-show-level-2)
 
-  (defadvice! org-roam-restore-insertion-order-for-tags-a (nodes)
-    "`org-roam-node-list' returns a list of `org-roam-node's whose tags property
-are arbitrarily sorted, due to the use of group_concat in the sqlite query used
-to generate it."
-    :filter-return #'org-roam-node-list
-    (mapcar (lambda (node)
-              (oset node tags
-                    (ignore-errors
-                      (split-string (cdr (assoc "ALLTAGS" (oref node properties)))
-                                    ":" t)))
-              node)
-            nodes))
+  ;; List dailies and zettels separately in the backlinks buffer.
+  (advice-add #'org-roam-backlinks-section :override #'org-roam-grouped-backlinks-section)
 
-  (defadvice! org-roam-add-preamble-a (&rest _)
-    :after #'org-roam-buffer-set-header-line-format
-    (let ((node org-roam-buffer-current-node))
-      (insert
-       (format "%-10s %s\n" (propertize "ID:" 'face 'bold)
-               (org-roam-node-id node))
-       (format "%-10s %s\n" (propertize "Type:" 'face 'bold)
-               (or (org-roam-node-doom-type node) "-"))
-       (format "%-10s %s\n" (propertize "Tags:" 'face 'bold)
-               (if-let (tags (org-roam-node-tags node))
-                   (mapconcat (lambda (tag)
-                                (propertize (concat "#" tag) 'face 'org-tag))
-                              tags " ")
-                 "-"))
-       (format "%-10s %s\n" (propertize "Aliases:" 'face 'bold)
-               (if-let (aliases (org-roam-node-aliases node))
-                   (string-join aliases ", ")
-                 "-"))
-       ?\n))))
+  ;; Open in focused buffer, despite popups
+  (advice-add #'org-roam-node-visit :around #'+popup-save-a)
+
+  ;; Make sure tags in vertico are sorted by insertion order, instead of
+  ;; arbitrarily (due to the use of group_concat in the underlying SQL query).
+  (advice-add #'org-roam-node-list :filter-return #'org-roam-restore-insertion-order-for-tags-a)
+
+  ;; Add ID, Type, Tags, and Aliases to top of backlinks buffer.
+  (advice-add #'org-roam-buffer-set-header-line-format :after #'org-roam-add-preamble-a))
 
 
 ;;; :ui doom-dashboard
