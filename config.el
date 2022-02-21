@@ -121,9 +121,17 @@
         '(("t" "todo" entry (file+headline "todo.org" "Unsorted")
            "* [ ] %?\n%i\n%a"
            :prepend t)
+          ("d" "deadline" entry (file+headline "todo.org" "Schedule")
+           "* [ ] %?\nDEADLINE: <%(org-read-date)>\n\n%i\n%a"
+           :prepend t)
+          ("s" "schedule" entry (file+headline "todo.org" "Schedule")
+           "* [ ] %?\nSCHEDULED: <%(org-read-date)>\n\n%i\n%a"
+           :prepend t)
           ("c" "check out later" entry (file+headline "todo.org" "Check out later")
            "* [ ] %?\n%i\n%a"
-           :prepend t))))
+           :prepend t)
+          ("l" "ledger" plain (file "ledger.gpg")
+           "%(+beancount/clone-transaction)"))))
 
 (after! org-roam
   (setq org-roam-capture-templates
