@@ -25,7 +25,7 @@
     ("topic"   . "🏷")
     ("works"   . "✏")))
 
-(defvar org-roam--spacer (propertize " " 'face 'variable-pitch))
+(defconst org-roam--spacer (propertize " " 'face 'variable-pitch))
 
 ;;;###autoload (autoload 'org-roam-node-doom-icon "lang/org/autoload/contrib-roam2" nil t)
 (cl-defmethod org-roam-node-doom-icon ((node org-roam-node))
@@ -50,27 +50,22 @@
                                   outline)))
               (mapconcat #'org-link-display-format outline " > ")))
            (file (org-roam-node-file source-node))
-           (icon (format "%s%s"
-                         (org-roam-node-doom-icon source-node)
-                         org-roam--spacer))
-           (title (concat icon
+           (title (concat (org-roam-node-doom-icon source-node)
+                          org-roam--spacer
                           (propertize (org-roam-node-title source-node) 'font-lock-face 'org-roam-title)
                           (when outline
                             (format " > %s" (propertize outline 'font-lock-face 'org-roam-olp)))))
            (tags (org-roam-node-doom-tags source-node))
            (tags (mapconcat (lambda (tag)
                               (propertize (concat "#" tag) 'face 'shadow))
-                            tags " ")))
-      (magit-insert-heading
-        (format (format "%%s %%%ds"
-                        (- (window-total-width (get-buffer-window org-roam-buffer))
-                           (length icon)
-                           (length title)
-                           left-margin-width
-                           right-margin-width
-                           3))  ; who doesn't love magic numbers?
-                title
-                (or tags "")))
+                            tags " "))
+           (tags (or tags ""))
+           (spc (propertize " " 'display
+                            `((space :align-to
+                                     (- ,(window-text-width (get-buffer-window org-roam-buffer))
+                                        ,(string-width tags)
+                                        0.5))))))
+      (magit-insert-heading (format "%s%s%s" title spc tags))
       (oset section node source-node)
       (unless (string-suffix-p ".org.gpg" file)
         (magit-insert-section section (org-roam-preview-section)
