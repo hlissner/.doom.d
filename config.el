@@ -47,6 +47,7 @@
        "b" #'org-roam-buffer-toggle
        "d" #'org-roam-dailies-goto-today
        "D" #'org-roam-dailies-goto-date
+       "e" (cmd! (find-file (doom-dir org-directory "ledger.gpg")))
        "i" #'org-roam-node-insert
        "r" #'org-roam-node-find
        "R" #'org-roam-capture))
