@@ -16,13 +16,12 @@
       doom-font (font-spec :family "JetBrainsMono" :size 12 :weight 'light)
       doom-variable-pitch-font (font-spec :family "DejaVu Sans" :size 13))
 
-;; Line numbers are pretty slow all around. The performance boost of
-;; disabling them outweighs the utility of always keeping them on.
+;; Line numbers are pretty slow all around. The performance boost of disabling
+;; them outweighs the utility of always keeping them on.
 (setq display-line-numbers-type nil)
 
-;; Prevents some cases of Emacs flickering
+;; Prevents some cases of Emacs flickering.
 (add-to-list 'default-frame-alist '(inhibit-double-buffering . t))
-
 
 
 ;;
@@ -85,9 +84,8 @@
 (after! lsp-mode
   (setq lsp-enable-symbol-highlighting nil
         ;; If an LSP server isn't present when I start a prog-mode buffer, you
-        ;; don't need to tell me. I know. On some systems I don't care to have a
-        ;; whole development environment for some ecosystems.
-        lsp-enable-server-download nil
+        ;; don't need to tell me. I know. On some machines I don't care to have
+        ;; a whole development environment for some ecosystems.
         lsp-enable-suggest-server-download nil))
 (after! lsp-ui
   (setq lsp-ui-sideline-enable nil  ; no more useful than flycheck
