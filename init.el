@@ -28,7 +28,7 @@
        ;;tree-sitter
        ;;unicode
        ;;tabs
-       vc-gutter
+       (vc-gutter +diff-hl +pretty)
        ;;window-select
        workspaces
        zen
