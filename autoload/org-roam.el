@@ -50,11 +50,19 @@
                                   outline)))
               (mapconcat #'org-link-display-format outline " > ")))
            (file (org-roam-node-file source-node))
+           (private (and (functionp org-roam-backlinks-filter)
+                         (funcall org-roam-backlinks-filter source-node)))
            (title (concat (org-roam-node-doom-icon source-node)
                           org-roam--spacer
-                          (propertize (org-roam-node-title source-node) 'font-lock-face 'org-roam-title)
+                          (propertize (org-roam-node-title source-node)
+                                      'font-lock-face 'org-roam-title)
                           (when outline
                             (format " > %s" (propertize outline 'font-lock-face 'org-roam-olp)))))
+           (title (if (not private)
+                      title
+                    (concat (cl-subseq title 0 4)
+                            (make-string (max 0 (- (length title) 6)) ?*)
+                            (ignore-errors (cl-subseq title -2)))))
            (tags (org-roam-node-doom-tags source-node))
            (tags (mapconcat (lambda (tag)
                               (propertize (concat "#" tag) 'face 'shadow))
@@ -67,7 +75,7 @@
                                         0.5))))))
       (magit-insert-heading (format "%s%s%s" title spc tags))
       (oset section node source-node)
-      (unless (string-suffix-p ".org.gpg" file)
+      (unless (or private (string-suffix-p ".org.gpg" file))
         (magit-insert-section section (org-roam-preview-section)
           (insert (org-roam-fontify-like-in-org-mode
                    (org-roam-preview-get-contents file point))
@@ -76,6 +84,7 @@
           (oset section point point)
           (insert ?\n))))))
 
+(defvar org-roam-backlinks-filter nil)
 ;;;###autoload
 (defun org-roam-grouped-backlinks-section (node)
   "The backlinks section for NODE."
