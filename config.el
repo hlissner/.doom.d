@@ -235,6 +235,14 @@
 ;;
 ;;; Language customizations
 
+(use-package! agenix
+  :mode ("\\.age\\'" . agenix-mode)
+  :config
+  (add-to-list 'agenix-key-files "~/.config/ssh/id_ed25519")
+  (add-to-list 'agenix-key-files "/etc/ssh/host_ed25519")
+  (dolist (file (doom-glob "~/.config/ssh/*/id_ed25519"))
+    (add-to-list 'agenix-key-files file)))
+
 (define-generic-mode sxhkd-mode
   '(?#)
   '("alt" "Escape" "super" "bspc" "ctrl" "space" "shift") nil
