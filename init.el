@@ -5,7 +5,7 @@
        ;;ivy
        ;;helm
        ;;ido
-       vertico
+       (vertico +icons)
 
        :ui
        ;;deft
@@ -31,7 +31,7 @@
        (vc-gutter +diff-hl +pretty)
        ;;window-select
        workspaces
-       zen
+       ;;zen
        ;;vi-tilde-fringe
 
        :input
@@ -70,6 +70,7 @@
        ;;grammar
 
        :tools
+       ;;tree-sitter
        ;;ansible
        ;;(debugger +lsp)
        direnv
@@ -105,7 +106,7 @@
        ;;crystal
        ;;clojure
        ;;(csharp +unity +lsp)
-       common-lisp
+       ;;common-lisp
        ;;coq
        ;;data
        ;;dart
@@ -125,19 +126,19 @@
        ;;julia
        ;;latex
        ;;ledger
-       (lua +fennel)
+       ;;(lua +fennel)
        markdown
        ;;nim
        nix
        ;;ocaml
        (org +dragndrop +roam2 +present)
        ;;perl
-       ;;php
+       ;; php
        ;;plantuml
        ;;purescript
        (python +lsp)
        ;;qt
-       ;;racket
+       ;; racket
        rest
        ruby
        (rust +lsp)
@@ -148,6 +149,7 @@
        ;;swift
        web
        yaml
+       zig
 
        :email
        ;;(mu4e +gmail)       ; WIP
@@ -158,8 +160,8 @@
        ;;calendar
        everywhere
        ;;irc
-       (rss +org)
-       ereader
+       ;;(rss +org)
+       ;;ereader
 
        :config
        ;;literate

@@ -13,7 +13,7 @@
 ;;; UI
 
 (setq doom-theme 'doom-dracula
-      doom-font (font-spec :family "JetBrainsMono" :size 12 :weight 'light)
+      doom-font (font-spec :family "JetBrainsMono" :size 12)
       doom-variable-pitch-font (font-spec :family "DejaVu Sans" :size 13))
 
 ;; Line numbers are pretty slow all around. The performance boost of disabling
@@ -47,7 +47,7 @@
        "b" #'org-roam-buffer-toggle
        "d" #'org-roam-dailies-goto-today
        "D" #'org-roam-dailies-goto-date
-       "e" (cmd! (find-file (doom-dir org-directory "ledger.gpg")))
+       "e" (cmd! (find-file (doom-path org-directory "ledger/personal.gpg")))
        "i" #'org-roam-node-insert
        "r" #'org-roam-node-find
        "R" #'org-roam-capture))
@@ -67,7 +67,7 @@
 
 ;;; :ui modeline
 ;; An evil mode indicator is redundant with cursor shape
-(advice-add #'doom-modeline-segment--modals :override #'ignore)
+(setq doom-modeline-modal nil)
 
 
 ;;; :editor evil
@@ -98,38 +98,38 @@
       magit-save-repository-buffers nil
       ;; Don't restore the wconf after quitting magit, it's jarring
       magit-inhibit-save-previous-winconf t
+      evil-collection-magit-want-horizontal-movement t
+      magit-openpgp-default-signing-key "FA1FADD9440B688CAA75A057B60957CA074D39A3"
       transient-values '((magit-rebase "--autosquash" "--autostash")
                          (magit-pull "--rebase" "--autostash")
                          (magit-revert "--autostash")))
 
 
 ;;; :lang org
-(setq +org-roam-auto-backlinks-buffer t
-      org-directory "~/projects/org/"
+(setq org-directory "~/projects/org/"
       org-roam-directory org-directory
-      org-roam-db-location (concat org-directory ".org-roam.db")
+      org-roam-db-location (file-name-concat org-directory ".org-roam.db")
       org-roam-dailies-directory "journal/"
-      org-archive-location (concat org-directory ".archive/%s::")
-      org-agenda-files org-directory)
+      org-archive-location (file-name-concat org-directory ".archive/%s::")
+      org-agenda-files (list org-directory))
 
 (after! org
   (setq org-startup-folded 'show2levels
         org-ellipsis " [...] "
-        ;; My org/org-roam capture templates
         org-capture-templates
-        '(("t" "todo" entry (file+headline "todo.org" "Unsorted")
+        '(("t" "todo" entry (file+headline "todo.org" "Inbox")
            "* [ ] %?\n%i\n%a"
            :prepend t)
-          ("d" "deadline" entry (file+headline "todo.org" "Schedule")
+          ("d" "deadline" entry (file+headline "todo.org" "Inbox")
            "* [ ] %?\nDEADLINE: <%(org-read-date)>\n\n%i\n%a"
            :prepend t)
-          ("s" "schedule" entry (file+headline "todo.org" "Schedule")
+          ("s" "schedule" entry (file+headline "todo.org" "Inbox")
            "* [ ] %?\nSCHEDULED: <%(org-read-date)>\n\n%i\n%a"
            :prepend t)
           ("c" "check out later" entry (file+headline "todo.org" "Check out later")
            "* [ ] %?\n%i\n%a"
            :prepend t)
-          ("l" "ledger" plain (file "ledger.gpg")
+          ("l" "ledger" plain (file "ledger/personal.gpg")
            "%(+beancount/clone-transaction)"))))
 
 (after! org-roam
@@ -171,8 +171,8 @@
            :unnarrowed t))
         ;; Use human readable dates for dailies titles
         org-roam-dailies-capture-templates
-        '(("d" "default" entry "* %?"
-           :target (file+head "%<%Y-%m-%d>.org" "#+title: %<%B %d, %Y>\n\n")))))
+        `(("d" "default" plain ""
+           :target (file+head "%<%Y-%m-%d>.org" ,(format "%%[%s/template/journal.org]" org-roam-directory))))))
 
 (after! org-tree-slide
   ;; I use g{h,j,k} to traverse headings and TAB to toggle their visibility, and
@@ -205,9 +205,9 @@
 
 
 ;;; :ui doom-dashboard
-(setq fancy-splash-image (concat doom-private-dir "splash.png"))
+(setq fancy-splash-image (file-name-concat doom-user-dir "splash.png"))
 ;; Hide the menu for as minimalistic a startup screen as possible.
-(remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
+(setq +doom-dashboard-functions '(doom-dashboard-widget-banner))
 
 
 ;;; :app everywhere
