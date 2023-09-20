@@ -106,9 +106,9 @@
               (set-marker heading nil))
             (dolist (backlink (seq-sort (or sortfn #'org-roam-backlinks-sort) backlinks))
               (org-roam-node-insert-section-with-tags
-                :source-node (org-roam-backlink-source-node backlink)
-                :point (org-roam-backlink-point backlink)
-                :properties (org-roam-backlink-properties backlink))))))
+               :source-node (org-roam-backlink-source-node backlink)
+               :point (org-roam-backlink-point backlink)
+               :properties (org-roam-backlink-properties backlink))))))
       (set-marker heading nil)
       (insert ?\n))))
 
@@ -147,9 +147,9 @@
 are arbitrarily sorted, due to the use of group_concat in the sqlite query used
 to generate it."
   (mapcar (lambda (node)
-            (oset node tags
+            (setf (org-roam-node-tags node)
                   (ignore-errors
-                    (split-string (cdr (assoc "ALLTAGS" (oref node properties)))
+                    (split-string (cdr (assoc "ALLTAGS" (org-roam-node-properties node)))
                                   ":" t)))
             node)
           nodes))
