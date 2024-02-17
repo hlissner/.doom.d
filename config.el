@@ -236,6 +236,7 @@
 ;;; Language customizations
 
 (use-package! agenix
+  :defer t
   :mode ("\\.age\\'" . agenix-mode)
   :config
   (add-to-list 'agenix-key-files "~/.config/ssh/id_ed25519")
