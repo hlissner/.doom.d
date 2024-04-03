@@ -119,6 +119,7 @@
        ;;faust
        ;;fortran
        ;;fsharp            ; ML stands for Microsoft's Language
+       (gdscript +lsp)
        ;;go
        ;;haskell
        ;;hy
