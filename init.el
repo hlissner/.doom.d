@@ -121,6 +121,7 @@
        ;;fsharp            ; ML stands for Microsoft's Language
        (gdscript +lsp)
        ;;go
+       (graphql +lsp)    ; Give queries a REST
        ;;haskell
        ;;hy
        ;;(java +meghanada)
@@ -151,7 +152,7 @@
        ;;swift
        web
        yaml
-       zig
+       (zig +lsp)
 
        :email
        ;;(mu4e +gmail)       ; WIP
