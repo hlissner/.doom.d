@@ -12,7 +12,7 @@
 ;;
 ;;; UI
 
-(setq doom-theme 'doom-dracula
+(setq doom-theme 'doom-tomorrow-night
       doom-font (font-spec :family "JetBrainsMono" :size 12)
       doom-variable-pitch-font (font-spec :family "DejaVu Sans" :size 13))
 
