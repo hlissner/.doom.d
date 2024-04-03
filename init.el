@@ -1,7 +1,8 @@
 ;;; ~/.doom.d/init.el -*- lexical-binding: t; -*-
 
 (doom! :completion
-       (company +childframe)
+       ;; (company +childframe)
+       corfu
        ;;ivy
        ;;helm
        ;;ido

@@ -16,6 +16,8 @@
       doom-font (font-spec :family "JetBrainsMono" :size 12)
       doom-variable-pitch-font (font-spec :family "DejaVu Sans" :size 13))
 
+(setq nerd-icons-font-names '("SymbolsNerdFontMono-Regular.ttf"))
+
 ;; Line numbers are pretty slow all around. The performance boost of disabling
 ;; them outweighs the utility of always keeping them on.
 (setq display-line-numbers-type nil)
@@ -63,6 +65,15 @@
 ;; rarely. So opt for manual completion:
 (after! company
   (setq company-idle-delay nil))
+
+
+;;; :completion corfu
+;; IMO, modern editors have trained a bad habit into us all: a burning need for
+;; completion all the time -- as we type, as we breathe, as we pray to the
+;; ancient ones -- but how often do you *really* need that information? I say
+;; rarely. So opt for manual completion:
+(after! corfu
+  (setq corfu-auto nil))
 
 
 ;;; :ui modeline
