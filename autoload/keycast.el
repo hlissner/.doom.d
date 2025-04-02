@@ -240,77 +240,67 @@ this many spaces of indentation.")
     (define-key map (kbd "C-c C-k") #'keycast-abort-recording)
     map))
 
+;;;###autoload
 (define-minor-mode keycast-mode
   "TODO"
   :init-value nil
+  :global t
+  (dolist (frame (frame-list))
+    (when keycast-mode
+      (set-frame-parameter frame 'old-alpha-background (frame-parameter frame 'alpha-background)))
+    (set-frame-parameter
+     frame 'alpha-background
+     (if keycast-mode 100
+       (or (frame-parameter frame 'old-alpha-background)
+           100))))
   (if keycast-mode
-      (progn
-        (add-hook 'pre-command-hook #'keycast-log-command nil t)
-        (add-hook 'post-command-hook #'keycast-log-post-command nil t))
-    (remove-hook 'pre-command-hook #'keycast-log-command t)
-    (remove-hook 'post-command-hook #'keycast-log-post-command t)))
-
-;;;###autoload
-(define-globalized-minor-mode global-keycast-mode
-  keycast-mode keycast-mode)
-
-(defun keycast-init ()
-  (if global-keycast-mode
       (progn
         (advice-add 'evil-normal-post-command :before #'keycast-log-pre-command-a)
         (advice-add 'evil-change :after #'keycast-log-post-command-a)
         (keycast-clear-buffer)
-        (funcall keycast-display-fn))
+        (funcall keycast-display-fn)
+        (add-hook 'pre-command-hook #'keycast-log-command)
+        (add-hook 'post-command-hook #'keycast-log-post-command))
     (advice-remove 'evil-normal-post-command #'keycast-log-pre-command-a)
     (advice-remove 'evil-change #'keycast-log-post-command-a)
-    (keycast-cleanup)))
-(add-hook 'global-keycast-mode-hook #'keycast-init)
+    (keycast-cleanup)
+    (remove-hook 'pre-command-hook #'keycast-log-command)
+    (remove-hook 'post-command-hook #'keycast-log-post-command)))
 
 
 ;;
 ;;; Screencasting
 
-(defvar keycast--current-filename nil)
 (defvar keycast--process nil)
 (defvar keycast--aborting nil)
+(defvar keycast--buffer-name "*hey*")
 
 (defun keycast--process-sentinel (process _event)
   (when (memq (process-status process) '(exit stop))
     (setq keycast--process nil)
-    (ignore-errors (kill-buffer "*ffmpeg*"))
+    (ignore-errors (kill-buffer keycast--buffer-name))
     (if keycast--aborting
-        (progn
-          (delete-file keycast--current-filename)
-          (message "Aborted recording"))
-      (kill-new keycast--current-filename)
-      (message "Saved to %s" (abbreviate-file-name keycast--current-filename))
+        (message "Aborted recording")
       (when (y-or-n-p "Preview file?")
-        (async-shell-command (format "mpv %S" keycast--current-filename))))
-    (setq keycast--current-filename nil
-          keycast--aborting nil)))
+        (async-shell-command (format "mpv %S" "/run/user/1000/hey/screencast.webm"))))
+    (setq keycast--aborting nil)))
 
 (defun keycast-start-recording ()
   (interactive)
   (when (process-live-p keycast--process)
     (user-error "Already recording"))
   (keycast-clear-buffer)
-  (cl-destructuring-bind (left top _right _bottom)
-      (frame-edges)
-    (let ((dest (format (expand-file-name "%s-%s.mp4" keycast-storage-dir)
-                        (format-time-string "%F-%T")
-                        (replace-regexp-in-string "[^[:alnum:]]" "" (buffer-name)))))
-      (setq keycast--current-filename dest
-            keycast--process
-            (make-process :name "ffmpeg"
-                          :buffer (get-buffer-create "*ffmpeg*")
-                          :command (list "ffmpeg" "-y" "-f" "x11grab"
-                                         "-ss" "1"
-                                         "-s" (format "%dx%d" (frame-pixel-width) (frame-pixel-height))
-                                         "-i" (format ":0.0+%d,%d" left top)
-                                         "-framerate" "30"
-                                         keycast--current-filename)))
-      (set-process-sentinel keycast--process #'keycast--process-sentinel)
-      (add-to-list 'global-mode-string "▶ "))))
+  (cl-destructuring-bind (left top _right _bottom) (frame-edges)
+    (setq keycast--process
+          (make-process :name "screencast"
+                        :buffer (get-buffer-create keycast--buffer-name)
+                        :command (list "hey" ".screencast" "webm"
+                                       (format "%d,%d %dx%d"
+                                               left top
+                                               (frame-pixel-width)
+                                               (frame-pixel-height)))))
+    (set-process-sentinel keycast--process #'keycast--process-sentinel)
+    (add-to-list 'global-mode-string "▶ ")))
 
 (defun keycast-finish-recording ()
   (interactive)

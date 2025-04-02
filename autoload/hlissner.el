@@ -4,13 +4,13 @@
 (defun find-in-dotfiles ()
   "Open a file somewhere in ~/.dotfiles via a fuzzy filename search."
   (interactive)
-  (doom-project-find-file (expand-file-name "~/.config/dotfiles")))
+  (doom-project-find-file (expand-file-name "~/.config/dotfiles/")))
 
 ;;;###autoload
 (defun browse-dotfiles ()
   "Browse the files in ~/.dotfiles."
   (interactive)
-  (doom-project-browse (expand-file-name "~/.config/dotfiles")))
+  (doom-project-browse (expand-file-name "~/.config/dotfiles/")))
 
 
 ;;
@@ -23,7 +23,7 @@
     (with-selected-frame frame
       (doom-adjust-font-size 2 frame)
       (keycast-mode -1)
-      (global-keycast-mode -1)
+      (keycast-mode -1)
       (remove-hook 'delete-frame-functions #'cleanup-recording-frame))))
 
 ;;;###autoload
@@ -53,7 +53,7 @@
     (unless (frame-visible-p +hlissner--recording-frame)
       (make-frame-visible)
       (redraw-frame)
-      (global-keycast-mode +1)
+      (keycast-mode +1)
       (add-hook 'delete-frame-functions #'cleanup-recording-frame))))
 
 

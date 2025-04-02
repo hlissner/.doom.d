@@ -63,7 +63,7 @@
                     (concat (cl-subseq title 0 4)
                             (make-string (max 0 (- (length title) 6)) ?*)
                             (ignore-errors (cl-subseq title -2)))))
-           (tags (org-roam-node-doom-tags source-node))
+           (tags (org-roam-node-tags source-node))
            (tags (mapconcat (lambda (tag)
                               (propertize (concat "#" tag) 'face 'shadow))
                             tags " "))
@@ -72,7 +72,7 @@
                             `((space :align-to
                                      (- ,(window-text-width (get-buffer-window org-roam-buffer))
                                         ,(string-width tags)
-                                        0.5))))))
+                                        1.0))))))
       (magit-insert-heading (format "%s%s%s" title spc tags))
       (oset section node source-node)
       (unless (or private (string-suffix-p ".org.gpg" file))
@@ -182,37 +182,36 @@ to generate it."
 ;;
 ;;; Hooks
 
-(defvar org-roam-old-slug nil)
 ;;;###autoload
 (defun org-roam-update-slug-on-save-h ()
   "Set up auto-updating for the current node's filename.
 
 Calls `org-roam-update-slug-h' on `after-save-hook'."
-  (setq-local org-roam-old-slug (ignore-errors (org-roam-node-slug (org-roam-node-at-point))))
-  (add-hook 'after-save-hook #'org-roam-update-slug-h
-            'append 'local))
+  (add-hook 'after-save-hook #'org-roam-update-slug-h 'append 'local))
 
 (defun org-roam-update-slug-h ()
   "Rename the current file if #+title has changed.
 
 Will ask for confirmation if the new filename already exists."
-  (when (org-roam-buffer-p)
-    (when-let* ((node (org-roam-node-at-point))
-                (new-slug (org-roam-node-slug node))
-                (old-slug org-roam-old-slug)
-                (old-slug-re (concat "/[^/]*\\(" (regexp-quote old-slug) "\\)[^/]*\\.org$"))
-                (file-name (org-roam-node-file node))
-                ((not (equal old-slug new-slug)))
-                ((string-match-p old-slug-re file-name)))
-      (setq org-roam-old-slug new-slug)
-      (condition-case _
-          (let ((new-file-name
-                 (replace-regexp-in-string
-                  old-slug-re (regexp-quote new-slug)
-                  file-name nil nil 1)))
-            (message "Updating slug in filename (%S -> %S)" old-slug new-slug)
-            (rename-file file-name new-file-name 1)
-            (set-visited-file-name new-file-name t t)
-            (org-roam-db-autosync--setup-file-h))
-        (error
-         (setq org-roam-old-slug old-slug))))))
+  ;; (when (org-roam-buffer-p)
+  ;;   (when-let* ((node (org-roam-node-at-point))
+  ;;               (old-title (org-roam-node-title node))
+  ;;               (new-title (org-roam--get-keyword "title"))
+  ;;               (old-slug-re (concat "/[^/]*\\(" (regexp-quote old-slug) "\\)[^/]*\\.org$"))
+  ;;               ((user-error "%S == %S" old-slug new-slug))
+  ;;               (file-name (org-roam-node-file node))
+  ;;               ((not (equal old-slug new-slug)))
+  ;;               ((string-match-p old-slug-re file-name)))
+  ;;     (setf (org-roam-node-title node) new-title)
+  ;;     (condition-case _
+  ;;         (let ((new-file-name
+  ;;                (replace-regexp-in-string
+  ;;                 old-slug-re (regexp-quote new-slug)
+  ;;                 file-name nil nil 1)))
+  ;;           (message "Updating slug in filename (%S -> %S)" old-slug new-slug)
+  ;;           (rename-file file-name new-file-name 1)
+  ;;           (set-visited-file-name new-file-name t t)
+  ;;           (org-roam-db-autosync--setup-file-h))
+  ;;       (error
+  ;;        (setf (org-roam-node-title node) old-title)))))
+  )
