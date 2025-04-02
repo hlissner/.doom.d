@@ -1,4 +1,4 @@
-;;; /mnt/projects/conf/doom-emacs-private/autoload/keycast.el -*- lexical-binding: t; -*-
+;;; $DOOMDIR/autoload/keycast.el -*- lexical-binding: t; -*-
 
 (defvar keycast-blacklist
   '(nil self-insert-command backward-char forward-char

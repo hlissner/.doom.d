@@ -1,4 +1,4 @@
-;;; ~/.config/doom/packages.el
+;;; $DOOMDIR/packages.el
 
 ;; :lang
 (package! agenix :recipe (:host github :repo "t4ccer/agenix.el"))

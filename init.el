@@ -1,4 +1,4 @@
-;;; ~/.doom.d/init.el -*- lexical-binding: t; -*-
+;;; $DOOMDIR/init.el -*- lexical-binding: t; -*-
 
 (doom! :completion
        ;; (company +childframe)

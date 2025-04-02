@@ -1,4 +1,4 @@
-;;; ~/.config/doom/config.el -*- lexical-binding: t; -*-
+;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
 (setq user-full-name "Henrik Lissner"
       user-mail-address "contact@henrik.io")

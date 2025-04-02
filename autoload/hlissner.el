@@ -1,4 +1,4 @@
-;;; ~/.config/doom/autoload/hlissner.el -*- lexical-binding: t; -*-
+;;; $DOOMDIR/autoload/hlissner.el -*- lexical-binding: t; -*-
 
 ;;;###autoload
 (defun find-in-dotfiles ()

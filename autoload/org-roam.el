@@ -1,4 +1,4 @@
-;;; autoload/org-roam.el -*- lexical-binding: t; -*-
+;;; $DOOMDIR/autoload/org-roam.el -*- lexical-binding: t; -*-
 
 (defvar org-roam-group-order
   '(("Backlinks" t
