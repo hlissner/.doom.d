@@ -4,22 +4,19 @@
        ;; (flags))
 
        :completion
-       ;; company
        (corfu +dabbrev +icons)
-       ;; ivy
        (vertico +icons)
 
        :ui
-       doom
+       (doom +tabs)
        modeline
        doom-dashboard
        hl-todo
        indent-guides
        ophints
-       (popup +all +defaults)
-       treemacs
+       (popup +defaults)
        (vc-gutter +pretty)
-       workspaces
+       (workspaces +tabs)
 
        :editor
        (evil +everywhere)
@@ -29,10 +26,13 @@
        multiple-cursors
        rotate-text
        snippets
+       (whitespace +guess +trim)
 
        :emacs
+       ;; eww
        (dired +dirvish +icons)
-       electric
+       ;; electric
+       tramp
        undo
        vc
 
@@ -45,55 +45,39 @@
        spell
 
        :tools
-       ;;(debugger +lsp)
+       debugger
        direnv
-       ;;editorconfig
+       editorconfig
        (eval +overlay)
        (lookup +docsets +dictionary)
-       lsp
+       ;; llm
+       (lsp +eglot)
        (magit +childframe +forge)
-       ;;pdf
+       pdf
        tree-sitter
-       ;;upload
 
        :os
        tty
 
        :lang
        beancount
-       cc
-       ;;common-lisp
+       (cc +lsp +tree-sitter)
        emacs-lisp
-       (gdscript +lsp)
-       ;;haskell
+       (gdscript +lsp +tree-sitter)
        janet
-       ;;(java +meghanada)
-       (javascript +lsp)
-       ;;julia
-       ;;latex
-       ;;(lua +fennel)
-       markdown
-       nix
-       (org +dragndrop +roam2 +appear)
-       ;;php
-       ;;plantuml
-       ;;(python +conda)
-       ;;rest
-       ;;ruby
-       (rust +lsp)
-       (scheme +guile)
-       (sh +powershell)
-       web
-       yaml
-       ;;(zig +lsp)
+       (javascript +lsp +tree-sitter)
+       (json +tree-sitter)
+       (lua +fennel +lsp +tree-sitter)
+       (markdown +tree-sitter)
+       (nix +lsp +tree-sitter)
+       (org +dragndrop +roam2 +pretty +forge +jupyter)
+       (python +lsp +tree-sitter +pyright)
+       (rust +lsp +tree-sitter)
+       (sh +powershell +fish +lsp)
+       ;; (zig +lsp)
 
        :email
        (mu4e +mbsync +fastmail +org +icons)
 
-       :app
-       ;;everywhere
-       ;;irc
-
        :config
-       ;;literate
        (default +bindings +smartparens +gnupg))
