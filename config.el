@@ -47,11 +47,15 @@
       (:prefix "f"
        "t" #'find-in-dotfiles
        "T" #'browse-dotfiles)
+      (:prefix "l"
+       :desc "Start fava" "o" #'beancount/fava
+       :desc "Open personal ledger"  "l" (cmd! (find-file "~/projects/ledger/main.bean"))
+       :desc "Find file in ledger"   "f" (cmd! (doom-project-find-file "~/projects/ledger/"))
+       :desc "Browse file in ledger" "p" (cmd! (doom-project-browse "~/projects/ledger/")))
       (:prefix "n"
        "b" #'org-roam-buffer-toggle
        "d" #'org-roam-dailies-goto-today
        "D" #'org-roam-dailies-goto-date
-       "e" (cmd! (find-file (doom-path org-directory "ledger/personal.gpg")))
        "i" #'org-roam-node-insert
        "r" #'org-roam-node-find
        "R" #'org-roam-capture))
@@ -110,6 +114,10 @@
                          (magit-revert "--autostash")))
 
 
+;;; :lang beancount
+(after! beancount
+  (setq beancount-number-alignment-column 62))
+
 ;;; :lang org
 (setq org-directory "~/projects/org/"
       org-roam-directory org-directory
@@ -137,8 +145,10 @@
           ("c" "check out later" entry (file+headline "todo.org" "Check out later")
            "* [ ] %?\n%i\n%a"
            :prepend t)
-          ("l" "ledger" plain (file "ledger/personal.gpg")
-           "%(+beancount/clone-transaction)"))))
+          ("l" "ledger (new transaction)" plain (file "~/projects/ledger/main.bean")
+           "%(org-read-date) ! \"%?\"\n  Expenses:Unknown  0.00 CAD\n  Assets:Unknown")
+          ("L" "ledger (clone existing transaction)" plain (file "~/projects/ledger/main.bean")
+           "%(+beancount/clone-transaction t)"))))
 
 (after! org-agenda
   (setq org-agenda-todo-list-sublevels nil
