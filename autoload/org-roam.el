@@ -215,3 +215,16 @@ Will ask for confirmation if the new filename already exists."
   ;;       (error
   ;;        (setf (org-roam-node-title node) old-title)))))
   )
+
+;;;###autoload
+(defun org-roam-agenda-project-files ()
+  "Return a list of note files containing 'project' tag." ;
+  (seq-uniq
+   (seq-map
+    #'car
+    (org-roam-db-query
+     [:select [nodes:file]
+      :from tags
+      :left-join nodes
+      :on (= tags:node-id nodes:id)
+      :where (like tag (quote "%\"agenda\"%"))]))))
