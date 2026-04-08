@@ -4,13 +4,13 @@
        ;; (flags))
 
        :completion
-       (corfu +dabbrev +icons)
+       (corfu +orderless +dabbrev +icons)
        (vertico +icons)
 
        :ui
        (doom +tabs)
+       dashboard
        modeline
-       doom-dashboard
        hl-todo
        indent-guides
        ophints
@@ -29,15 +29,14 @@
        (whitespace +guess +trim)
 
        :emacs
-       ;; eww
        (dired +dirvish +icons)
-       ;; electric
+       electric
        tramp
        undo
        vc
 
        :term
-       eshell
+       ;; eshell
        vterm
 
        :checkers
@@ -45,39 +44,45 @@
        spell
 
        :tools
-       debugger
+       ;; debugger
        direnv
        editorconfig
        (eval +overlay)
        (lookup +docsets +dictionary)
-       ;; llm
+       llm
        (lsp +eglot)
-       (magit +childframe +forge)
+       (magit +childframe)
        pdf
        tree-sitter
+       ;; upload
 
        :os
-       tty
+       ;; tty
 
        :lang
        beancount
+       common-lisp
        (cc +lsp +tree-sitter)
        emacs-lisp
        (gdscript +lsp +tree-sitter)
        janet
        (javascript +lsp +tree-sitter)
        (json +tree-sitter)
-       (lua +fennel +lsp +tree-sitter)
+       (lua +lsp +tree-sitter)
        (markdown +tree-sitter)
        (nix +lsp +tree-sitter)
-       (org +dragndrop +roam2 +pretty +forge +jupyter)
-       (python +lsp +tree-sitter +pyright)
-       (rust +lsp +tree-sitter)
+       (org +dragndrop +roam2 +pretty +forge +jupyter +gnuplot)
+       (python +lsp +tree-sitter +uv +pyright)
+       (rust +tree-sitter)
        (sh +powershell +fish +lsp)
-       ;; (zig +lsp)
+       (yaml +tree-sitter)
+       ruby
+       web
+       (zig +lsp +tree-sitter)
 
-       :email
-       (mu4e +mbsync +fastmail +org +icons)
+       :app
+       everywhere
 
        :config
-       (default +bindings +smartparens +gnupg))
+       ;; literate
+       (default +bindings +gnupg))
