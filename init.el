@@ -3,9 +3,12 @@
 (doom! ;;((sources)
        ;; (flags))
 
+       :doom
+       cli
+
        :completion
        (corfu +orderless +dabbrev +icons)
-       (vertico +icons)
+       vertico
 
        :ui
        (doom +tabs)
@@ -16,7 +19,7 @@
        ophints
        (popup +defaults)
        (vc-gutter +pretty)
-       (workspaces +tabs)
+       workspaces
 
        :editor
        (evil +everywhere)
@@ -27,31 +30,33 @@
        rotate-text
        snippets
        (whitespace +guess +trim)
+       word-wrap
 
        :emacs
-       (dired +dirvish +icons)
+       (dired +dirvish)
        electric
        tramp
        undo
        vc
 
        :term
+       ghostel
        ;; eshell
-       vterm
+       ;; vterm
 
        :checkers
        (syntax +childframe)
        spell
 
        :tools
-       ;; debugger
+       debugger
        direnv
        editorconfig
        (eval +overlay)
        (lookup +docsets +dictionary)
        llm
        (lsp +eglot)
-       (magit +childframe)
+       (magit +childframe +forge)
        pdf
        tree-sitter
        ;; upload
@@ -61,11 +66,13 @@
 
        :lang
        beancount
-       common-lisp
+       ;; common-lisp
+       ;; (clojure +tree-sitter)
        (cc +lsp +tree-sitter)
        emacs-lisp
        (gdscript +lsp +tree-sitter)
        janet
+       ;; (latex +cdlatex +lsp +fold)
        (javascript +lsp +tree-sitter)
        (json +tree-sitter)
        (lua +lsp +tree-sitter)
@@ -77,7 +84,7 @@
        (sh +powershell +fish +lsp)
        (yaml +tree-sitter)
        ruby
-       web
+       ;; web
        (zig +lsp +tree-sitter)
 
        :app
@@ -85,4 +92,4 @@
 
        :config
        ;; literate
-       (default +bindings +gnupg))
+       (default +bindings +gnupg +smartparens))
